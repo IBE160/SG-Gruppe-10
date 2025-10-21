@@ -1,51 +1,68 @@
-## Case Title
+### Case Title
 PumpTrack – Personal Workout Logger
 
-## Background
+### Background
 Fitness enthusiasts often want to track their progress, but lack a simple and flexible tool to log workouts and goals. Many existing apps are either too complex or too generic, and don’t provide a clear overview of personal development.
 
-## Purpose
+### Purpose
 To build a web application where users can log their workouts, set goals, and monitor progress – with a focus on simplicity, clarity, and motivation.
 
-## Target Users
+### Target Users
 People who train regularly and want to keep track of their workouts, goals, and progress. This includes both beginners and experienced users.
 
-## Core Functionality
+### Core Functionality
+**Must Have (MVP)**
+- User registration and authentication
+- Log workouts with date, type, duration, and notes
+- View workout history and set personal goals
 
-### Must Have (MVP)
-- Feature 1: User registration and authentication
-- Feature 2: Log workouts with date, type, duration, and notes
-- Feature 3: View workout history and set personal goals
+**Nice to Have (Optional Extensions)**
+- Statistics and graphs showing progress over time
+- Share workouts with friends and calendar view
+- Natural language input for logging workouts (e.g., "ran 5k in 25 minutes")
+- Smart goal suggestions based on workout history
 
-### Nice to Have (Optional Extensions)
-- Feature 4: Statistics and graphs showing progress over time
-- Feature 5: Share workouts with friends and calendar view
+### Data Requirements
+- Users: name, email, password
+- Workouts: date, workout type, duration, intensity, notes
+- Goals: goal type, start value, target value, progress
+- Progress: date, value, linked goal
 
-## Data Requirements
-
-- Data entity 1: Users – name, email, password
-- Data entity 2: Workouts – date, workout type, duration, intensity, notes
-- Data entity 3: Goals – goal type, start value, target value, progress
-- Data entity 4: Progress – date, value, linked goal
-
-## User Stories (Optional)
-
+### User Stories
 1. As a user, I want to log my workouts, so that I can track my progress over time.
 2. As a user, I want to set personal goals, so that I stay motivated.
 3. As a user, I want to view statistics, so that I can see how I improve.
+4. As a user, I want to log workouts using natural language, so that it's faster and easier.
+5. As a user, I want the app to suggest goals based on my history, so that I can improve efficiently.
 
-## Technical Constraints
+### User Flows
+1. **New User Registration** → Fill form → Submit → Redirect to Dashboard
+2. **Login** → Enter credentials → Authenticated → Redirect to Dashboard
+3. **Log Workout** → Click "Add Workout" → Fill form or use natural language → Submit → Workout saved
+4. **Set Goal** → Navigate to Goals → Click "New Goal" → Define goal → Save
+5. **View Progress** → Dashboard → View charts/statistics → Filter by date/type
+6. **Share Workout** (optional) → Select workout → Click "Share" → Generate link or share with friend
 
+### Technical Constraints
 - Must be mobile-responsive
 - Must support user authentication
 - Must validate required fields (e.g., date, duration)
-- Must use FastAPI (backend), Next.js (frontend), PostgreSQL (database)
-- Must use Git with AI-generated commit messages
-- Must be developed using BMAD-METHOD™ and Gemini CLI
+- Frontend: Next.js + Tailwind CSS
+- Backend: FastAPI (Python)
+- Database/Auth: Supabase (PostgreSQL + Auth)
+- Git with AI-generated commit messages
+- Developed using BMAD-METHOD™ and Gemini CLI
 
-## Success Criteria
+### Success Criteria
+- Users can create, view, and manage their workouts and goals
+- Data persists across sessions and is securely stored
+- Application is responsive and intuitive to use
+- AI tools are actively used and documented throughout the development process
 
-- Criterion 1: Users can create, view, and manage their workouts and goals
-- Criterion 2: Data persists across sessions and is securely stored
-- Criterion 3: Application is responsive and intuitive to use
-- Criterion 4: AI tools are actively used and documented throughout the development process
+### Development Timeline (6 Weeks)
+- **Week 1**: Project setup, Git repo, Supabase config, auth system, database schema
+- **Week 2**: Implement user registration/login, workout logging (CRUD)
+- **Week 3**: Implement goal setting and progress tracking
+- **Week 4**: Frontend integration, dashboard UI, Tailwind styling
+- **Week 5**: Add optional features (charts, natural language input, smart goals)
+- **Week 6**: Testing, bug fixing, documentation, final polish
