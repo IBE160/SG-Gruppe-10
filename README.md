@@ -48,6 +48,8 @@ PumpTrack is a personal workout logging web application that helps users track t
 
 ## 📅 Development Timeline
 
+123123
+
 | Week | Milestone |
 |------|-----------|
 | 1    | Project setup, Supabase config, auth system, DB schema |
