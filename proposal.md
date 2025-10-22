@@ -1,6 +1,6 @@
 ### Case Title
 PumpTrack – Personal Workout Logger
-Test test 
+
 
 ### Background
 Fitness enthusiasts often want to track their progress, but lack a simple and flexible tool to log workouts and goals. Many existing apps are either too complex or too generic, and don’t provide a clear overview of personal development.
