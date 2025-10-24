@@ -1,5 +1,5 @@
 ### Case Title
-PumpTrack – Personal Workout Logger
+ApexTrack – Personal Workout Logger
 
 
 ### Background

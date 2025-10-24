@@ -2,7 +2,7 @@
 
 ## Project Configuration
 
-PROJECT_NAME: PumpTrack
+PROJECT_NAME: ApexTrack
 PROJECT_TYPE: software
 PROJECT_LEVEL: 2
 FIELD_TYPE: greenfield
@@ -27,11 +27,11 @@ NEXT_AGENT: analyst
 
 ## Story Backlog
 
-
+(No stories created yet)
 
 ## Completed Stories
 
-
+(No storries created yet)
 
 ---
 
