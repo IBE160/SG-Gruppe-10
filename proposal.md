@@ -67,3 +67,5 @@ People who train regularly and want to keep track of their workouts, goals, and 
 - **Week 4**: Frontend integration, dashboard UI, Tailwind styling
 - **Week 5**: Add optional features (charts, natural language input, smart goals)
 - **Week 6**: Testing, bug fixing, documentation, final polish
+
+
