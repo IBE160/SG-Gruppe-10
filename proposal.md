@@ -22,6 +22,11 @@ People who train regularly and want to keep track of their workouts, goals, and 
 - Share workouts with friends and calendar view
 - Natural language input for logging workouts (e.g., "ran 5k in 25 minutes")
 - Smart goal suggestions based on workout history
+- "Zen Mode" (a low-pressure mode focused on recovery and maintenance)
+- Smart recovery tips (e.g., appearing after tough workouts)
+- Celebrate rest days (e.g., with "Recovery Streaks" and "Rest Day" badges)
+- Consistency calendar (a visual graph of active days)
+- Consistency badges (for weekly goals and variety)
 
 ### Data Requirements
 - Users: name, email, password
@@ -30,11 +35,11 @@ People who train regularly and want to keep track of their workouts, goals, and 
 - Progress: date, value, linked goal
 
 ### User Stories
-1. As a user, I want to log my workouts, so that I can track my progress over time.
-2. As a user, I want to set personal goals, so that I stay motivated.
-3. As a user, I want to view statistics, so that I can see how I improve.
-4. As a user, I want to log workouts using natural language, so that it's faster and easier.
-5. As a user, I want the app to suggest goals based on my history, so that I can improve efficiently.
+*   **Discovery Story:** “As a fitness enthusiast who just saw a friend’s PumpTrack achievement post, I want to click the link and instantly understand what PumpTrack offers, so that I feel motivated to sign up and start tracking my own progress.”
+*   **Onboarding Story:** “As a new user who just clicked a PumpTrack link, I want to sign up quickly with minimal steps, so that I can start tracking my workouts immediately without feeling overwhelmed.”
+*   **First Use Story:** “As a new user who just finished signing up, I want to log my first workout quickly and easily, so that I feel confident and motivated to keep using PumpTrack.”
+*   **Regular Use Story:** “As a regular user, I want the app to provide smart nudges and personalized goal suggestions, so that I feel continuously supported and guided in my fitness journey without feeling overwhelmed.”
+*   **Achieving a Goal Story:** “As a dedicated user who has just completed a major goal, I want to see my achievement celebrated in a meaningful way and receive intelligent suggestions for my next challenge, so that I feel recognized, motivated, and eager to continue my fitness journey with the app.”
 
 ### User Flows
 1. **New User Registration** → Fill form → Submit → Redirect to Dashboard
@@ -49,10 +54,23 @@ People who train regularly and want to keep track of their workouts, goals, and 
 - Must support user authentication
 - Must validate required fields (e.g., date, duration)
 - Frontend: Next.js + Tailwind CSS
-- Backend: FastAPI (Python)
+- Backend: FastAPI (Python) (See Pydantic AI research report: [Pydantic AI Research Report](docs/fase-1-analysis/research-technical-lørdag 1. november 2025.md))
 - Database/Auth: Supabase (PostgreSQL + Auth)
 - Git with AI-generated commit messages
 - Developed using BMAD-METHOD™ and Gemini CLI
+
+### Risks and Mitigations
+
+*   **Erosion of User Trust:** A combination of technical bugs and data integrity issues could lead to a loss of faith in the product.
+    *   **Mitigation:** Implement multi-layered data validation (frontend and backend) to prevent bad data and broken experiences.
+*   **Ineffective Marketing:** The application could fail to reach its target audience beyond a small, initial niche.
+    *   **Mitigation:** Develop a clear marketing and user engagement strategy.
+*   **Loss of Competitive Edge:** The development team could be unable to keep up with the pace of innovation from competing products.
+    *   **Mitigation:** Foster a culture of continuous improvement and allocate time for research and development.
+*   **Team Burnout:** Internal team burnout could lead to an inability to adapt to challenges or recover from setbacks.
+    *   **Mitigation:** Ensure balanced workloads, regular check-ins, and clear milestones to maintain long-term stability and momentum.
+*   **Security Breaches:** A leaked Supabase service key could lead to a devastating data breach.
+    *   **Mitigation:** Implement automated secret scanning with key rotation for security.
 
 ### Success Criteria
 - Users can create, view, and manage their workouts and goals
