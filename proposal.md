@@ -1,5 +1,5 @@
 ### Case Title
-PumpTrack – Personal Workout Logger
+FitTrack – Personal Workout Logger
 
 
 ### Background
