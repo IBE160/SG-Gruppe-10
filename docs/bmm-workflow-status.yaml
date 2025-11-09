@@ -7,7 +7,7 @@
 # project_type: software
 # project_level: 3
 # field_type: greenfield
-# workflow_path: greenfield-level-3.yaml
+# workflow_path: method-greenfield.yaml
 
 # STATUS DEFINITIONS:
 # ==================
@@ -26,7 +26,7 @@ project: "ibe160"
 project_type: "software"
 project_level: "3"
 field_type: "greenfield"
-workflow_path: "greenfield-level-3.yaml"
+workflow_path: "@bmad/bmm/workflows/workflow-status/paths/method-greenfield.yaml"
 
 workflow_status:
   # Phase 1: Analysis
