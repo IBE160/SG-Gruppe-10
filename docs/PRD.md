@@ -79,6 +79,28 @@ Based on the provided product brief and proposal, the vision for FitTrack is to 
 
 ---
 
+## Out of Scope
+
+The following features are explicitly considered out of scope for the Minimum Viable Product (MVP) and are deferred to future development phases (Growth or Vision). This ensures focus on delivering the core value proposition of FitTrack.
+
+### Deferred Growth Features (Post-MVP)
+
+*   Statistics and graphs showing progress over time.
+*   Goal-oriented reminders and notifications.
+*   Consistency tracking (e.g., streaks, calendars, badges).
+*   "Zen Mode" (for rest and recovery).
+*   Smart recovery tips.
+
+### Deferred Vision Features (Future)
+
+*   Advanced goal setting (e.g., smart goal suggestions, progress-based goal adjustments).
+*   Natural language input for logging workouts.
+*   Social features (e.g., sharing workouts, leaderboards).
+*   Wearable integration.
+*   Premium features (e.g., advanced analytics, personalized coaching).
+
+---
+
 ## web_app Specific Requirements
 
 Based on FitTrack being a `web_app`, here are the specific requirements and considerations:
