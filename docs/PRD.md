@@ -21,6 +21,7 @@ The magic of FitTrack lies in its ability to transform the often-complex task of
 **Technical Type:** web_app
 **Domain:** general
 **Complexity:** low
+This project is not considered an innovation project and operates within a well-understood, simple domain.
 
 Based on the provided product brief and proposal, the vision for FitTrack is to create a simple, clear, and motivating web application that empowers fitness enthusiasts to easily log workouts, set personal goals, and monitor their progress, ultimately fostering consistent engagement and a sense of personal development.
 
@@ -78,6 +79,28 @@ Based on the provided product brief and proposal, the vision for FitTrack is to 
 
 ---
 
+## Out of Scope
+
+The following features are explicitly considered out of scope for the Minimum Viable Product (MVP) and are deferred to future development phases (Growth or Vision). This ensures focus on delivering the core value proposition of FitTrack.
+
+### Deferred Growth Features (Post-MVP)
+
+*   Statistics and graphs showing progress over time.
+*   Goal-oriented reminders and notifications.
+*   Consistency tracking (e.g., streaks, calendars, badges).
+*   "Zen Mode" (for rest and recovery).
+*   Smart recovery tips.
+
+### Deferred Vision Features (Future)
+
+*   Advanced goal setting (e.g., smart goal suggestions, progress-based goal adjustments).
+*   Natural language input for logging workouts.
+*   Social features (e.g., sharing workouts, leaderboards).
+*   Wearable integration.
+*   Premium features (e.g., advanced analytics, personalized coaching).
+
+---
+
 ## web_app Specific Requirements
 
 Based on FitTrack being a `web_app`, here are the specific requirements and considerations:
@@ -124,6 +147,28 @@ Based on FitTrack being a `web_app`, here are the specific requirements and cons
 *   **P1 - High Priority (Complete MVP):** Goal Management.
 *   **P2 - Medium Priority (Growth Features):** Progress Tracking, Motivational Features.
 *   **P3 - Low Priority (Vision Features):** Advanced Features.
+
+### P0 - Highest Priority (Core MVP)
+*   **FR-001:** User registration and authentication.
+*   **FR-002:** Create, view, update, and delete workouts (with date, type, duration, and notes).
+*   **FR-003:** View workout history (a simple, chronological list).
+
+### P1 - High Priority (Complete MVP)
+*   **FR-004:** Create and view personal goals (with a title and a target, e.g., "run 10k" or "work out 3 times a week").
+
+### P2 - Medium Priority (Growth Features)
+*   **FR-005:** Statistics and graphs showing progress over time.
+*   **FR-006:** Goal-oriented reminders and notifications.
+*   **FR-007:** Consistency tracking (e.g., streaks, calendars, badges).
+*   **FR-008:** "Zen Mode" (for rest and recovery).
+*   **FR-009:** Smart recovery tips.
+
+### P3 - Low Priority (Vision Features)
+*   **FR-010:** Advanced goal setting (e.g., smart goal suggestions, progress-based goal adjustments).
+*   **FR-011:** Natural language input for logging workouts.
+*   **FR-012:** Social features (e.g., sharing workouts, leaderboards).
+*   **FR-013:** Wearable integration.
+*   **FR-014:** Premium features (e.g., advanced analytics, personalized coaching).
 
 ---
 

@@ -31,6 +31,8 @@ As a developer,
 I want to initialize the project structure with a monorepo, basic CI/CD pipeline, and dependency management,
 So that we have a solid foundation for collaborative development and automated builds.
 
+**Covers:** NFR (Maintainability)
+
 **Acceptance Criteria:**
 
 **Given** a new project,
@@ -47,6 +49,8 @@ So that we have a solid foundation for collaborative development and automated b
 As a developer,
 I want to set up a new Supabase project and define the initial database schema,
 So that we have a database and authentication service ready for the application.
+
+**Covers:** NFR (Reliability / Data Integrity)
 
 **Acceptance Criteria:**
 
@@ -65,6 +69,8 @@ As a developer,
 I want to create a basic FastAPI application with a health check endpoint and Supabase integration,
 So that we have a backend service ready to be developed.
 
+**Covers:** NFR (Performance, Scalability)
+
 **Acceptance Criteria:**
 
 **Given** the project structure from Story 1.1,
@@ -81,6 +87,8 @@ So that we have a backend service ready to be developed.
 As a developer,
 I want to create a basic Next.js application with Tailwind CSS and a basic layout,
 So that we have a frontend application ready for development.
+
+**Covers:** NFR (Usability)
 
 **Acceptance Criteria:**
 
@@ -105,6 +113,8 @@ As a new user,
 I want to be able to register for a new account using my email and a password,
 So that I can start using the application.
 
+**Covers:** FR-001
+
 **Acceptance Criteria:**
 
 **Given** I am on the registration page,
@@ -121,6 +131,8 @@ So that I can start using the application.
 As a registered user,
 I want to be able to log in to my account using my email and password,
 So that I can access my personal workout data.
+
+**Covers:** FR-001
 
 **Acceptance Criteria:**
 
@@ -139,6 +151,8 @@ As a logged-in user,
 I want to be able to log out of my account,
 So that I can securely end my session.
 
+**Covers:** FR-001
+
 **Acceptance Criteria:**
 
 **Given** I am logged in to the application,
@@ -156,6 +170,8 @@ As a developer,
 I want to protect certain routes so that they are only accessible to authenticated users,
 So that I can secure the application and protect user data.
 
+**Covers:** FR-001
+
 **Acceptance Criteria:**
 
 **Given** I am not logged in,
@@ -171,6 +187,8 @@ So that I can secure the application and protect user data.
 As a logged-in user,
 I want to be able to view and update my profile information (e.g., name),
 So that I can keep my personal information up to date.
+
+**Covers:** FR-001
 
 **Acceptance Criteria:**
 
@@ -195,6 +213,8 @@ As a logged-in user,
 I want to be able to log a new workout with details such as date, type, duration, and notes,
 So that I can keep a record of my fitness activities.
 
+**Covers:** FR-002
+
 **Acceptance Criteria:**
 
 **Given** I am logged in and on the workout logging page,
@@ -211,6 +231,8 @@ So that I can keep a record of my fitness activities.
 As a logged-in user,
 I want to be able to view a chronological list of all my past workouts,
 So that I can easily review my fitness journey.
+
+**Covers:** FR-003
 
 **Acceptance Criteria:**
 
@@ -229,6 +251,8 @@ As a logged-in user,
 I want to be able to view the full details of a specific workout,
 So that I can recall all information about that session.
 
+**Covers:** FR-002
+
 **Acceptance Criteria:**
 
 **Given** I am viewing my workout history,
@@ -244,6 +268,8 @@ So that I can recall all information about that session.
 As a logged-in user,
 I want to be able to edit the details of an existing workout,
 So that I can correct mistakes or add more information.
+
+**Covers:** FR-002
 
 **Acceptance Criteria:**
 
@@ -261,6 +287,8 @@ So that I can correct mistakes or add more information.
 As a logged-in user,
 I want to be able to delete a workout from my history,
 So that I can remove incorrect or unwanted entries.
+
+**Covers:** FR-002
 
 **Acceptance Criteria:**
 
@@ -285,6 +313,8 @@ As a logged-in user,
 I want to be able to create a new personal fitness goal with a title and a target,
 So that I can define my fitness aspirations.
 
+**Covers:** FR-004
+
 **Acceptance Criteria:**
 
 **Given** I am logged in and on the goal creation page,
@@ -302,6 +332,8 @@ As a logged-in user,
 I want to be able to view a list of all my personal fitness goals,
 So that I can keep track of my objectives.
 
+**Covers:** FR-004
+
 **Acceptance Criteria:**
 
 **Given** I am logged in and on the goals page,
@@ -317,6 +349,8 @@ So that I can keep track of my objectives.
 As a logged-in user,
 I want to be able to view the full details of a specific goal,
 So that I can understand its progress and requirements.
+
+**Covers:** FR-004
 
 **Acceptance Criteria:**
 
@@ -334,6 +368,8 @@ As a logged-in user,
 I want to be able to edit the details of an existing goal,
 So that I can adjust my objectives as needed.
 
+**Covers:** FR-004
+
 **Acceptance Criteria:**
 
 **Given** I am viewing the details of a specific goal,
@@ -350,6 +386,8 @@ So that I can adjust my objectives as needed.
 As a logged-in user,
 I want to be able to delete a goal from my list,
 So that I can remove completed or irrelevant objectives.
+
+**Covers:** FR-004
 
 **Acceptance Criteria:**
 
@@ -374,6 +412,8 @@ As a user,
 I want the application to be fully functional and visually appealing on various screen sizes (desktop, tablet, mobile),
 So that I can use FitTrack comfortably on any device.
 
+**Covers:** NFR (Usability)
+
 **Acceptance Criteria:**
 
 **Given** I am accessing the application on a mobile device,
@@ -390,6 +430,8 @@ So that I can use FitTrack comfortably on any device.
 As a user,
 I want the application to have a clean, minimalist, and intuitive visual design,
 So that I can focus on my fitness tracking without distractions.
+
+**Covers:** NFR (Usability)
 
 **Acceptance Criteria:**
 
@@ -408,6 +450,8 @@ As a user,
 I want to easily navigate between different sections of the application,
 So that I can quickly access the features I need.
 
+**Covers:** NFR (Usability)
+
 **Acceptance Criteria:**
 
 **Given** I am using the application,
@@ -425,6 +469,8 @@ As a user,
 I want to receive clear and immediate feedback on my actions and any errors that occur,
 So that I understand what is happening and how to proceed.
 
+**Covers:** NFR (Usability)
+
 **Acceptance Criteria:**
 
 **Given** I perform an action (e.g., save a workout, register),
@@ -439,4 +485,26 @@ So that I understand what is happening and how to proceed.
 
 ---
 
+## Requirements Traceability Matrix
+
+| FR ID | Requirement | Epic | Story |
+|---|---|---|---|
+| FR-001 | User registration and authentication. | Epic 2 | 2.1, 2.2, 2.3, 2.4, 2.5 |
+| FR-002 | Create, view, update, and delete workouts. | Epic 3 | 3.1, 3.3, 3.4, 3.5 |
+| FR-003 | View workout history. | Epic 3 | 3.2 |
+| FR-004 | Create and view personal goals. | Epic 4 | 4.1, 4.2, 4.3, 4.4, 4.5 |
+| FR-005 | Statistics and graphs showing progress over time. | (Future) | |
+| FR-006 | Goal-oriented reminders and notifications. | (Future) | |
+| FR-007 | Consistency tracking (e.g., streaks, calendars, badges). | (Future) | |
+| FR-008 | "Zen Mode" (for rest and recovery). | (Future) | |
+| FR-009 | Smart recovery tips. | (Future) | |
+| FR-010 | Advanced goal setting. | (Future) | |
+| FR-011 | Natural language input for logging workouts. | (Future) | |
+| FR-012 | Social features. | (Future) | |
+| FR-013 | Wearable integration. | (Future) | |
+| FR-014 | Premium features. | (Future) | |
+
+---
+
 _For implementation: Use the `create-story` workflow to generate individual story implementation plans from this epic breakdown._
+
