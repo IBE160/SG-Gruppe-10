@@ -12,7 +12,7 @@ WORKFLOW_PATH: method-greenfield.yaml
 ## Current State
 
 CURRENT_PHASE: 2
-CURRENT_WORKFLOW: validate-prd
+CURRENT_WORKFLOW: epics-stories
 CURRENT_AGENT: pm
 PHASE_1_COMPLETE: true
 PHASE_2_COMPLETE: false
@@ -30,8 +30,8 @@ STORIES_DONE: "[]"
 
 ## Next Action
 
-NEXT_ACTION: Guide user through PRD Validation
-NEXT_COMMAND: validate-prd
+NEXT_ACTION: Guide user to create epics and stories from the PRD
+NEXT_COMMAND: epics-stories
 NEXT_AGENT: pm
 
 ## Story Backlog
@@ -44,5 +44,5 @@ NEXT_AGENT: pm
 
 ---
 
-_Last Updated: 2025-11-09_
+_Last Updated: 2025-11-13_
 _Status Version: 2.0_
