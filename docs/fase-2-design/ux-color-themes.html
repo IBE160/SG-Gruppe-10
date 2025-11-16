@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack Color Theme Visualizer</title>
+    <style>
+        /* Global styles */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; line-height: 1.6; }
+        h1 { color: #222; text-align: center; margin-bottom: 30px; }
+        h2 { color: #333; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: #444; font-size: 1.4em; margin-top: 25px; margin-bottom: 15px; }
+        p { margin-bottom: 10px; }
+
+        .theme-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .theme-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+        }
+        .theme-card h3 { margin-top: 0; font-size: 1.6em; border-bottom: none; padding-bottom: 0; }
+        .theme-card p.personality { font-style: italic; color: #666; margin-bottom: 20px; }
+
+        .color-palette { display: flex; flex-wrap: wrap; margin-bottom: 20px; }
+        .color-swatch {
+            width: 60px; height: 60px; border-radius: 6px; margin: 5px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75em; color: #fff; text-shadow: 0 0 3px rgba(0,0,0,0.6);
+            border: 1px solid rgba(0,0,0,0.1);
+            flex-direction: column;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .color-swatch span { font-size: 0.65em; opacity: 0.8; }
+
+        .component-example { margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+        .component-example h4 { font-size: 1.1em; margin-bottom: 10px; color: #555; }
+
+        .btn {
+            padding: 10px 18px; border-radius: 6px; border: none; cursor: pointer;
+            font-weight: 600; margin-right: 10px; margin-bottom: 10px;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .btn:hover { opacity: 0.9; }
+
+        .input-field {
+            padding: 10px 12px; border: 1px solid var(--neutral-300); border-radius: 6px;
+            width: 100%; box-sizing: border-box; margin-bottom: 10px;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+        }
+        .input-field.error { border-color: var(--error-color); }
+
+        .card {
+            border-radius: 8px; padding: 15px; margin-bottom: 10px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+            background-color: var(--neutral-100);
+            color: var(--neutral-800);
+        }
+        .card-title { font-weight: bold; margin-bottom: 5px; color: var(--neutral-900); }
+        .card-text { font-size: 0.9em; }
+
+        .alert {
+            padding: 12px 15px; border-radius: 6px; margin-bottom: 10px;
+            font-weight: 500;
+            display: flex; align-items: center;
+        }
+        .alert-icon { margin-right: 10px; font-size: 1.2em; }
+
+        /* Theme specific variables and styles */
+        .theme-card[data-theme="1"] {
+            --primary-color: #4A148C; --primary-rgb: 74, 20, 140; --on-primary-color: #FFFFFF;
+            --secondary-color: #212121; --secondary-rgb: 33, 33, 33; --on-secondary-color: #FFFFFF;
+            --accent-color: #E040FB; --accent-rgb: 224, 64, 251; --on-accent-color: #FFFFFF;
+            --success-color: #4CAF50; --on-success-color: #FFFFFF;
+            --warning-color: #FFC107; --on-warning-color: #212121;
+            --error-color: #F44336; --on-error-color: #FFFFFF;
+            --info-color: #2196F3; --on-info-color: #FFFFFF;
+            --neutral-50: #FAFAFA; --neutral-100: #F5F5F5; --neutral-200: #EEEEEE; --neutral-300: #E0E0E0;
+            --neutral-400: #BDBDBD; --neutral-500: #9E9E9E; --neutral-600: #757575; --neutral-700: #616161;
+            --neutral-800: #424242; --neutral-900: #212121; --on-neutral-color: #FFFFFF;
+        }
+        .theme-card[data-theme="1"] .btn-primary { background-color: var(--primary-color); color: var(--on-primary-color); }
+        .theme-card[data-theme="1"] .btn-secondary { background-color: var(--secondary-color); color: var(--on-secondary-color); }
+        .theme-card[data-theme="1"] .btn-accent { background-color: var(--accent-color); color: var(--on-accent-color); }
+        .theme-card[data-theme="1"] .alert-success { background-color: var(--success-color); color: var(--on-success-color); }
+        .theme-card[data-theme="1"] .alert-error { background-color: var(--error-color); color: var(--on-error-color); }
+
+        .theme-card[data-theme="2"] {
+            --primary-color: #673AB7; --primary-rgb: 103, 58, 183; --on-primary-color: #FFFFFF;
+            --secondary-color: #00BCD4; --secondary-rgb: 0, 188, 212; --on-secondary-color: #212121;
+            --accent-color: #FFEB3B; --accent-rgb: 255, 235, 59; --on-accent-color: #212121;
+            --success-color: #8BC34A; --on-success-color: #212121;
+            --warning-color: #FF9800; --on-warning-color: #212121;
+            --error-color: #E91E63; --on-error-color: #FFFFFF;
+            --info-color: #03A9F4; --on-info-color: #FFFFFF;
+            --neutral-50: #FAFAFA; --neutral-100: #F5F5F5; --neutral-200: #EEEEEE; --neutral-300: #E0E0E0;
+            --neutral-400: #BDBDBD; --neutral-500: #9E9E9E; --neutral-600: #757575; --neutral-700: #616161;
+            --neutral-800: #424242; --neutral-900: #212121; --on-neutral-color: #FFFFFF;
+        }
+        .theme-card[data-theme="2"] .btn-primary { background-color: var(--primary-color); color: var(--on-primary-color); }
+        .theme-card[data-theme="2"] .btn-secondary { background-color: var(--secondary-color); color: var(--on-secondary-color); }
+        .theme-card[data-theme="2"] .btn-accent { background-color: var(--accent-color); color: var(--on-accent-color); }
+        .theme-card[data-theme="2"] .alert-success { background-color: var(--success-color); color: var(--on-success-color); }
+        .theme-card[data-theme="2"] .alert-error { background-color: var(--error-color); color: var(--on-error-color); }
+
+        .theme-card[data-theme="3"] {
+            --primary-color: #616161; --primary-rgb: 97, 97, 97; --on-primary-color: #FFFFFF;
+            --secondary-color: #9E9E9E; --secondary-rgb: 158, 158, 158; --on-secondary-color: #212121;
+            --accent-color: #9C27B0; --accent-rgb: 156, 39, 176; --on-accent-color: #FFFFFF;
+            --success-color: #4CAF50; --on-success-color: #FFFFFF;
+            --warning-color: #FFC107; --on-warning-color: #212121;
+            --error-color: #F44336; --on-error-color: #FFFFFF;
+            --info-color: #2196F3; --on-info-color: #FFFFFF;
+            --neutral-50: #FAFAFA; --neutral-100: #F5F5F5; --neutral-200: #EEEEEE; --neutral-300: #E0E0E0;
+            --neutral-400: #BDBDBD; --neutral-500: #9E9E9E; --neutral-600: #757575; --neutral-700: #616161;
+            --neutral-800: #424242; --neutral-900: #212121; --on-neutral-color: #FFFFFF;
+        }
+        .theme-card[data-theme="3"] .btn-primary { background-color: var(--primary-color); color: var(--on-primary-color); }
+        .theme-card[data-theme="3"] .btn-secondary { background-color: var(--secondary-color); color: var(--on-secondary-color); }
+        .theme-card[data-theme="3"] .btn-accent { background-color: var(--accent-color); color: var(--on-accent-color); }
+        .theme-card[data-theme="3"] .alert-success { background-color: var(--success-color); color: var(--on-success-color); }
+        .theme-card[data-theme="3"] .alert-error { background-color: var(--error-color); color: var(--on-error-color); }
+
+        .theme-card[data-theme="4"] {
+            --primary-color: #9575CD; --primary-rgb: 149, 117, 205; --on-primary-color: #212121;
+            --secondary-color: #BDBDBD; --secondary-rgb: 189, 189, 189; --on-secondary-color: #212121;
+            --accent-color: #7C4DFF; --accent-rgb: 124, 77, 255; --on-accent-color: #FFFFFF;
+            --success-color: #A5D6A7; --on-success-color: #212121;
+            --warning-color: #FFECB3; --on-warning-color: #212121;
+            --error-color: #EF9A9A; --on-error-color: #212121;
+            --info-color: #90CAF9; --on-info-color: #212121;
+            --neutral-50: #FAFAFA; --neutral-100: #F5F5F5; --neutral-200: #EEEEEE; --neutral-300: #E0E0E0;
+            --neutral-400: #BDBDBD; --neutral-500: #9E9E9E; --neutral-600: #757575; --neutral-700: #616161;
+            --neutral-800: #424242; --neutral-900: #212121; --on-neutral-color: #FFFFFF;
+        }
+        .theme-card[data-theme="4"] .btn-primary { background-color: var(--primary-color); color: var(--on-primary-color); }
+        .theme-card[data-theme="4"] .btn-secondary { background-color: var(--secondary-color); color: var(--on-secondary-color); }
+        .theme-card[data-theme="4"] .btn-accent { background-color: var(--accent-color); color: var(--on-accent-color); }
+        .theme-card[data-theme="4"] .alert-success { background-color: var(--success-color); color: var(--on-success-color); }
+        .theme-card[data-theme="4"] .alert-error { background-color: var(--error-color); color: var(--on-error-color); }
+
+    </style>
+</head>
+<body>
+    <h1>FitTrack Color Theme Visualizer</h1>
+    <p>Explore different color themes for FitTrack. Each theme incorporates black and purple in various ways, along with complementary colors, to evoke different feelings. Choose the one that best resonates with the "efficient and productive" feel we're aiming for.</p>
+
+    <div class="theme-container">
+
+        <!-- Theme 1: Deep Focus -->
+        <div class="theme-card" data-theme="1">
+            <h3>1. Deep Focus</h3>
+            <p class="personality">_Professional, modern, sleek. Emphasizes depth and sophistication._</p>
+            <h4>Color Palette</h4>
+            <div class="color-palette">
+                <div class="color-swatch bg-primary">Primary<br>#4A148C</div>
+                <div class="color-swatch bg-secondary">Secondary<br>#212121</div>
+                <div class="color-swatch bg-accent">Accent<br>#E040FB</div>
+                <div class="color-swatch bg-success">Success<br>#4CAF50</div>
+                <div class="color-swatch bg-warning">Warning<br>#FFC107</div>
+                <div class="color-swatch bg-error">Error<br>#F44336</div>
+                <div class="color-swatch bg-neutral-700">Text<br>#616161</div>
+                <div class="color-swatch bg-neutral-100" style="color: #333;">Background<br>#F5F5F5</div>
+            </div>
+            <h4>Component Examples</h4>
+            <div class="component-example">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-accent">Accent Button</button>
+                <input type="text" class="input-field" placeholder="Text Input">
+                <input type="text" class="input-field error" placeholder="Error Input">
+                <div class="card">
+                    <div class="card-title">Card Title</div>
+                    <div class="card-text">This is some card content.</div>
+                </div>
+                <div class="alert alert-success"><span class="alert-icon">✔</span>Success Message</div>
+                <div class="alert alert-error"><span class="alert-icon">✖</span>Error Message</div>
+            </div>
+        </div>
+
+        <!-- Theme 2: Vibrant Energy -->
+        <div class="theme-card" data-theme="2">
+            <h3>2. Vibrant Energy</h3>
+            <p class="personality">_Dynamic, motivating, playful. Uses purple as primary with a bright accent._</p>
+            <h4>Color Palette</h4>
+            <div class="color-palette">
+                <div class="color-swatch bg-primary">Primary<br>#673AB7</div>
+                <div class="color-swatch bg-secondary">Secondary<br>#00BCD4</div>
+                <div class="color-swatch bg-accent">Accent<br>#FFEB3B</div>
+                <div class="color-swatch bg-success">Success<br>#8BC34A</div>
+                <div class="color-swatch bg-warning">Warning<br>#FF9800</div>
+                <div class="color-swatch bg-error">Error<br>#E91E63</div>
+                <div class="color-swatch bg-neutral-800">Text<br>#424242</div>
+                <div class="color-swatch bg-neutral-100" style="color: #333;">Background<br>#F5F5F5</div>
+            </div>
+            <h4>Component Examples</h4>
+            <div class="component-example">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-accent">Accent Button</button>
+                <input type="text" class="input-field" placeholder="Text Input">
+                <input type="text" class="input-field error" placeholder="Error Input">
+                <div class="card">
+                    <div class="card-title">Card Title</div>
+                    <div class="card-text">This is some card content.</div>
+                </div>
+                <div class="alert alert-success"><span class="alert-icon">✔</span>Success Message</div>
+                <div class="alert alert-error"><span class="alert-icon">✖</span>Error Message</div>
+            </div>
+        </div>
+
+        <!-- Theme 3: Minimalist Power -->
+        <div class="theme-card" data-theme="3">
+            <h3>3. Minimalist Power</h3>
+            <p class="personality">_Clean, simple, strong. Mostly grays/blacks with purple as a key accent._</p>
+            <h4>Color Palette</h4>
+            <div class="color-palette">
+                <div class="color-swatch bg-primary">Primary<br>#616161</div>
+                <div class="color-swatch bg-secondary">Secondary<br>#9E9E9E</div>
+                <div class="color-swatch bg-accent">Accent<br>#9C27B0</div>
+                <div class="color-swatch bg-success">Success<br>#4CAF50</div>
+                <div class="color-swatch bg-warning">Warning<br>#FFC107</div>
+                <div class="color-swatch bg-error">Error<br>#F44336</div>
+                <div class="color-swatch bg-neutral-900">Text<br>#212121</div>
+                <div class="color-swatch bg-neutral-100" style="color: #333;">Background<br>#F5F5F5</div>
+            </div>
+            <h4>Component Examples</h4>
+            <div class="component-example">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-accent">Accent Button</button>
+                <input type="text" class="input-field" placeholder="Text Input">
+                <input type="text" class="input-field error" placeholder="Error Input">
+                <div class="card">
+                    <div class="card-title">Card Title</div>
+                    <div class="card-text">This is some card content.</div>
+                </div>
+                <div class="alert alert-success"><span class="alert-icon">✔</span>Success Message</div>
+                <div class="alert alert-error"><span class="alert-icon">✖</span>Error Message</div>
+            </div>
+        </div>
+
+        <!-- Theme 4: Calm Strength -->
+        <div class="theme-card" data-theme="4">
+            <h3>4. Calm Strength</h3>
+            <p class="personality">_Balanced, serene, reliable. Uses a muted purple with warm grays for an approachable feel._</p>
+            <h4>Color Palette</h4>
+            <div class="color-palette">
+                <div class="color-swatch bg-primary">Primary<br>#9575CD</div>
+                <div class="color-swatch bg-secondary">Secondary<br>#BDBDBD</div>
+                <div class="color-swatch bg-accent">Accent<br>#7C4DFF</div>
+                <div class="color-swatch bg-success">Success<br>#A5D6A7</div>
+                <div class="color-swatch bg-warning">Warning<br>#FFECB3</div>
+                <div class="color-swatch bg-error">Error<br>#EF9A9A</div>
+                <div class="color-swatch bg-neutral-800">Text<br>#424242</div>
+                <div class="color-swatch bg-neutral-100" style="color: #333;">Background<br>#F5F5F5</div>
+            </div>
+            <h4>Component Examples</h4>
+            <div class="component-example">
+                <button class="btn btn-primary">Primary Button</button>
+                <button class="btn btn-secondary">Secondary Button</button>
+                <button class="btn btn-accent">Accent Button</button>
+                <input type="text" class="input-field" placeholder="Text Input">
+                <input type="text" class="input-field error" placeholder="Error Input">
+                <div class="card">
+                    <div class="card-title">Card Title</div>
+                    <div class="card-text">This is some card content.</div>
+                </div>
+                <div class="alert alert-success"><span class="alert-icon">✔</span>Success Message</div>
+                <div class="alert alert-error"><span class="alert-icon">✖</span>Error Message</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Basic interactivity for future expansion, e.g., light/dark mode toggle, detailed view
+        // For now, just basic display.
+    </script>
+</body>
+</html>
