@@ -1,6 +1,6 @@
-# {{project_name}} UX Design Specification
+# FitTrack UX Design Specification
 
-_Created on {{date}} by {{user_name}}_
+_Created on 2025-11-16 by BIP_
 _Generated using BMad Method - Create UX Design Workflow v1.0_
 
 ---
@@ -38,7 +38,27 @@ This statement is our north star. It dictates that our design priority is not to
 
 ### 2.2 Novel UX Patterns
 
-{{novel_ux_patterns}}
+No novel UX patterns were identified or required for FitTrack, as the design focuses on simplifying and refining existing, proven UX patterns for workout logging and tracking.
+
+### Related Documents
+
+- Product Requirements: `docs/PRD.md`
+- Product Brief: `docs/product-brief.md`
+- Brainstorming: `N/A`
+
+### Core Interactive Deliverables
+
+This UX Design Specification was created through visual collaboration:
+
+- **Color Theme Visualizer**: `ux-color-themes.html`
+  - Interactive HTML showing all color theme options explored
+  - Live UI component examples in each theme
+  - Side-by-side comparison and semantic color usage
+
+- **Design Direction Mockups**: The provided HTML files (`goals-achivements-dashboard.html`, `logging-dashboard.html`, `login-screen-dashboard.html`, `workout-history-dashboard.html`) collectively serve as the interactive mockups for this design direction.
+  - Full-screen mockups of key screens
+  - Design philosophy and rationale for each direction
+
 
 ### 2.3 Desired Emotional Response
 
@@ -68,11 +88,24 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 3.1 Color System
 
-{{visual_foundation}}
+The color system for FitTrack has been explored through an interactive visualizer, presenting various themes to align with the desired emotional impact of "efficient and productive."
 
 **Interactive Visualizations:**
 
 - Color Theme Explorer: [ux-color-themes.html](./ux-color-themes.html)
+
+#### 3.2 Typography
+
+-   **Font Families:** 'Lexend' for headings and display text, with a standard sans-serif for body content (e.g., system UI fonts).
+-   **Type Scale:** Defined hierarchy (e.g., text-xs to text-5xl used in mockups) to ensure clear visual structure.
+-   **Font Weights:** Regular (400), Medium (500), Semi-bold (600), and Bold (700) for emphasis.
+-   **Line Heights:** Standardized for optimal readability across various text sizes.
+
+#### 3.3 Spacing & Layout
+
+-   **Spacing System:** An 8px base unit will be used for all spacing (padding, margins, gaps) to ensure consistency.
+-   **Layout Grid:** Flexible grid system, adapting to different screen sizes, commonly using a 12-column approach for larger displays.
+-   **Container Widths:** Content is constrained by max-widths on larger screens for optimal readability, becoming fluid on smaller viewports.
 
 ---
 
@@ -80,11 +113,19 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 4.1 Chosen Design Approach
 
-{{design_direction_decision}}
+**Clean, Card-Based Dashboard with Mobile-First Responsiveness**
+
+The design consistently utilizes a clean, modern aesthetic with a strong emphasis on card-based layouts for organizing information. Key characteristics include:
+
+*   **Layout:** Predominantly single-column on mobile, adapting to multi-column card grids on larger screens. Sticky headers and, in some cases, bottom navigation provide consistent navigation.
+*   **Visual Hierarchy:** Clear, bold headings (`Lexend` font) establish strong visual hierarchy. Information is grouped logically within cards, making it scannable.
+*   **Interaction Patterns:** Standard tap/click interactions are implied. The use of Material Symbols Outlined provides clear visual cues for actions and information.
+*   **Visual Style:** A balanced visual weight, leaning towards minimalist with subtle shadows on cards. Dark mode is supported, indicating a modern and flexible interface.
+*   **Content Approach:** Data-driven, with clear metrics, progress bars, and lists of activities.
 
 **Interactive Mockups:**
 
-- Design Direction Showcase: [ux-design-directions.html](./ux-design-directions.html)
+- Design Direction Showcase: The provided HTML files (`goals-achivements-dashboard.html`, `logging-dashboard.html`, `login-screen-dashboard.html`, `workout-history-dashboard.html`) collectively serve as the interactive mockups for this design direction.
 
 ---
 
@@ -92,7 +133,54 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 5.1 Critical User Paths
 
-{{user_journey_flows}}
+#### User Journey: User Registration and Authentication (Just-in-Time)
+
+**User Goal:** A new user wants to log their first workout and create an account with minimal friction.
+
+**Approach:** Just-in-Time Registration, prioritizing immediate value delivery.
+
+**Flow Steps:**
+
+1.  **Entry: Land on Site & Log Workout Prompt**
+    *   **User sees:** A prominent, simple form or call-to-action to "Log Your First Workout" or "Start Tracking Now." No explicit "Sign Up" required initially.
+    *   **User does:** Enters basic workout details (e.g., "Workout Type," "Duration," "Notes").
+    *   **System responds:** Form fields update, possibly with real-time validation hints.
+
+2.  **Action: Save Workout & Account Creation Prompt**
+    *   **User sees:** After filling out the workout details, a "Save Workout" button. Upon clicking, a modal or overlay appears.
+    *   **User does:** The modal prompts for "Email" and "Password" with a message like "Save your progress and create your account."
+    *   **System responds:** Input fields for email and password, with validation.
+
+3.  **Success: Account Created & Workout Saved**
+    *   **User sees:** A success message (e.g., "Workout Saved! Welcome to FitTrack, BIP!") and is immediately directed to their main dashboard, with the newly logged workout visible.
+    *   **User does:** Continues exploring the app, potentially logging another workout or setting a goal.
+    *   **System responds:** User is logged in, account is created, and the workout data is persisted.
+
+**Decision Points:**
+*   **User already has an account:** If the email entered in Step 2 matches an existing account, prompt for password only or offer "Forgot Password."
+*   **Invalid input:** Provide clear, inline error messages for email/password validation.
+
+**Error States:**
+*   **Invalid Email/Password:** Display clear error messages within the modal.
+*   **Network Error:** Inform the user and offer a retry option.
+
+**Success State:**
+*   Immediate visual confirmation of workout saved and account created. Seamless transition to the main dashboard.
+
+**Mermaid Diagram:**
+```mermaid
+graph TD
+    A[User Lands on Site] --> B{Prompt to Log First Workout};
+    B --> C[User Enters Workout Details];
+    C --> D{Click "Save Workout"};
+    D --> E{Modal: "Save Progress & Create Account"};
+    E --> F[User Enters Email & Password];
+    F --> G{Click "Create Account / Save"};
+    G -- Success --> H[Workout Saved & Account Created];
+    H --> I[Redirect to Dashboard];
+    F -- Invalid Input --> E;
+    G -- Error --> E;
+```
 
 ---
 
@@ -100,7 +188,9 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 6.1 Component Strategy
 
-{{component_library_strategy}}
+The component strategy will primarily leverage **shadcn/ui** for its robust, accessible, and customizable components. The existing HTML mockups (`goals-achivements-dashboard.html`, `logging-dashboard.html`, `login-screen-dashboard.html`, `workout-history-dashboard.html`) will serve as the definitive visual guide for selecting, customizing, and assembling these components.
+
+Any unique UI elements or specific interaction patterns not directly covered by `shadcn/ui` will be implemented as custom components, adhering to the overall design language established in the mockups. The goal is to maintain consistency and efficiency in development while achieving the desired user experience.
 
 ---
 
@@ -108,7 +198,45 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 7.1 Consistency Rules
 
-{{ux_pattern_decisions}}
+To ensure a consistent and predictable user experience across FitTrack, the following UX pattern decisions will guide implementation:
+
+*   **Button Hierarchy:**
+    *   **Primary Actions:** Solid, high-contrast background (e.g., the "Sign In" button in `login-screen-dashboard.html`). Used for the main call-to-action on a page.
+    *   **Secondary Actions:** Outline or lower-contrast background.
+    *   **Destructive Actions:** Indicated with a red color to signify irreversible operations (e.g., deleting a workout).
+
+*   **Feedback Patterns:**
+    *   **Success:** Non-intrusive "toast" or "snackbar" notifications appearing temporarily at the bottom of the screen.
+    *   **Error:** Inline error messages displayed directly below the relevant form field, typically in red. For critical, system-wide errors, a modal dialog may be used.
+    *   **Loading:** Subtle spinners for ongoing actions and skeleton screens (placeholder content) for loading larger content blocks.
+
+*   **Form Patterns:**
+    *   **Labels:** Positioned above the input field for clear association.
+    *   **Validation:** Errors are displayed after a user interacts with and then leaves a field (on blur).
+    *   **Error Display:** Inline, below the field, using a distinct error color.
+
+*   **Modal Patterns:**
+    *   **Dismissal:** Modals can be closed by clicking outside the modal content area or by pressing the 'Escape' key.
+    *   **Focus Management:** Focus will be trapped within the modal when open, returning to the triggering element upon close.
+
+*   **Navigation Patterns:**
+    *   **Active State:** The currently active navigation item will have a clear visual indicator (e.g., distinct color, underline, or background highlight).
+    *   **Back Button:** The browser's back button will function as expected. In-app back buttons will be provided for navigating within specific multi-step flows.
+
+*   **Empty State Patterns:**
+    *   When a section or list has no content (e.g., no workout history), a clear message will be displayed, often accompanied by a relevant icon/illustration and a primary call-to-action to guide the user (as seen in the `workout-history-dashboard.html` mockup).
+
+*   **Confirmation Patterns:**
+    *   A modal dialog will be used to request confirmation for any potentially destructive or irreversible actions (e.g., "Are you sure you want to delete this workout?").
+
+*   **Notification Patterns:**
+    *   Non-critical informational notifications will use toast/snackbar components. Critical system alerts may use modal dialogs.
+
+*   **Search Patterns:**
+    *   Search input fields will typically filter results dynamically as the user types, providing immediate feedback.
+
+*   **Date/Time Patterns:**
+    *   Dates will be displayed in a user-friendly, localized format (e.g., "October 26, 2023"). Date pickers will be used for input where appropriate.
 
 ---
 
@@ -116,7 +244,34 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 8.1 Responsive Strategy
 
-{{responsive_accessibility_strategy}}
+FitTrack will implement a fully mobile-responsive design, ensuring a consistent and simple user experience across various devices (desktop, tablet, mobile).
+
+*   **Mobile (Small Screens):**
+    *   **Layout:** Primarily single-column layouts, optimized for vertical scrolling.
+    *   **Navigation:** Bottom navigation bar for primary actions, with a hamburger menu or similar for secondary navigation if needed.
+    *   **Content:** Concise presentation of information, with larger touch targets for ease of use.
+    *   **Adaptation:** Multi-column layouts from larger screens will collapse into single columns or utilize horizontal scrolling where appropriate.
+
+*   **Tablet (Medium Screens):**
+    *   **Layout:** Adaptable layouts, potentially introducing two-column grids for some content areas, while maintaining touch-optimized interactions.
+    *   **Navigation:** May transition to a sidebar or persistent top navigation, depending on screen real estate.
+    *   **Content:** More information can be displayed, prioritizing clarity and avoiding clutter.
+
+*   **Desktop (Large Screens):**
+    *   **Layout:** Multi-column layouts will be fully utilized, making efficient use of horizontal space.
+    *   **Navigation:** Persistent sidebar navigation or a robust top navigation bar.
+    *   **Content:** Richer data displays, dashboards, and potentially more complex interactions will be available.
+
+### 8.2 Accessibility Strategy
+
+To ensure FitTrack is usable by everyone, including individuals with disabilities, we will target **WCAG 2.1 Level AA compliance**.
+
+*   **Color Contrast:** All text and essential UI elements will meet WCAG 2.1 AA contrast ratios.
+*   **Keyboard Navigation:** All interactive elements will be fully navigable and operable using only a keyboard.
+*   **Focus Indicators:** Clear and visible focus indicators will be provided for all interactive elements.
+*   **ARIA Attributes:** Appropriate ARIA roles, states, and properties will be used to enhance semantic meaning for assistive technologies.
+*   **Alt Text:** All meaningful images will have descriptive alternative text.
+*   **Form Accessibility:** Form fields will have properly associated labels, and error messages will be clearly identified and programmatically linked to their respective fields.
 
 ---
 
@@ -124,7 +279,29 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ### 9.1 Completion Summary
 
-{{completion_summary}}
+Excellent work! Your UX Design Specification is complete.
+
+**What we created together:**
+
+-   **Design System:** shadcn/ui with existing mockups guiding component selection and customization.
+-   **Visual Foundation:** Color theme explored via `ux-color-themes.html`, with Lexend typography and an 8px spacing system.
+-   **Design Direction:** Clean, Card-Based Dashboard with Mobile-First Responsiveness, as demonstrated by your HTML mockups.
+-   **User Journeys:** "User Registration and Authentication" designed using a Just-in-Time approach.
+-   **UX Patterns:** Consistent rules established for button hierarchy, feedback, forms, modals, navigation, empty states, confirmations, notifications, search, and date/time.
+-   **Responsive Strategy:** Defined for Mobile, Tablet, and Desktop, ensuring adaptability across devices.
+-   **Accessibility:** WCAG 2.1 Level AA compliance requirements defined.
+
+**Your Deliverables:**
+-   UX Design Document: `docs/fase-2-design/ux-design-specification.md`
+-   Interactive Color Themes: `ux-color-themes.html`
+-   Design Direction Mockups: The provided HTML files (`goals-achivements-dashboard.html`, `logging-dashboard.html`, `login-screen-dashboard.html`, `workout-history-dashboard.html`)
+
+**What happens next:**
+-   Designers can create high-fidelity mockups from this foundation.
+-   Developers can implement with clear UX guidance and rationale.
+-   All your design decisions are documented with reasoning for future reference.
+
+You've made thoughtful choices through visual collaboration that will create a great user experience. Ready for design refinement and implementation!
 
 ---
 
