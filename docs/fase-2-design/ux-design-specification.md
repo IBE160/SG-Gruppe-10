@@ -182,6 +182,148 @@ graph TD
     G -- Error --> E;
 ```
 
+#### User Journey: Create, View, Update, and Delete Workouts
+
+**User Goal:** To efficiently manage their workout records, including adding new ones, reviewing past sessions, making corrections, and removing entries.
+
+**Approach:** Streamlined interaction with clear entry points and feedback.
+
+**Flow Steps:**
+
+1.  **Initiate New Workout Creation:**
+    *   **Entry:** From the main dashboard (`logging-dashboard.html`), the user clicks the prominent "Log New Workout" button.
+    *   **User sees:** A dedicated "Log Workout" screen with input fields for workout details (e.g., Type, Date, Duration, Notes, Exercises with Sets/Reps/Weight).
+    *   **User does:** Fills in the workout details.
+    *   **System responds:** Real-time validation feedback on inputs.
+
+2.  **Save New Workout:**
+    *   **User sees:** A "Save Workout" button on the "Log Workout" screen.
+    *   **User does:** Clicks "Save Workout."
+    *   **System responds:** A success toast notification ("Workout Saved!") and redirection to the main dashboard or workout history, with the new workout visible.
+
+3.  **View Workout Details:**
+    *   **Entry:** From the "Recent Activity" section on the dashboard (`logging-dashboard.html`) or the "Workout History" screen (`workout-history-dashboard.html`), the user clicks on a specific workout entry.
+    *   **User sees:** A "Workout Details" screen displaying all recorded information for that session.
+    *   **User does:** Reviews the workout details.
+    *   **System responds:** Displays comprehensive workout data.
+
+4.  **Update Workout:**
+    *   **Entry:** From the "Workout Details" screen, the user clicks an "Edit" button (e.g., a pencil icon or a dedicated button).
+    *   **User sees:** The "Log Workout" screen pre-populated with the existing workout's details.
+    *   **User does:** Modifies the necessary fields.
+    *   **System responds:** Real-time validation feedback.
+    *   **User sees:** A "Save Changes" button.
+    *   **User does:** Clicks "Save Changes."
+    *   **System responds:** A success toast notification ("Workout Updated!") and redirection back to the "Workout Details" screen or history.
+
+5.  **Delete Workout:**
+    *   **Entry:** From the "Workout Details" screen, the user clicks a "Delete" button (e.g., a trash can icon or dedicated button).
+    *   **User sees:** A confirmation modal asking, "Are you sure you want to delete this workout? This action cannot be undone." with "Cancel" and "Delete" buttons.
+    *   **User does:** Clicks "Delete" in the modal.
+    *   **System responds:** A success toast notification ("Workout Deleted!") and redirection to the "Workout History" screen, with the workout removed.
+
+**Mermaid Diagram (Create/Update/Delete):**
+```mermaid
+graph TD
+    A[Dashboard/History] --> B{Click "Log New Workout" / Select Workout};
+    B -- New --> C[Log Workout Screen (Empty)];
+    B -- View/Edit --> D[Workout Details Screen];
+    C --> E[Fill Workout Details];
+    E --> F{Click "Save Workout"};
+    F --> G[Success Toast & Redirect to Dashboard/History];
+    D --> H{Click "Edit" / "Delete"};
+    H -- Edit --> I[Log Workout Screen (Pre-filled)];
+    I --> J[Modify Details];
+    J --> K{Click "Save Changes"};
+    K --> L[Success Toast & Redirect to Details/History];
+    H -- Delete --> M[Confirmation Modal];
+    M -- Confirm Delete --> N[Success Toast & Redirect to History];
+    M -- Cancel --> D;
+```
+
+#### User Journey: View Workout History
+
+**User Goal:** To review past workouts, track progress over time, and easily find specific sessions.
+
+**Approach:** Chronological list with filtering/sorting options.
+
+**Flow Steps:**
+
+1.  **Access Workout History:**
+    *   **Entry:** From the main dashboard (`logging-dashboard.html`), the user clicks the "History" navigation item (bottom nav).
+    *   **User sees:** The "Workout History" screen (`workout-history-dashboard.html`) displaying a chronological list of all logged workouts.
+    *   **User does:** Scrolls through the list, potentially using date navigation (e.g., month/year selectors).
+
+2.  **Filter/Sort History (Optional):**
+    *   **Entry:** On the "Workout History" screen, the user clicks a filter/sort icon or menu.
+    *   **User sees:** Options to filter by workout type, duration, or sort by date (newest/oldest).
+    *   **User does:** Selects filter/sort criteria.
+    *   **System responds:** The workout list updates to reflect the applied filters/sorting.
+
+3.  **View Individual Workout:**
+    *   **Entry:** From the list, the user clicks on a specific workout entry.
+    *   **User sees:** The "Workout Details" screen (as described in the previous journey).
+    *   **User does:** Reviews the details.
+
+**Mermaid Diagram:**
+```mermaid
+graph TD
+    A[Dashboard] --> B{Click "History" Nav Item};
+    B --> C[Workout History Screen (List of Workouts)];
+    C --> D{Click on a Workout Entry};
+    D --> E[Workout Details Screen];
+    C --> F{Click Filter/Sort Options};
+    F --> G[Filter/Sort Menu];
+    G --> C;
+```
+
+#### User Journey: Create and View Personal Goals
+
+**User Goal:** To set new fitness goals, track their progress towards existing goals, and celebrate achievements.
+
+**Approach:** Dedicated goals section with clear progress indicators.
+
+**Flow Steps:**
+
+1.  **Access Goals Section:**
+    *   **Entry:** From the main dashboard (`logging-dashboard.html`), the user clicks the "Goals" navigation item (bottom nav).
+    *   **User sees:** The "Goals & Achievements" screen (`goals-achivements-dashboard.html`) displaying active goals with progress, and a section for achievements.
+    *   **User does:** Reviews current goals and achievements.
+
+2.  **Initiate New Goal Creation:**
+    *   **Entry:** On the "Goals & Achievements" screen, the user clicks a prominent "Add" button (e.g., the floating action button in `goals-achivements-dashboard.html`).
+    *   **User sees:** A "Create New Goal" screen or modal with input fields (e.g., Goal Title, Target Value, Unit, Deadline).
+    *   **User does:** Fills in the goal details.
+
+3.  **Save New Goal:**
+    *   **User sees:** A "Save Goal" button on the "Create New Goal" screen/modal.
+    *   **User does:** Clicks "Save Goal."
+    *   **System responds:** A success toast notification ("Goal Created!") and redirection back to the "Goals & Achievements" screen, with the new goal visible and tracking initiated.
+
+4.  **View Goal Progress:**
+    *   **Entry:** On the "Goals & Achievements" screen, the user sees progress bars and numerical indicators for active goals.
+    *   **User does:** Monitors progress.
+    *   **System responds:** Progress updates automatically as workouts are logged.
+
+5.  **Achieve Goal:**
+    *   **Entry:** User completes a goal.
+    *   **User sees:** A celebratory notification or animation. The completed goal moves to the "Achievements" section.
+    *   **User does:** Celebrates!
+
+**Mermaid Diagram:**
+```mermaid
+graph TD
+    A[Dashboard] --> B{Click "Goals" Nav Item};
+    B --> C[Goals & Achievements Screen];
+    C --> D{Click "Add" Button};
+    D --> E[Create New Goal Screen/Modal];
+    E --> F[Fill Goal Details];
+    F --> G{Click "Save Goal"};
+    G --> H[Success Toast & Redirect to Goals Screen];
+    C --> I[View Progress on Active Goals];
+    I --> J[Goal Completed (Celebration/Achievement)];
+```
+
 ---
 
 ## 6. Component Library
@@ -272,6 +414,24 @@ To ensure FitTrack is usable by everyone, including individuals with disabilitie
 *   **ARIA Attributes:** Appropriate ARIA roles, states, and properties will be used to enhance semantic meaning for assistive technologies.
 *   **Alt Text:** All meaningful images will have descriptive alternative text.
 *   **Form Accessibility:** Form fields will have properly associated labels, and error messages will be clearly identified and programmatically linked to their respective fields.
+
+#### Accessibility Testing Strategy
+
+To ensure FitTrack meets the targeted WCAG 2.1 Level AA compliance, the following testing strategy will be employed:
+
+1.  **Automated Testing:**
+    *   **Tools:** Integrate automated accessibility checkers (e.g., Lighthouse, axe DevTools) into the development pipeline.
+    *   **Frequency:** Run automated checks regularly (e.g., on every pull request or nightly build).
+    *   **Scope:** Focus on identifying common, easily detectable issues such as color contrast, missing alt text, and basic ARIA violations.
+
+2.  **Manual Testing:**
+    *   **Keyboard Navigation:** Conduct thorough testing to ensure all interactive elements are reachable and operable using only the keyboard (Tab, Shift+Tab, Enter, Spacebar, Arrow keys).
+    *   **Screen Reader Testing:** Perform testing with popular screen readers (e.g., NVDA, JAWS, VoiceOver) to verify that content is correctly announced, navigation is logical, and interactive elements are understandable.
+    *   **Zoom/Magnification:** Test the application at various zoom levels (up to 200%) to ensure content remains readable and functional without horizontal scrolling.
+    *   **Color Contrast Verification:** Manually verify contrast ratios for critical text and UI elements, especially in areas not fully covered by automated tools.
+
+3.  **User Testing (Optional but Recommended):**
+    *   Include users with disabilities in user testing sessions to gather real-world feedback on usability and accessibility.
 
 ---
 
