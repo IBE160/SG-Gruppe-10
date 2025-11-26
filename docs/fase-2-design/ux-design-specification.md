@@ -18,9 +18,42 @@ This document outlines the User Experience (UX) design for FitTrack, a web appli
 
 ---
 
-## 1. Design System Foundation
+## 1. User Personas
 
-### 1.1 Design System Choice
+To ensure our design decisions are grounded in user-centric thinking, we have developed the following personas to represent our key user segments.
+
+### Persona 1: Alex, the Efficient Logger
+
+*   **Bio:** Alex is a 28-year-old software developer who has been consistently working out for the past 5 years. They value routine and efficiency in all aspects of life, including their fitness. They typically do a mix of strength training and cardio 3-4 times a week.
+*   **Quote:** *"I know what I'm doing at the gym. I just need a super fast way to track my lifts and runs without getting bogged down in features I don't use."*
+*   **Goals:**
+    *   Log a workout in under 30 seconds.
+    *   Easily view past performance for a specific exercise (e.g., "What was my bench press last week?").
+    *   Track personal records (PRs) automatically.
+*   **Frustrations:**
+    *   Apps with slow, multi-step logging processes.
+    *   Cluttered dashboards full of social feeds, articles, and workout suggestions.
+    *   Inaccurate exercise databases that make logging a chore.
+
+### Persona 2: Sam, the Goal-Driven Motivator
+
+*   **Bio:** Sam is a 34-year-old project manager who thrives on setting and achieving goals. They got into fitness to improve their overall health and are motivated by tangible progress. They enjoy challenges, whether it's training for a half-marathon or hitting a new squat weight.
+*   **Quote:** *"For me, it's all about the journey and seeing how far I've come. I want an app that celebrates my milestones and keeps me focused on the next one."*
+*   **Goals:**
+    *   Set clear, measurable fitness goals (e.g., "Run 100km this month," "Complete 15 workouts").
+    *   Visualize progress towards goals with clear charts and percentages.
+    *   Receive notifications or badges when a goal is achieved.
+    *   Look back at their workout history over months to see long-term trends.
+*   **Frustrations:**
+    *   Apps that make it difficult to set custom goals.
+    *   Poor data visualization that doesn't clearly show progress over time.
+    *   Lack of a sense of accomplishment or "gamification."
+
+---
+
+## 2. Design System Foundation
+
+### 2.1 Design System Choice
 
 **Chosen Design System:** shadcn/ui
 
@@ -28,15 +61,15 @@ This document outlines the User Experience (UX) design for FitTrack, a web appli
 
 ---
 
-## 2. Core User Experience
+## 3. Core User Experience
 
-### 2.1 Defining Experience
+### 3.1 Defining Experience
 
 The defining experience of FitTrack, as described by a user to a friend, will be: **"It's so easy and effective to use."**
 
 This statement is our north star. It dictates that our design priority is not to invent novel interactions, but to ruthlessly simplify and refine existing, proven UX patterns for workout logging and tracking. Every design decision will be measured against this promise of ease and effectiveness.
 
-### 2.2 Novel UX Patterns
+### 3.2 Novel UX Patterns
 
 No novel UX patterns were identified or required for FitTrack, as the design focuses on simplifying and refining existing, proven UX patterns for workout logging and tracking.
 
@@ -55,11 +88,11 @@ This UX Design Specification was created through visual collaboration:
 - **Design Direction Mockups**: The provided HTML files (`goals-achivements-dashboard.html`, `logging-dashboard.html`, `login-screen-dashboard.html`, `workout-history-dashboard.html`) collectively serve as the interactive mockups for this design direction.
   - Full-screen mockups of key screens that define the visual language and layout.
 
-### 2.3 Desired Emotional Response
+### 3.3 Desired Emotional Response
 
 Users should feel **efficient and productive** when using FitTrack. The design will focus on streamlining workflows and providing clear feedback to reinforce these feelings, ensuring that every interaction contributes to a sense of accomplishment and forward momentum in their fitness journey.
 
-### 2.4 Inspiration Analysis
+### 3.4 Inspiration Analysis
 
 Analysis of competitor apps (Centr, Sweat, Fitbod) reveals several key principles for creating an "efficient and productive" user experience:
 
@@ -68,7 +101,7 @@ Analysis of competitor apps (Centr, Sweat, Fitbod) reveals several key principle
 *   **Smart Reusability over Complex AI:** Instead of complex AI for workout generation, FitTrack's "smart" feature will be making it trivial to find and repeat a previous workout. This directly addresses user needs and removes the mental burden of repetitive data entry.
 *   **Simplicity as a Core Feature:** A key weakness in competitor apps is feature overload. FitTrack's strategic advantage will be its disciplined focus on the core experience of logging and tracking, avoiding the complexity that leads to user friction.
 
-### 2.5 Core Experience Principles
+### 3.5 Core Experience Principles
 
 To deliver on the promise of "easy and effective," the following principles will guide all design decisions:
 
@@ -79,9 +112,9 @@ To deliver on the promise of "easy and effective," the following principles will
 
 ---
 
-## 3. Visual Foundation
+## 4. Visual Foundation
 
-### 3.1 Color System
+### 4.1 Color System
 
 The color system for FitTrack has been consolidated into a single, unified theme named **"Green & Graphite"**, based on the visual language of the provided sketches. This theme supports both light and dark modes to ensure a comfortable viewing experience in any environment.
 
@@ -89,14 +122,14 @@ The color system for FitTrack has been consolidated into a single, unified theme
 
 - Color Theme Explorer: [ux-color-themes.html](./ux-color-themes.html)
 
-#### 3.2 Typography
+#### 4.2 Typography
 
 -   **Font Families:** 'Lexend' for headings and display text, with a standard sans-serif for body content (e.g., system UI fonts).
 -   **Type Scale:** Defined hierarchy (e.g., text-xs to text-3xl used in mockups) to ensure clear visual structure.
 -   **Font Weights:** Regular (400), Medium (500), and Bold (700) for emphasis.
 -   **Line Heights:** Standardized for optimal readability across various text sizes.
 
-#### 3.3 Spacing & Layout
+#### 4.3 Spacing & Layout
 
 -   **Spacing System:** A consistent spacing scale (seen in Tailwind classes like `p-4`, `gap-4`) is used for all padding, margins, and gaps to ensure visual rhythm.
 -   **Layout Grid:** A flexible, mobile-first grid system that adapts to different screen sizes.
@@ -104,9 +137,9 @@ The color system for FitTrack has been consolidated into a single, unified theme
 
 ---
 
-## 4. Design Direction
+## 5. Design Direction
 
-### 4.1 Chosen Design Approach
+### 5.1 Chosen Design Approach
 
 **Clean, Card-Based Dashboard with Mobile-First Responsiveness**
 
@@ -124,9 +157,9 @@ The design, as defined by the sketches, utilizes a clean, modern aesthetic with 
 
 ---
 
-## 5. User Journey Flows
+## 6. User Journey Flows
 
-### 5.1 Critical User Paths
+### 6.1 Critical User Paths
 
 #### User Journey: User Registration and Authentication
 
@@ -202,9 +235,9 @@ The design, as defined by the sketches, utilizes a clean, modern aesthetic with 
 
 ---
 
-## 6. Component Library
+## 7. Component Library
 
-### 6.1 Component Strategy
+### 7.1 Component Strategy
 
 The component strategy will primarily leverage **shadcn/ui**, with the provided HTML mockups serving as the definitive visual guide for selecting, customizing, and assembling these components.
 
@@ -219,9 +252,9 @@ The component strategy will primarily leverage **shadcn/ui**, with the provided 
 
 ---
 
-## 7. UX Pattern Decisions
+## 8. UX Pattern Decisions
 
-### 7.1 Consistency Rules
+### 8.1 Consistency Rules
 
 The UX patterns established in the sketches will be the standard for the application.
 
@@ -240,16 +273,16 @@ The UX patterns established in the sketches will be the standard for the applica
 
 ---
 
-## 8. Responsive Design & Accessibility
+## 9. Responsive Design & Accessibility
 
-### 8.1 Responsive Strategy
+### 9.1 Responsive Strategy
 
 FitTrack will implement a fully mobile-responsive design, as demonstrated by the mobile-first nature of the sketches.
 
 *   **Mobile (Small Screens):** Single-column layouts, vertical scrolling, and a fixed bottom navigation bar are the primary interaction model.
 *   **Desktop (Large Screens):** The card-based design will adapt naturally to multi-column grids, making efficient use of horizontal space.
 
-### 8.2 Accessibility Strategy
+### 9.2 Accessibility Strategy
 
 We will target **WCAG 2.1 Level AA compliance**.
 
@@ -261,9 +294,9 @@ We will target **WCAG 2.1 Level AA compliance**.
 
 ---
 
-## 9. Implementation Guidance
+## 10. Implementation Guidance
 
-### 9.1 Completion Summary
+### 10.1 Completion Summary
 
 This specification has been successfully updated to reflect the consolidated design direction from the provided sketches.
 
