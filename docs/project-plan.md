@@ -28,22 +28,23 @@
 
 - [x] Planning
   - [x] /run-agent-task pm *prd
-    - [x] File: PRD.md
+    - [x] File: docs/fase-2-plan/PRD.md
   - [x] /run-agent-task pm *validate-prd
-    - [x] File: validation-report-date.md
-  - [x] /run-agent-task ux-designer *create-ux-design {prompt / user-input-file}
-    - [x] File: ux-design-specification.md
-    - [x] File: ux-color-themes.html
-    - [x] File: ux-design-directions.html
-  - [x] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
+    - [x] File: docs/fase-2-plan/PRD-validation-report-2025-11-12.md
+  - [x] /run-agent-task pm *create-epics-and-stories
+    - [x] File: docs/fase-2-plan/epics.md
+  - [x] /run-agent-task ux-designer *create-ux-design
+    - [x] File: docs/fase-2-ux/ux-design-specification.md
+    - [x] File: docs/fase-2-ux/ux-color-themes.html
+    - [x] File: docs/fase-2-ux/ux-design-directions.html
+  - [x] /run-agent-task ux-designer *validate-ux-design
+    - [x] File: docs/fase-2-ux/ux-design-spec-validation-report-2025-11-16.md
 
 ## Fase 2
 
 - [ ] Solutioning
   - [ ] /run-agent-task architect *create-architecture {prompt / user-input-file}
     - [ ] File: architecture.md
-  - [ ] /run-agent-task pm *create-epics-and-stories {prompt / user-input-file}
-    - [ ] File: epics.md
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
   - [ ] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
 
