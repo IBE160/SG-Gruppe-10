@@ -11,17 +11,17 @@
 - [x] /run-agent-task analyst *workflow-init
   - [x] File: bmm-workflow-status.yaml
 - [x] Brainstorming
-  - [x] /run-agent-task analyst *brainstorm "User Motivation & Engagement Strategies for FitTrack"
-    - [x] File: brainstorming-session-results-date.md
-  - [x] /run-agent-task analyst *brainstorm "User Flow Deviations & Edge Cases"
-    - [x] File: brainstorming-session-results-date.md
-  - [x] /run-agent-task analyst *brainstorm "Brainstorm what it means to have a paid user"
-    - [x] File: brainstorming-session-results-date.md
+  - [x] /run-agent-task analyst *brainstorm "User Stories & Journey Mapping"
+    - [x] File: docs/fase-1-analysis/brainstorming-2025-10-31-user-stories.md
+  - [x] /run-agent-task analyst *brainstorm "Off-Track Scenarios & Recovery Strategies"
+    - [x] File: docs/fase-1-analysis/brainstorming-2025-11-02-scenarios.md
+  - [x] /run-agent-task analyst *brainstorm "Chaos Engineering & Risk Assessment"
+    - [x] File: docs/fase-1-analysis/brainstorming-2025-11-02-chaos-engineering.md
 - [x] Research
-  - [x] /run-agent-task analyst *research "Which AI library should we use for orchestrating LLM interactions?"
-    - [x] File: research-technical-date.md
+  - [x] /run-agent-task analyst *research "Data Validation Library Selection (Pydantic)"
+    - [x] File: docs/fase-1-analysis/research-technical-2025-11-01-ai-library.md
 - [x] Product Brief
-  - [x] /run-agent-task analyst *product-brief "Read the two brainstorming sessions the research session and the @proposal.md file, and create a product brief for the project."
+  - [x] /run-agent-task analyst *product-brief "Read the brainstorming sessions, the research session, and the @proposal.md file, and create a product brief for the project."
     - [x] File: product-brief.md
 
 ## Fase 1
