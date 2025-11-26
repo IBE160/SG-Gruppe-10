@@ -225,7 +225,7 @@ Requirements must be decomposed into epics and bite-sized stories.
 - Product Brief: `docs/product-brief.md`
 - Research:
     - `docs/fase-1-analysis/brainstorming-summary.md`
-    - `docs/fase-1-analysis/research-technical-lørdag 1. november 2025.md`
+    - `docs/fase-1-analysis/research-technical-2025-11-01-ai-library.md`
 
 ---
 
