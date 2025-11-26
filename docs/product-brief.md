@@ -203,10 +203,10 @@ Brainstorming sessions were conducted to explore user stories, "off-track" scena
 ### C. References
 
 *   proposal.md
-*   docs/fase-1-analysis/brainstorming-session-results-Sunday, 2 November 2025.md
-*   docs/fase-1-analysis/brainstorming-session-results-fredag 31. oktober 2025.md
-*   docs/fase-1-analysis/chaos-engineering-session-2025-11-02.md
-*   docs/fase-1-analysis/research-technical-lørdag 1. november 2025.md
+*   docs/fase-1-analysis/brainstorming-2025-11-02-scenarios.md
+*   docs/fase-1-analysis/brainstorming-2025-10-31-user-stories.md
+*   docs/fase-1-analysis/brainstorming-2025-11-02-chaos-engineering.md
+*   docs/fase-1-analysis/research-technical-2025-11-01-ai-library.md
 
 ---
 
