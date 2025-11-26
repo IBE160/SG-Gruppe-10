@@ -11,13 +11,13 @@
 - [x] /run-agent-task analyst *workflow-init
   - [x] File: bmm-workflow-status.yaml
 - [x] Brainstorming
-  - [x] /run-agent-task analyst *brainstorm "Root Cause Analysis and Solution Design for Player Inactivity"
+  - [x] /run-agent-task analyst *brainstorm "User Motivation & Engagement Strategies for FitTrack"
     - [x] File: brainstorming-session-results-date.md
   - [x] /run-agent-task analyst *brainstorm "User Flow Deviations & Edge Cases"
     - [x] File: brainstorming-session-results-date.md
   - [x] /run-agent-task analyst *brainstorm "Brainstorm what it means to have a paid user"
     - [x] File: brainstorming-session-results-date.md
-- [ ] Research
+- [x] Research
   - [x] /run-agent-task analyst *research "Which AI library should we use for orchestrating LLM interactions?"
     - [x] File: research-technical-date.md
 - [x] Product Brief
@@ -26,16 +26,16 @@
 
 ## Fase 1
 
-- [ ] Planning
+- [x] Planning
   - [x] /run-agent-task pm *prd
     - [x] File: PRD.md
   - [x] /run-agent-task pm *validate-prd
     - [x] File: validation-report-date.md
-  - [ ] /run-agent-task ux-designer *create-ux-design {prompt / user-input-file}
-    - [ ] File: ux-design-specification.md
-    - [ ] File: ux-color-themes.html
-    - [ ] File: ux-design-directions.html
-  - [ ] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
+  - [x] /run-agent-task ux-designer *create-ux-design {prompt / user-input-file}
+    - [x] File: ux-design-specification.md
+    - [x] File: ux-color-themes.html
+    - [x] File: ux-design-directions.html
+  - [x] /run-agent-task ux-designer *validate-ux-design {prompt / user-input-file}
 
 ## Fase 2
 
