@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Design Direction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 200%; /* Aspect ratio for a typical phone screen */
+            height: 0;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            border: 8px solid #1f2937;
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto px-4 py-12 md:py-20">
+
+        <header class="text-center mb-16">
+            <h1 class="text-5xl font-bold tracking-tight text-slate-900">FitTrack Design Direction</h1>
+            <p class="mt-4 text-xl text-slate-600 max-w-3xl mx-auto">A unified, mobile-first design system focused on creating a <span class="font-semibold text-[#2C5F2D]">clean, motivating, and efficient</span> user experience.</p>
+        </header>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-4">Design Philosophy</h2>
+            <p class="text-lg text-slate-700 max-w-4xl mx-auto text-center">
+                The chosen direction is a **Clean, Card-Based Dashboard with Mobile-First Responsiveness**. It utilizes a modern aesthetic with a strong emphasis on scannable, card-based layouts. The interface is data-driven, presenting key metrics, progress bars, and activity lists to give users an immediate sense of their progress and keep them engaged.
+            </p>
+        </section>
+
+        <section class="mb-20">
+            <h2 class="text-3xl font-bold text-center mb-12">Color System: "Green & Graphite"</h2>
+            <div class="flex justify-center">
+                 <a href="./ux-color-themes.html" target="_blank" class="inline-block bg-[#2C5F2D] text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-opacity-90 transition-transform transform hover:scale-105">
+                    View Full Color System
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-bold text-center mb-12">Key Screens</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+
+                <!-- Login Screen -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-4">1. Login</h3>
+                    <div class="iframe-container">
+                        <iframe src="./login-screen-dashboard.html"></iframe>
+                    </div>
+                </div>
+
+                <!-- Logging Dashboard -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-4">2. Main Dashboard</h3>
+                    <div class="iframe-container">
+                        <iframe src="./logging-dashboard.html"></iframe>
+                    </div>
+                </div>
+
+                <!-- Goals & Achievements -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-4">3. Goals & Achievements</h3>
+                    <div class="iframe-container">
+                        <iframe src="./goals-achivements-dashboard.html"></iframe>
+                    </div>
+                </div>
+
+                <!-- Workout History -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl font-semibold mb-4">4. Workout History</h3>
+                    <div class="iframe-container">
+                        <iframe src="./workout-history-dashboard.html"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
