@@ -31,8 +31,6 @@
     - [x] File: docs/fase-2-plan/PRD.md
   - [x] /run-agent-task pm *validate-prd
     - [x] File: docs/fase-2-plan/PRD-validation-report-2025-11-12.md
-  - [x] /run-agent-task pm *create-epics-and-stories
-    - [x] File: docs/fase-2-plan/epics.md
   - [x] /run-agent-task ux-designer *create-ux-design
     - [x] File: docs/fase-2-ux/ux-design-specification.md
     - [x] File: docs/fase-2-ux/ux-color-themes.html
@@ -45,6 +43,8 @@
 - [ ] Solutioning
   - [ ] /run-agent-task architect *create-architecture {prompt / user-input-file}
     - [ ] File: architecture.md
+  - [ ] /run-agent-task pm *create-epics-and-stories
+    - [ ] File: docs/fase-2-plan/epics.md
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
   - [ ] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
 
