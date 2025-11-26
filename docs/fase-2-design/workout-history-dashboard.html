@@ -1,178 +1,168 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FitTrack - Workout History</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#1A1A1A", "background-light": "#f7f7f7", "background-dark": "#191919", "surface-light": "#FFFFFF", "surface-dark": "#1C2D22", "text-light-primary": "#111813", "text-dark-primary": "#FFFFFF", "text-light-secondary": "#637A6A", "text-dark-secondary": "#A0B5A7"}, fontFamily: {display: "Lexend"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
-<style>
-      .material-symbols-outlined {
-        font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 24
-      }
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FitTrack - Workout History</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-green": "#2C5F2D",
+                        "primary-dark": "#1A1A1A",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#131313",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1C221D",
+                        "text-light-primary": "#111813",
+                        "text-dark-primary": "#e2e8f0",
+                        "text-light-secondary": "#64748b",
+                        "text-dark-secondary": "#94a3b8",
+                        "border-light": "#e2e8f0",
+                        "border-dark": "#334155",
+                    },
+                    fontFamily: {
+                        display: "Lexend",
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="font-display bg-background-light dark:bg-background-dark">
-<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-<div class="sticky top-0 z-10 flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between">
-<button class="text-text-light-primary dark:text-text-dark-primary flex size-12 shrink-0 items-center justify-center">
-<span class="material-symbols-outlined text-2xl">arrow_back</span>
-</button>
-<h2 class="text-text-light-primary dark:text-text-dark-primary text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Workout History</h2>
-<div class="flex size-12 shrink-0 items-center"></div>
-</div>
-<div class="flex flex-wrap items-center justify-center gap-6 p-4 pt-2">
-<div class="flex w-full max-w-md flex-col gap-0.5">
-<div class="flex items-center p-1 justify-between">
-<button class="text-text-light-primary dark:text-text-dark-primary">
-<div class="flex size-10 items-center justify-center">
-<span class="material-symbols-outlined text-lg">chevron_left</span>
-</div>
-</button>
-<p class="text-text-light-primary dark:text-text-dark-primary text-base font-bold leading-tight flex-1 text-center">October 2023</p>
-<button class="text-text-light-primary dark:text-text-dark-primary">
-<div class="flex size-10 items-center justify-center">
-<span class="material-symbols-outlined text-lg">chevron_right</span>
-</div>
-</button>
-</div>
-<div class="grid grid-cols-7">
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">M</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">W</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">F</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 col-start-4 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">1</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">2</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">3</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">4</div></button>
-<button class="h-12 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-surface-dark">5</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">6</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">7</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">8</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">9</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">10</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">11</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">12</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">13</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">14</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">15</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">16</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">17</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">18</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">19</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">20</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">21</div></button>
-<button class="h-12 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-surface-dark">22</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">23</div></button>
-<button class="h-12 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-surface-dark">24</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">25</div></button>
-<button class="h-12 w-full text-white text-sm font-bold leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-primary">26</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">27</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">28</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">29</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">30</div></button>
-<button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">31</div></button>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-4 p-4">
-<div class="flex items-stretch justify-between gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-4">
-<div class="flex flex-col gap-1 flex-1">
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">October 26, 2023</p>
-<p class="text-text-light-primary dark:text-text-dark-primary text-base font-bold leading-tight">Upper Body Strength</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">5 exercises, 45 mins, 1200 lbs</p>
-</div>
-<div class="flex items-center justify-center">
-<button class="text-text-light-secondary dark:text-text-dark-secondary">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</div>
-</div>
-<div class="flex items-stretch justify-between gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-4">
-<div class="flex flex-col gap-1 flex-1">
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">October 24, 2023</p>
-<p class="text-text-light-primary dark:text-text-dark-primary text-base font-bold leading-tight">Morning Run</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">3.1 miles, 30 mins, 3 PRs</p>
-</div>
-<div class="flex items-center justify-center">
-<button class="text-text-light-secondary dark:text-text-dark-secondary">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</div>
-</div>
-<div class="flex items-stretch justify-between gap-4 rounded-xl bg-surface-light dark:bg-surface-dark p-4">
-<div class="flex flex-col gap-1 flex-1">
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">October 22, 2023</p>
-<p class="text-text-light-primary dark:text-text-dark-primary text-base font-bold leading-tight">Leg Day</p>
-<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">6 exercises, 60 mins, 2100 lbs</p>
-</div>
-<div class="flex items-center justify-center">
-<button class="text-text-light-secondary dark:text-text-dark-secondary">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</div>
-</div>
-</div>
-<div class="hidden flex-col items-center justify-center gap-4 p-8 text-center mt-8">
-<div class="flex items-center justify-center rounded-full bg-primary/20 text-primary p-4">
-<span class="material-symbols-outlined text-5xl">history</span>
-</div>
-<h3 class="text-xl font-bold text-text-light-primary dark:text-text-dark-primary">No More Workouts Here</h3>
-<p class="text-text-light-secondary dark:text-text-dark-secondary max-w-xs">Your workout history for this period is empty. Go crush a new session!</p>
-<button class="mt-4 rounded-full bg-primary px-8 py-3 text-base font-bold text-white shadow-sm transition-transform hover:scale-105">Start a Workout</button>
-</div>
-</div>
-</body></html>
+</head>
+<body class="bg-background-light dark:bg-background-dark">
+
+    <div class="mx-auto max-w-sm h-[884px] my-8 rounded-2xl shadow-2xl border border-border-light dark:border-border-dark overflow-hidden relative font-display text-text-light-primary dark:text-text-dark-primary">
+        <div class="relative flex h-full w-full flex-col bg-surface-light dark:bg-surface-dark">
+            <header class="sticky top-0 z-10 flex items-center bg-surface-light/80 dark:bg-surface-dark/80 backdrop-blur-sm p-4 pb-2 justify-between border-b border-border-light dark:border-border-dark">
+                <button class="flex size-12 shrink-0 items-center justify-center">
+                    <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                </button>
+                <h2 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Workout History</h2>
+                <div class="flex size-12 shrink-0 items-center"></div>
+            </header>
+
+            <main class="flex-grow pb-4 overflow-y-auto">
+                <div class="flex flex-wrap items-center justify-center gap-6 p-4 pt-2">
+                    <div class="flex w-full max-w-md flex-col gap-0.5">
+                        <div class="flex items-center p-1 justify-between">
+                            <button>
+                                <div class="flex size-10 items-center justify-center">
+                                    <span class="material-symbols-outlined text-lg">chevron_left</span>
+                                </div>
+                            </button>
+                            <p class="text-base font-bold leading-tight flex-1 text-center">October 2023</p>
+                            <button>
+                                <div class="flex size-10 items-center justify-center">
+                                    <span class="material-symbols-outlined text-lg">chevron_right</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-7">
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">M</p>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">W</p>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">T</p>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">F</p>
+                            <p class="text-text-light-secondary dark:text-text-dark-secondary text-[13px] font-bold leading-normal tracking-[0.015em] flex h-12 w-full items-center justify-center pb-0.5">S</p>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 col-start-4 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">1</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">2</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">3</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">4</div></button>
+                            <button class="h-12 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-surface-dark">5</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">6</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">7</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">8</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">9</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">10</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">11</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">12</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">13</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">14</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">15</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">16</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">17</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">18</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">19</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">20</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">21</div></button>
+                            <button class="h-12 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-surface-dark">22</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">23</div></button>
+                            <button class="h-12 w-full text-white text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-surface-dark">24</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">25</div></button>
+                            <button class="h-12 w-full text-white text-sm font-bold leading-normal"><div class="flex size-full items-center justify-center rounded-full bg-primary-green">26</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">27</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">28</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">29</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">30</div></button>
+                            <button class="h-12 w-full text-text-light-primary/40 dark:text-text-dark-primary/40 text-sm font-medium leading-normal"><div class="flex size-full items-center justify-center rounded-full">31</div></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4 p-4">
+                    <div class="flex items-stretch justify-between gap-4 rounded-xl bg-primary-green p-4 border border-primary-green">
+                        <div class="flex flex-col gap-1 flex-1">
+                            <p class="text-white text-sm font-normal leading-normal">October 26, 2023</p>
+                            <p class="text-white text-base font-bold leading-tight">Upper Body Strength</p>
+                            <p class="text-white text-sm font-normal leading-normal">5 exercises, 45 mins, 1200 lbs</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <button class="text-white">
+                                <span class="material-symbols-outlined">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-stretch justify-between gap-4 rounded-xl bg-primary-green p-4 border border-primary-green">
+                        <div class="flex flex-col gap-1 flex-1">
+                            <p class="text-white text-sm font-normal leading-normal">October 24, 2023</p>
+                            <p class="text-white text-base font-bold leading-tight">Morning Run</p>
+                            <p class="text-white text-sm font-normal leading-normal">3.1 miles, 30 mins, 3 PRs</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <button class="text-white">
+                                <span class="material-symbols-outlined">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-stretch justify-between gap-4 rounded-xl bg-primary-green p-4 border border-primary-green">
+                        <div class="flex flex-col gap-1 flex-1">
+                            <p class="text-white text-sm font-normal leading-normal">October 22, 2023</p>
+                            <p class="text-white text-base font-bold leading-tight">Leg Day</p>
+                            <p class="text-white text-sm font-normal leading-normal">6 exercises, 60 mins, 2100 lbs</p>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <button class="text-white">
+                                <span class="material-symbols-outlined">more_vert</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden flex-col items-center justify-center gap-4 p-8 text-center mt-8">
+                    <div class="flex items-center justify-center rounded-full bg-primary-green/20 text-primary-green p-4">
+                        <span class="material-symbols-outlined text-5xl">history</span>
+                    </div>
+                    <h3 class="text-xl font-bold">No More Workouts Here</h3>
+                    <p class="text-text-light-secondary dark:text-text-dark-secondary max-w-xs">Your workout history for this period is empty. Go crush a new session!</p>
+                    <button class="mt-4 rounded-full bg-primary-green px-8 py-3 text-base font-bold text-white shadow-sm transition-transform hover:scale-105">Start a Workout</button>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
