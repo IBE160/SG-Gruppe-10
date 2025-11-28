@@ -46,7 +46,7 @@
   - [x] /run-agent-task pm *create-epics-and-stories
     - [x] File: docs/fase-2-plan/epics.md
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
-  - [ ] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
+  - [x] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
 
 ## Fase 4
 
