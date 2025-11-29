@@ -42,7 +42,7 @@
 
 - [x] Solutioning
   - [x] /run-agent-task architect *create-architecture {prompt / user-input-file}
-    - [x] File: architecture.md
+    - [x] File: docs/fase-3-solutioning/architecture.md
   - [x] /run-agent-task pm *create-epics-and-stories
     - [x] File: docs/fase-2-plan/epics.md
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}

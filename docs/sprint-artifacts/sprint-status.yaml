@@ -1,42 +1,57 @@
-# generated: Friday, 28 November 2025
+# generated: lørdag 29. november 2025
 # project: ibe160
-# project_key: null
+# project_key: ibe160
 # tracking_system: file-system
-# story_location: C:\Users\sande\OneDrive\School\FitTrack\SG-Gruppe-10\docs\sprint-artifacts
+# story_location: docs/sprint-artifacts
 
 # STATUS DEFINITIONS:
 # ==================
 # Epic Status:
 #   - backlog: Epic exists in epic file but not contexted
-#   - contexted: Next epic tech context created by *epic-tech-context (required)
+#   - contexted: Epic tech context created (required before drafting stories)
 #
 # Story Status:
 #   - backlog: Story only exists in epic file
-#   - drafted: Story file created in stories folder by *create-story
-#   - ready-for-dev: Draft approved and story context created by *story-ready
-#   - in-progress: Developer actively working on implementation by *dev-story
-#   - review: Implementation complete, ready for review by *code-review
-#   - done: Story completed by *story-done
+#   - drafted: Story file created in stories folder
+#   - ready-for-dev: Draft approved and story context created
+#   - in-progress: Developer actively working on implementation
+#   - review: Under SM review (via code-review workflow)
+#   - done: Story completed
 #
 # Retrospective Status:
 #   - optional: Can be completed but not required
-#   - completed: Retrospective has been done by *retrospective
+#   - completed: Retrospective has been done
 #
 # WORKFLOW NOTES:
 # ===============
 # - Epics should be 'contexted' before stories can be 'drafted'
-# - SM typically drafts next story ONLY after previous one is 'done' to incorporate learnings
-# - Dev moves story to 'review', dev reviews, then Dev moves to 'done'
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically drafts next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', SM reviews, then Dev moves to 'done'
 
-generated: Friday, 28 November 2025
+generated: lørdag 29. november 2025
 project: ibe160
-project_key: null
+project_key: ibe160
 tracking_system: file-system
-story_location: C:\Users\sande\OneDrive\School\FitTrack\SG-Gruppe-10\docs\sprint-artifacts
+story_location: docs/sprint-artifacts
 
 development_status:
-  epic-1: contexted
-  1-1-first-story-title: drafted
-  1-2-second-story-title: backlog
-  1-3-third-story-title: backlog
+  epic-1: backlog
+  1-1-project-setup: backlog
+  1-2-user-registration: backlog
+  1-3-user-login: backlog
+  1-4-user-logout: backlog
   epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-create-workout: backlog
+  2-2-view-workout-history: backlog
+  2-3-view-workout-details: backlog
+  2-4-update-workout: backlog
+  2-5-delete-workout: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-create-goal: backlog
+  3-2-view-goals: backlog
+  epic-3-retrospective: optional
