@@ -47,6 +47,7 @@
     - [x] File: docs/fase-2-plan/epics.md
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
   - [x] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
+    - [x] File: docs/fase-3-solutioning/implementation-readiness-report-2025-11-29.md
 
 ## Fase 4
 
