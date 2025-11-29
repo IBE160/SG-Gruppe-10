@@ -47,12 +47,13 @@
     - [x] File: docs/fase-2-plan/epics.md
   - [ ] /run-agent-task tea *test-design {prompt / user-input-file}
   - [x] /run-agent-task architect *solutioning-gate-check {prompt / user-input-file}
+    - [x] File: docs/fase-3-solutioning/implementation-readiness-report-2025-11-29.md
 
 ## Fase 4
 
 - [ ] Implementation
-  - [x] /run-agent-task sm *sprint-planning {prompt / user-input-file}
-    - [x] File: sprint-artifacts/sprint-status.yaml
+  - [ ] /run-agent-task sm *sprint-planning {prompt / user-input-file}
+    - [ ] File: sprint-artifacts/sprint-status.yaml
   - foreach epic in sprint planning:
     - [ ] /run-agent-task sm create-epic-tech-context {prompt / user-input-file}
       - [ ] File: sprint-artifacts/tech-spec-epic-{{epic_id}}.md
