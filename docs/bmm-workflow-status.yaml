@@ -32,17 +32,17 @@ workflow_status:
   # Phase 0: Discovery (Optional)
   brainstorm-project: "docs/fase-1-analysis/brainstorming-summary.md"
   research: "docs/fase-1-analysis/research-technical-2025-11-01-ai-library.md"
-  product-brief: "@docs/product-brief.md"
+  product-brief: "docs/product-brief.md"
 
   # Phase 1: Planning
-  prd: "docs/PRD.md"
+  prd: "docs/fase-2-plan/PRD.md"
   validate-prd: "docs/fase-2-plan/PRD-validation-report-2025-11-12.md"
   create-design: "docs/fase-2-ux/ux-design-specification.md"
 
   # Phase 2: Solutioning
   create-architecture: "docs/architecture.md"
-  validate-architecture: optional
-  solutioning-gate-check: recommended
+  validate-architecture: "docs/fase-3-solutioning/architecture-validation-report-2025-11-26.md"
+  solutioning-gate-check: "docs/implementation-readiness-report-2025-11-29.md"
 
   # Phase 3: Implementation
   sprint-planning: required
