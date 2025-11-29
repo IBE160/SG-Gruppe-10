@@ -59,9 +59,10 @@
     - [x] /run-agent-task sm validate-epic-tech-context {prompt / user-input-file}
       - [x] File: docs/sprint-artifacts/validation-report-2025-11-29.md
     - foreach story in epic:
-      - [ ] /run-agent-task sm *create-story {prompt / user-input-file}
-        - [ ] File: sprint-artifacts/{{story_key}}.md
-      - [ ] /run-agent-task sm *validate-create-story {prompt / user-input-file}
+      - [x] /run-agent-task sm *create-story {prompt / user-input-file}
+        - [x] File: docs/sprint-artifacts/1-1-first-story-title.md
+      - [x] /run-agent-task sm *validate-create-story {prompt / user-input-file}
+        - [x] File: docs/sprint-artifacts/validation-report-2025-11-29.md
       - [ ] /run-agent-task sm *create-story-context {prompt / user-input-file}
         - [ ] File: sprint-artifacts/{{story_key}}.context.xml
       - [ ] /run-agent-task sm *validate-story-context {prompt / user-input-file}
