@@ -1,0 +1,163 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>1</storyId>
+    <title>Project Setup</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-30</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-1-first-story-title.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a developer</asA>
+    <iWant>to have a project structure with all necessary dependencies and build tools configured</iWant>
+    <soThat>I can start developing features efficiently</soThat>
+    <tasks>
+      - Initialize Next.js Project (AC: 1)
+        - Execute `npx create-next-app@latest . --typescript --eslint --tailwind --app --import-alias "@/*"`
+        - Verify `next.config.mjs` includes `@/*` alias configuration
+        - Validate generated project structure against Architecture Document's "Project Structure" section
+        - Testing: Manually inspect `tsconfig.json` and directory layout for adherence to architecture
+      - Install Dependencies (AC: 2)
+        - Run `pnpm install` to install all project dependencies
+        - Testing: Verify successful installation and check `pnpm-lock.yaml` for consistency
+      - Configure Development Server (AC: 3)
+        - Ensure `pnpm dev` command is available and correctly starts the development server
+        - Testing: Start the development server (`pnpm dev`) and confirm it is accessible at `localhost:3000` without errors
+      - Implement Linting and Formatting (AC: 4)
+        - Verify `.eslintrc.json` is configured for TypeScript and React
+        - Ensure Prettier is integrated for code formatting
+        - Testing: Run `pnpm lint` and `pnpm format` to confirm no linting errors or formatting issues
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    1. Given a new project,
+    2. When I run the setup script,
+    3. Then the project structure is created.
+    4. And the frontend and backend dependencies are installed.
+    5. And the development server can be started.
+    6. And basic linting and formatting rules are in place.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Initialization</section>
+        <snippet>The project will be initialized using `npx create-next-app@latest . --typescript --eslint --tailwind --app --import-alias "@/*"`. This establishes the base architecture with Next.js, TypeScript, Tailwind CSS, App Router, ESLint, and @/* import aliases.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Structure</section>
+        <snippet>Defines complete directory structure including app/, components/, lib/, hooks/, styles/, types/, public/, and tests/ directories with specific file organization patterns.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Decision Summary</section>
+        <snippet>Framework: Next.js 16, Language: TypeScript 5, Styling: Tailwind CSS 4.0 + shadcn/ui, Backend Strategy: Unified Next.js with Server Actions, Database: Supabase (PostgreSQL), Testing: Layered strategy with Jest, RTL, and Playwright.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-epic-1.md</path>
+        <title>Epic Technical Specification: FitTrack Epic 1</title>
+        <section>System Architecture Alignment</section>
+        <snippet>Epic implementation adheres to Next.js-based architecture with App Router, Supabase Auth for authentication, PostgreSQL database, Server Actions for mutations, and TanStack Query for data fetching.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Story 1.1: Project Setup</section>
+        <snippet>As a developer, I want to have a project structure with all necessary dependencies and build tools configured, so that I can start developing features efficiently. Technical notes: involves setting up repository, basic CI/CD pipeline, and initial configuration for frontend and backend frameworks.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <!-- No existing code artifacts - this is the first story establishing the project structure -->
+    </code>
+    <dependencies>
+      <ecosystem name="Node.js/pnpm">
+        <package name="next" version="16" description="Next.js framework" />
+        <package name="react" version="19" description="React library" />
+        <package name="typescript" version="5" description="TypeScript compiler" />
+        <package name="tailwindcss" version="4.0" description="Utility-first CSS framework" />
+        <package name="eslint" description="JavaScript/TypeScript linter" />
+        <package name="prettier" description="Code formatter" />
+        <package name="@supabase/supabase-js" version="2" description="Supabase client library" />
+        <package name="@tanstack/react-query" version="5" description="Data fetching and state management" />
+        <package name="date-fns" version="4" description="Date utility library" />
+        <package name="jest" description="Testing framework" />
+        <package name="@testing-library/react" description="React testing utilities" />
+        <package name="@playwright/test" description="End-to-end testing framework" />
+      </ecosystem>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint category="naming">Use kebab-case for API routes/files (non-component), snake_case for database tables/columns, PascalCase for components/types</constraint>
+    <constraint category="structure">Unit/Integration tests co-located with source files, E2E tests in tests/e2e directory, Components organized by feature</constraint>
+    <constraint category="consistency">Strict TypeScript enforcement, consistent ESLint/Prettier formatting, environment variable management via .env.local</constraint>
+    <constraint category="imports">Use @/* import aliases for all internal imports as configured in tsconfig.json</constraint>
+    <constraint category="deployment">Project must be compatible with Vercel deployment platform</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>Project Initialization Command</name>
+      <kind>CLI Command</kind>
+      <signature>npx create-next-app@latest . --typescript --eslint --tailwind --app --import-alias "@/*"</signature>
+      <path>docs/fase-3-solutioning/architecture.md#Project-Initialization</path>
+    </interface>
+    <interface>
+      <name>Development Server</name>
+      <kind>NPM Script</kind>
+      <signature>pnpm dev</signature>
+      <path>Expected to be available after Next.js initialization</path>
+    </interface>
+    <interface>
+      <name>Linting</name>
+      <kind>NPM Script</kind>
+      <signature>pnpm lint</signature>
+      <path>Expected to be available after Next.js initialization</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Testing strategy follows a layered approach with 80% code coverage target:
+      - Unit Tests (Jest): For pure functions and utilities
+      - Integration Tests (React Testing Library + Jest): For React components and their interactions
+      - End-to-End Tests (Playwright): For critical user flows
+      All tests should use TypeScript and follow consistent naming patterns (*.test.ts, *.test.tsx, *.spec.ts).
+    </standards>
+    <locations>
+      - Unit/Integration tests: Co-located with source files (e.g., lib/__tests__/, components/__tests__/)
+      - E2E tests: tests/e2e/ directory
+      - Test configuration: jest.config.ts, playwright.config.ts in project root
+    </locations>
+    <ideas>
+      <test id="AC-1">
+        <description>Verify project structure creation</description>
+        <approach>Integration test to check all expected directories and configuration files exist after initialization</approach>
+        <files>Verify existence of app/, components/, lib/, hooks/, styles/, types/, public/, tests/ directories and configuration files</files>
+      </test>
+      <test id="AC-2">
+        <description>Verify dependencies installation</description>
+        <approach>Check that pnpm-lock.yaml exists and package.json has all required dependencies listed</approach>
+        <files>package.json, pnpm-lock.yaml</files>
+      </test>
+      <test id="AC-3">
+        <description>Verify development server starts</description>
+        <approach>E2E test using Playwright to start dev server and verify it responds at localhost:3000</approach>
+        <files>playwright.config.ts, tests/e2e/dev-server.spec.ts</files>
+      </test>
+      <test id="AC-4">
+        <description>Verify linting and formatting configuration</description>
+        <approach>Run lint and format commands and verify they complete without errors on sample code</approach>
+        <files>.eslintrc.json, prettier configuration files</files>
+      </test>
+    </ideas>
+  </tests>
+</story-context>
