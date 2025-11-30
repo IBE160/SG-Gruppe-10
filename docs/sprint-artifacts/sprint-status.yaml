@@ -39,8 +39,8 @@ development_status:
   epic-1: contexted
   1-1-project-setup: done
   1-2-user-registration: done
-  1-3-user-login: backlog
-  1-4-user-logout: backlog
+  1-3-user-login: done
+  1-4-user-logout: done
   epic-1-retrospective: optional
 
   epic-2: backlog

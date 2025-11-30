@@ -1,0 +1,169 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>3</storyId>
+    <title>User Login</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-11-30</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-3-user-login.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>registered user</asA>
+    <iWant>be able to log in with my email and password</iWant>
+    <soThat>I can access my account</soThat>
+    <tasks>
+      <task id="1" ac="1">Create Login Page UI
+        <subtask>Create app/(auth)/login/page.tsx with login form</subtask>
+        <subtask>Add email and password input fields using shadcn/ui components</subtask>
+        <subtask>Implement client-side validation for email format</subtask>
+        <subtask>Add "Login" submit button</subtask>
+        <subtask>Style form with Tailwind CSS following UX design patterns from Story 1.2</subtask>
+      </task>
+      <task id="2" ac="1,3">Implement Login API Route Handler
+        <subtask>Create API route at app/api/auth/login/route.ts following pattern from Story 1.2</subtask>
+        <subtask>Implement request validation using Zod schema (email, password)</subtask>
+        <subtask>Use Supabase Auth signInWithPassword() method</subtask>
+        <subtask>Handle successful login and return success response</subtask>
+        <subtask>Handle error cases: invalid credentials, network errors</subtask>
+        <subtask>Return appropriate error messages for client display</subtask>
+      </task>
+      <task id="3" ac="2">Implement Post-Login Flow
+        <subtask>Configure client-side navigation to /dashboard after successful login</subtask>
+        <subtask>Use router.push('/dashboard') + router.refresh() pattern from Story 1.2</subtask>
+        <subtask>Reuse existing app/dashboard/page.tsx from Story 1.2</subtask>
+        <subtask>Verify auth protection on dashboard works for logged-in users</subtask>
+      </task>
+      <task id="4" ac="3">Add Error Handling and User Feedback
+        <subtask>Display toast notifications for invalid credentials using Sonner</subtask>
+        <subtask>Show toast for server-side errors</subtask>
+        <subtask>Add loading state during login submission (disable button, show spinner)</subtask>
+      </task>
+      <task id="5">Create .env.example Template
+        <subtask>Create .env.example file with Supabase environment variable templates</subtask>
+        <subtask>Document required variables: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY</subtask>
+      </task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">Given a user is on the login page, when they enter their correct email and password and click "Login", then the user is logged in.</criterion>
+    <criterion id="AC-2">And they are redirected to the main dashboard.</criterion>
+    <criterion id="AC-3">And an error message is shown for invalid credentials.</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc path="docs/fase-2-plan/epics.md" title="Epic Breakdown" section="Story 1.3: User Login">
+        User login story with acceptance criteria: user can log in with email/password, redirected to dashboard, error shown for invalid credentials. Prerequisite: Story 1.2 (User Registration).
+      </doc>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-epic-1.md" title="Epic 1 Technical Specification" section="Authentication (FR-001)">
+        Authentication acceptance criteria AC-2: A registered user must be able to log in using their correct email and password. Uses Supabase Auth for authentication with cookie-based session management.
+      </doc>
+      <doc path="docs/sprint-artifacts/tech-spec-epic-epic-1.md" title="Epic 1 Technical Specification" section="Services and Modules">
+        app/(auth)/ contains user-facing pages for Login and Sign Up. lib/supabase/ encapsulates Supabase client for server-side (Server Actions) and client-side operations.
+      </doc>
+      <doc path="docs/fase-3-solutioning/architecture.md" title="Architecture Document" section="Backend Strategy">
+        Unified Next.js with Server Actions for mutations. API Route Handlers for authentication flows with proper cookie handling. TypeScript for type safety.
+      </doc>
+      <doc path="docs/sprint-artifacts/1-2-user-registration.md" title="Story 1.2: User Registration - Completion Notes" section="Implementation Approach">
+        Used API Route Handler (/api/auth/signup) instead of Server Actions for proper cookie handling and redirects. Client-side form with fetch() API. Zod validation on server-side. Toast notifications via Sonner. Pattern established for auth flows.
+      </doc>
+    </docs>
+    <code>
+      <artifact path="app/api/auth/signup/route.ts" kind="api-route" symbol="POST" lines="1-56" reason="Reference pattern for login API route - shows Zod validation, Supabase auth usage, error handling, and response structure. Use signInWithPassword() instead of signUp()." />
+      <artifact path="app/(auth)/signup/page.tsx" kind="page-component" symbol="SignUpPage" lines="1-100" reason="Reference UI pattern for login page - shows form structure, client-side validation, fetch() usage, router navigation, loading states, and toast notifications." />
+      <artifact path="lib/supabase/server.ts" kind="utility" symbol="createClient" reason="Server-side Supabase client with cookie handling for API routes - use this in login route handler." />
+      <artifact path="lib/supabase/client.ts" kind="utility" symbol="createClient" reason="Client-side Supabase client - may be used in login page component." />
+      <artifact path="lib/supabase/auth.ts" kind="utility" symbol="signUp" reason="Contains legacy Server Action auth code - review for patterns but follow API Route Handler approach instead." />
+      <artifact path="app/dashboard/page.tsx" kind="page-component" symbol="DashboardPage" reason="Protected dashboard page with server-side auth check - reuse as redirect target after successful login." />
+      <artifact path="components/ui/button.tsx" kind="ui-component" reason="shadcn/ui Button component for login form submit button." />
+      <artifact path="components/ui/input.tsx" kind="ui-component" reason="shadcn/ui Input component for email and password fields." />
+      <artifact path="components/ui/label.tsx" kind="ui-component" reason="shadcn/ui Label component for form field labels." />
+    </code>
+    <dependencies>
+      <node>
+        <package name="next" version="16.0.5" usage="Framework for pages, routing, API routes" />
+        <package name="react" version="19.2.0" usage="UI library" />
+        <package name="@supabase/supabase-js" version="^2.86.0" usage="Supabase client for authentication" />
+        <package name="@supabase/ssr" version="^0.8.0" usage="Server-side Supabase client with cookie handling" />
+        <package name="zod" version="^4.1.13" usage="Schema validation for API request bodies" />
+        <package name="sonner" version="^2.0.7" usage="Toast notifications for error messages" />
+        <package name="react-hook-form" version="^7.67.0" usage="Optional form management (signup uses manual state)" />
+        <package name="@hookform/resolvers" version="^5.2.2" usage="Zod integration for react-hook-form" />
+        <package name="tailwindcss" version="^4" usage="Styling framework" />
+        <package name="next-themes" version="^0.4.6" usage="Theme management (if dark mode needed)" />
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Follow API Route Handler pattern from Story 1.2 - NOT Server Actions - for proper cookie/session handling in auth flows</constraint>
+    <constraint>Use Zod for server-side request validation with schema: email (string, email format), password (string, min 8 chars)</constraint>
+    <constraint>Client-side navigation pattern: router.push('/dashboard') + router.refresh() after successful response</constraint>
+    <constraint>Error messages must be generic for security: "Invalid email or password" for failed authentication</constraint>
+    <constraint>Use Sonner toast notifications for error feedback to user</constraint>
+    <constraint>Add loading state during form submission: disable button and show spinner</constraint>
+    <constraint>Use shadcn/ui components (Input, Button, Label) for consistent UI with Story 1.2</constraint>
+    <constraint>All code must use TypeScript with strict type checking</constraint>
+    <constraint>Login page route: app/(auth)/login/page.tsx (auth route group)</constraint>
+    <constraint>API route: app/api/auth/login/route.ts</constraint>
+    <constraint>Dashboard route is /dashboard (not /(dashboard)) per Story 1.2 implementation</constraint>
+    <constraint>Create .env.example file to address Story 1.2 Review Finding R-1 (low priority but should be included)</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface name="POST /api/auth/login" kind="api-route">
+      <signature>
+        Request Body: { email: string, password: string }
+        Response Success (200): { success: true }
+        Response Error (400/401): { error: string }
+      </signature>
+      <path>app/api/auth/login/route.ts</path>
+      <notes>Use NextResponse.json() for responses. Set cookies automatically via Supabase client. Follow pattern from app/api/auth/signup/route.ts</notes>
+    </interface>
+    <interface name="supabase.auth.signInWithPassword()" kind="function">
+      <signature>
+        signInWithPassword({ email: string, password: string }): Promise&lt;AuthResponse&gt;
+        Returns: { data: { user, session }, error }
+      </signature>
+      <path>lib/supabase/server.ts</path>
+      <notes>Use server-side Supabase client. Automatically sets session cookie on success. Check error object for authentication failures.</notes>
+    </interface>
+    <interface name="createClient() - Server" kind="function">
+      <signature>
+        createClient(): SupabaseClient
+        Uses cookies() from next/headers for cookie management
+      </signature>
+      <path>lib/supabase/server.ts</path>
+      <notes>Import and call in API route handler. Handles cookie-based auth for API routes.</notes>
+    </interface>
+    <interface name="toast.error()" kind="function">
+      <signature>
+        toast.error(message: string): void
+      </signature>
+      <path>sonner</path>
+      <notes>Display error messages to user. Import from 'sonner'. Used in client component (login page).</notes>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Manual testing strategy per project plan. Test all acceptance criteria with valid and invalid inputs. Verify error handling, loading states, and successful navigation flow. Automated testing deferred to test epic per architecture document (80% coverage target for future).
+    </standards>
+    <locations>
+      Manual testing only for this story. Future automated tests would go in: __tests__/, tests/, or app/**/*.test.tsx
+    </locations>
+    <ideas>
+      <idea ac="AC-1">Test successful login with valid credentials - user should be authenticated</idea>
+      <idea ac="AC-1">Test login with invalid email format - should show client-side validation error</idea>
+      <idea ac="AC-1,AC-3">Test login with incorrect password - should show "Invalid email or password" toast</idea>
+      <idea ac="AC-1,AC-3">Test login with non-existent email - should show "Invalid email or password" toast</idea>
+      <idea ac="AC-2">Test redirect after successful login - should navigate to /dashboard and refresh session</idea>
+      <idea ac="AC-3">Test network error handling - should show generic error toast</idea>
+      <idea>Test loading state - button should be disabled and show spinner during submission</idea>
+      <idea>Test dashboard access after login - should display user session and protected content</idea>
+    </ideas>
+  </tests>
+</story-context>
