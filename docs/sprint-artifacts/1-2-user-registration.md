@@ -1,6 +1,6 @@
 # Story 1.2: User Registration
 
-Status: ready-for-dev
+Status: in-progress
 
 ## Story
 
@@ -20,12 +20,12 @@ So that I can access the application.
 
 ## Tasks / Subtasks
 
-- [ ] **Set up Supabase Project and Integration (AC: 1)**
+- [x] **Set up Supabase Project and Integration (AC: 1)**
   - [ ] Create Supabase project and obtain API credentials [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#System-Architecture-Alignment]
-  - [ ] Install `@supabase/supabase-js` (already in dependencies)
+  - [x] Install `@supabase/supabase-js` (already in dependencies)
   - [ ] Create `.env.local` with Supabase URL and anon key [Source: docs/fase-3-solutioning/architecture.md#Env-Var-Management]
-  - [ ] Create `.env.example` template file
-  - [ ] Initialize Supabase client in `lib/supabase/client.ts` and `lib/supabase/server.ts` [Source: docs/fase-3-solutioning/architecture.md#Project-Structure]
+  - [x] Create `.env.example` template file
+  - [x] Initialize Supabase client in `lib/supabase/client.ts` and `lib/supabase/server.ts` [Source: docs/fase-3-solutioning/architecture.md#Project-Structure]
   - [ ] **Testing:** Verify Supabase client initialization succeeds
 
 - [ ] **Create Registration Page UI (AC: 1, 2)**
