@@ -1,0 +1,262 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>2</storyId>
+    <title>User Registration</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-30</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-2-user-registration.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a new user</asA>
+    <iWant>to be able to register for an account using my email and a password</iWant>
+    <soThat>I can access the application</soThat>
+    <tasks>
+      - Set up Supabase Project and Integration (AC: 1)
+        - Create Supabase project and obtain API credentials
+        - Install @supabase/supabase-js (already in dependencies)
+        - Create .env.local with Supabase URL and anon key
+        - Create .env.example template file
+        - Initialize Supabase client in lib/supabase/client.ts and lib/supabase/server.ts
+        - Testing: Verify Supabase client initialization succeeds
+      - Create Registration Page UI (AC: 1, 2)
+        - Create app/(auth)/signup/page.tsx with registration form
+        - Add email and password input fields using shadcn/ui components
+        - Implement client-side validation for email format and password strength (min 8 chars, 1 uppercase, 1 number)
+        - Add "Register" submit button
+        - Style form with Tailwind CSS following UX design
+        - Testing: Verify form renders and validation works
+      - Implement Registration Server Action (AC: 3, 6, 7)
+        - Create Server Action in lib/supabase/auth.ts for user registration
+        - Use Supabase Auth signUp() method with email/password
+        - Handle successful registration → auto-login user
+        - Handle error cases: email already exists, weak password, network errors
+        - Return appropriate error messages for client display
+        - Testing: Test registration with valid and invalid inputs
+      - Implement Post-Registration Flow (AC: 4, 5)
+        - Configure Server Action to redirect to /dashboard after successful registration
+        - Create basic app/(dashboard)/page.tsx placeholder page
+        - Create app/(dashboard)/layout.tsx for authenticated routes
+        - Implement auth state check and redirect logic
+        - Testing: Verify redirect works after successful registration
+      - Add Error Handling and User Feedback (AC: 6, 7)
+        - Display inline error messages for validation failures
+        - Show toast notifications for server-side errors using shadcn/ui toast component
+        - Add loading state during registration submission
+        - Ensure password strength requirements are communicated clearly in UI
+        - Testing: Verify all error scenarios show appropriate messages
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    1. Given a user is on the registration page,
+    2. When they enter a valid email and password, and click "Register",
+    3. Then a new user account is created.
+    4. And the user is logged in.
+    5. And they are redirected to the main dashboard.
+    6. And an error message is shown if the email is already in use.
+    7. And password strength requirements are enforced.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-epic-1.md</path>
+        <title>Epic Technical Specification: FitTrack Epic 1</title>
+        <section>System Architecture Alignment</section>
+        <snippet>Framework uses Next.js with App Router, distinct route groups for authentication (auth) and main dashboard. Supabase Auth for registration/login via Supabase JS Client. Server Actions for mutations, TanStack Query for data fetching.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-epic-1.md</path>
+        <title>Epic Technical Specification: FitTrack Epic 1</title>
+        <section>Data Models - users table</section>
+        <snippet>users table automatically managed by Supabase Auth with columns: id (uuid, PK), email (varchar, unique), created_at (timestamptz). Stores user identity information.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Structure</section>
+        <snippet>app/(auth)/ directory for authentication routes (login, signup). lib/supabase/ for Supabase client initialization (client.ts for client-side, server.ts for Server Actions). Environment variables in .env.local with .env.example template.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Decision Summary - Auth</section>
+        <snippet>Supabase Auth chosen for native integration with Supabase DB, secure implementation, easy setup. Handles user sessions automatically.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-ux/ux-design-specification.md</path>
+        <title>FitTrack UX Design Specification</title>
+        <section>Design System Foundation</section>
+        <snippet>shadcn/ui chosen for components. Provides robust foundation with full customization control, accessibility, seamless Next.js/Tailwind integration. Focus on ease and effectiveness as core UX principle.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Story 1.2: User Registration</section>
+        <snippet>New user registration with email/password. Must create account, auto-login, redirect to dashboard, show errors for duplicate email, enforce password strength. Uses Supabase Auth with frontend validation.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/1-1-first-story-title.md</path>
+        <title>Story 1.1: Project Setup</title>
+        <section>Review Findings</section>
+        <snippet>L-2 finding: Missing .env.example template - should be added in Story 1.2 when environment variables first needed. Project uses pnpm, strict TypeScript, @/* import aliases, ESLint + Prettier.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>app/layout.tsx</path>
+        <kind>component</kind>
+        <symbol>RootLayout</symbol>
+        <lines>1-20</lines>
+        <reason>Root layout established in Story 1.1, will need to integrate auth provider/context</reason>
+      </artifact>
+      <artifact>
+        <path>app/page.tsx</path>
+        <kind>component</kind>
+        <symbol>Home</symbol>
+        <lines>1-15</lines>
+        <reason>Current homepage - should redirect authenticated users to dashboard or show signup CTA</reason>
+      </artifact>
+      <artifact>
+        <path>tsconfig.json</path>
+        <kind>config</kind>
+        <symbol>compilerOptions</symbol>
+        <lines>21-23</lines>
+        <reason>@/* import alias configured for lib/supabase imports</reason>
+      </artifact>
+      <artifact>
+        <path>package.json</path>
+        <kind>config</kind>
+        <symbol>dependencies</symbol>
+        <lines>12-15</lines>
+        <reason>@supabase/supabase-js needs to be installed (currently listed but may need verification)</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <ecosystem name="Node.js/pnpm">
+        <package name="@supabase/supabase-js" version="2" description="Supabase client for authentication and database access" />
+        <package name="@supabase/ssr" description="Supabase SSR helpers for Next.js App Router" />
+        <package name="next" version="16.0.5" description="Next.js framework with App Router and Server Actions" />
+        <package name="react" version="19.2.0" description="React library" />
+        <package name="react-hook-form" description="Form state management and validation" />
+        <package name="zod" description="TypeScript-first schema validation for form inputs" />
+        <package name="@hookform/resolvers" description="Validation resolvers for react-hook-form" />
+      </ecosystem>
+      <ecosystem name="shadcn/ui">
+        <package name="@radix-ui/react-label" description="Accessible label component" />
+        <package name="@radix-ui/react-toast" description="Toast notification component" />
+        <package name="button" description="shadcn/ui button component" />
+        <package name="input" description="shadcn/ui input component" />
+        <package name="form" description="shadcn/ui form component with react-hook-form integration" />
+        <package name="toast" description="shadcn/ui toast component" />
+      </ecosystem>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint category="authentication">Use Supabase Auth exclusively - no custom JWT or session management. All auth operations through Supabase client.</constraint>
+    <constraint category="security">Never expose Supabase service_role key. Use anon key for client-side. Server-side operations via Server Actions with RLS policies.</constraint>
+    <constraint category="validation">Client-side validation required: email format (RFC 5322), password minimum 8 chars with 1 uppercase, 1 number. Server validates via Supabase.</constraint>
+    <constraint category="routing">Use route groups: app/(auth)/ for public authentication pages, app/(dashboard)/ for protected routes. No middleware auth yet (defer to later story).</constraint>
+    <constraint category="environment">All Supabase credentials in .env.local (gitignored). Provide .env.example template. Use NEXT_PUBLIC_ prefix for client-accessible vars.</constraint>
+    <constraint category="error-handling">User-friendly error messages. No technical stack traces to client. Log errors server-side for debugging.</constraint>
+    <constraint category="ui">Use shadcn/ui components exclusively. Follow Tailwind utility classes. Mobile-first responsive design.</constraint>
+    <constraint category="testing">Manual testing for MVP. Unit tests for validation functions. Integration tests deferred to future stories.</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>Supabase Client (Browser)</name>
+      <kind>Client Library</kind>
+      <signature>createBrowserClient(url: string, anonKey: string)</signature>
+      <path>lib/supabase/client.ts</path>
+    </interface>
+    <interface>
+      <name>Supabase Client (Server)</name>
+      <kind>Server Library</kind>
+      <signature>createServerClient(url: string, anonKey: string, cookieOptions)</signature>
+      <path>lib/supabase/server.ts</path>
+    </interface>
+    <interface>
+      <name>signUp Server Action</name>
+      <kind>Next.js Server Action</kind>
+      <signature>async function signUp(formData: FormData): Promise&lt;{error?: string}&gt;</signature>
+      <path>lib/supabase/auth.ts</path>
+    </interface>
+    <interface>
+      <name>Supabase Auth API - signUp</name>
+      <kind>API Method</kind>
+      <signature>supabase.auth.signUp({ email, password, options })</signature>
+      <path>@supabase/supabase-js</path>
+    </interface>
+    <interface>
+      <name>Registration Form Component</name>
+      <kind>React Component</kind>
+      <signature>export default function SignupPage(): JSX.Element</signature>
+      <path>app/(auth)/signup/page.tsx</path>
+    </interface>
+    <interface>
+      <name>Dashboard Page</name>
+      <kind>React Component</kind>
+      <signature>export default function DashboardPage(): JSX.Element</signature>
+      <path>app/(dashboard)/page.tsx</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Testing strategy for authentication features:
+      - Manual Testing: End-to-end registration flow, error scenarios, redirect behavior
+      - Unit Tests: Email validation regex, password strength checker, error message formatter
+      - Integration Tests (Future): Form submission, Supabase client initialization, Server Action responses
+      - Security Tests: Verify credentials not exposed, RLS policies work (deferred to Supabase setup)
+      Target: 80% code coverage for utility functions, manual verification for UI flows
+    </standards>
+    <locations>
+      - Manual tests: Document test cases in story Dev Notes
+      - Unit tests: lib/__tests__/validation.test.ts (if implemented)
+      - Integration tests: app/(auth)/__tests__/signup.test.tsx (future)
+      - E2E tests: tests/e2e/registration.spec.ts (future)
+    </locations>
+    <ideas>
+      <test id="AC-1">
+        <description>Verify registration page renders</description>
+        <approach>Manual: Navigate to /signup, verify form displays with email and password fields, register button</approach>
+        <files>app/(auth)/signup/page.tsx</files>
+      </test>
+      <test id="AC-2">
+        <description>Validate registration with valid credentials</description>
+        <approach>Manual: Enter valid email/password (8+ chars, 1 uppercase, 1 number), click Register, verify success</approach>
+        <files>lib/supabase/auth.ts, app/(auth)/signup/page.tsx</files>
+      </test>
+      <test id="AC-3">
+        <description>Verify user account created in Supabase</description>
+        <approach>Manual: Check Supabase dashboard Auth Users table for new user entry after registration</approach>
+        <files>Supabase Auth backend</files>
+      </test>
+      <test id="AC-4">
+        <description>Verify auto-login after registration</description>
+        <approach>Manual: After registration, verify session cookie exists and user is authenticated</approach>
+        <files>lib/supabase/auth.ts, Supabase session management</files>
+      </test>
+      <test id="AC-5">
+        <description>Verify redirect to dashboard</description>
+        <approach>Manual: After successful registration, verify browser navigates to /dashboard</approach>
+        <files>lib/supabase/auth.ts, app/(dashboard)/page.tsx</files>
+      </test>
+      <test id="AC-6">
+        <description>Verify duplicate email error</description>
+        <approach>Manual: Register same email twice, verify error message "Email already in use" or similar</approach>
+        <files>lib/supabase/auth.ts, app/(auth)/signup/page.tsx</files>
+      </test>
+      <test id="AC-7">
+        <description>Verify password strength enforcement</description>
+        <approach>Manual: Try passwords &lt;8 chars, no uppercase, no number - verify validation errors shown</approach>
+        <files>app/(auth)/signup/page.tsx validation logic</files>
+      </test>
+    </ideas>
+  </tests>
+</story-context>

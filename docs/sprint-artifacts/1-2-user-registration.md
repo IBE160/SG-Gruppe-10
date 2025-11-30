@@ -1,6 +1,6 @@
 # Story 1.2: User Registration
 
-Status: drafted
+Status: ready-for-dev
 
 ## Story
 
@@ -173,6 +173,8 @@ Allows new users to sign up with email/password authentication using Supabase Au
 ## Dev Agent Record
 
 ### Context Reference
+
+- docs/sprint-artifacts/1-2-user-registration.context.xml
 
 ### Agent Model Used
 
