@@ -1,0 +1,252 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.1</storyId>
+    <title>Create Workout</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-30</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-1-create-workout.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in user</asA>
+    <iWant>to be able to log a new workout with details like date, type, duration, and notes</iWant>
+    <soThat>I can keep a record of my activities</soThat>
+    <tasks>
+      - Create Workouts Database Table and RLS Policies (AC: 1, 4)
+      - Create TypeScript Types for Workout (AC: 1)
+      - Create Workout Query Functions (AC: 1, 3)
+      - Create Workout Server Actions (AC: 1, 4)
+      - Create WorkoutForm Component (AC: 1, 4)
+      - Create Workout Creation Page (AC: 1, 2)
+      - Create Workout History Page Stub (AC: 2, 3)
+      - Add Navigation to Workout Creation (AC: 1)
+      - Install Required Dependencies (AC: 1, 4)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    AC-1: Given a user is on the "Log Workout" page, when they fill in the workout details and click "Save", then a new workout is created and associated with their account.
+    AC-2: And they are redirected to the workout history page.
+    AC-3: And the new workout appears in their history.
+    AC-4: And all fields are validated.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Data Models and Contracts</section>
+        <snippet>Database schema for workouts table with UUID primary key, user_id foreign key, workout_date, workout_type, duration_minutes, notes fields. Includes RLS policies for SELECT, INSERT, UPDATE, DELETE operations ensuring users can only access their own workouts.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>APIs and Interfaces</section>
+        <snippet>Server Actions for createWorkout with validation (date, type, duration > 0). Query functions getWorkouts(userId) and getWorkoutById(id, userId). TypeScript interfaces: Workout, CreateWorkoutInput, UpdateWorkoutInput, WorkoutFormData.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Workflows and Sequencing</section>
+        <snippet>Create Workout Flow: User navigates to /workouts/new → WorkoutForm renders → Client validation → createWorkout Server Action → Server validates and inserts → Redirect to /workouts with toast → Invalidate TanStack Query cache on success.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>API Pattern/Data Fetching</section>
+        <snippet>Next.js Server Actions for mutations with type-safe operations. TanStack Query for client-side data fetching and caching. date-fns for date formatting, UTC/ISO 8601 in database.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Structure</section>
+        <snippet>App Router with (dashboard) route group for authenticated pages. Server Actions in app/actions/. Supabase clients in lib/supabase/. shadcn/ui components in components/ui/. Custom hooks in hooks/.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown - Story 2.1</title>
+        <section>Epic 2: Core Workout Management</section>
+        <snippet>Story 2.1 enables workout creation with date, type, duration, and notes. Prerequisites: Story 1.3 (User Login). Requires form in frontend and API endpoint to save workout data to database.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>lib/supabase/server.ts</path>
+        <kind>service</kind>
+        <symbol>createClient</symbol>
+        <lines>1-27</lines>
+        <reason>Server-side Supabase client factory for Server Actions. Handles cookie-based authentication. Required for createWorkout Server Action to access authenticated user session.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/page.tsx</path>
+        <kind>page</kind>
+        <symbol>DashboardPage</symbol>
+        <lines>1-22</lines>
+        <reason>Existing authenticated dashboard page where "Log Workout" navigation link should be added. Demonstrates auth pattern with supabase.auth.getUser() and redirect.</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/form.tsx</path>
+        <kind>component</kind>
+        <symbol>Form, FormField, FormItem</symbol>
+        <lines>1-50</lines>
+        <reason>shadcn/ui Form components for building WorkoutForm. Provides react-hook-form integration, validation display, and accessible form structure.</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/button.tsx</path>
+        <kind>component</kind>
+        <symbol>Button</symbol>
+        <lines>all</lines>
+        <reason>shadcn/ui Button component for form submission and navigation actions.</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/input.tsx</path>
+        <kind>component</kind>
+        <symbol>Input</symbol>
+        <lines>all</lines>
+        <reason>shadcn/ui Input component for workout type and duration fields.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/layout.tsx</path>
+        <kind>layout</kind>
+        <symbol>DashboardLayout</symbol>
+        <lines>all</lines>
+        <reason>Dashboard route group layout ensuring authentication protection for all workout pages.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package>@supabase/supabase-js</package>
+        <version>^2.86.0</version>
+        <reason>Database client for Server Actions and queries</reason>
+      </node>
+      <node>
+        <package>react-hook-form</package>
+        <version>^7.67.0</version>
+        <reason>Form state management - ALREADY INSTALLED</reason>
+      </node>
+      <node>
+        <package>zod</package>
+        <version>^4.1.13</version>
+        <reason>Schema validation for forms and Server Actions - ALREADY INSTALLED</reason>
+      </node>
+      <node>
+        <package>date-fns</package>
+        <version>NEEDS INSTALLATION (^4.x)</version>
+        <reason>Date formatting and manipulation for workout dates</reason>
+      </node>
+      <node>
+        <package>@tanstack/react-query</package>
+        <version>NEEDS INSTALLATION (^5.x)</version>
+        <reason>Client-side data fetching and caching for workout list (Story 2.2)</reason>
+      </node>
+      <node>
+        <package>sonner</package>
+        <version>^2.0.7</version>
+        <reason>Toast notifications for success/error feedback - ALREADY INSTALLED</reason>
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Use Next.js Server Actions (NOT API Route Handlers) for createWorkout mutation per architecture decision
+    - All workout pages must be in app/(dashboard)/ route group for authentication protection
+    - Apply Row Level Security (RLS) policies on workouts table before any CRUD operations
+    - Validate duration_minutes: must be > 0 and <= 1440 (24 hours max)
+    - Store dates in UTC/ISO 8601 format in database, format with date-fns on client
+    - Use react-hook-form + zod for both client and server validation
+    - Invalidate TanStack Query cache after successful createWorkout
+    - Use shadcn/ui components (Form, Input, Button, Textarea, DatePicker) for consistent styling
+    - Follow existing auth pattern: await createClient() then supabase.auth.getUser()
+    - Use toast notifications (Sonner) for user feedback on success/error
+    - Redirect with router.push() after successful creation to /workouts
+    - TypeScript strict mode: all types must be explicitly defined in lib/types/workout.ts
+    - Database migration must create indexes: idx_workouts_user_id and idx_workouts_user_date
+    - Notes field is optional, all other fields (workout_date, workout_type, duration_minutes) are required
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>createWorkout</name>
+      <kind>Server Action</kind>
+      <signature>export async function createWorkout(input: CreateWorkoutInput): Promise&lt;ActionResult&lt;Workout&gt;&gt;</signature>
+      <path>app/actions/workouts.ts</path>
+      <description>Server Action for creating new workout. Validates input with zod, checks authentication, inserts to Supabase with user_id from session.</description>
+    </interface>
+    <interface>
+      <name>getWorkouts</name>
+      <kind>Query Function</kind>
+      <signature>export async function getWorkouts(userId: string): Promise&lt;Workout[]&gt;</signature>
+      <path>lib/supabase/queries.ts</path>
+      <description>Fetches all workouts for user ordered by workout_date DESC. Used in Story 2.2 for history page.</description>
+    </interface>
+    <interface>
+      <name>getWorkoutById</name>
+      <kind>Query Function</kind>
+      <signature>export async function getWorkoutById(id: string, userId: string): Promise&lt;Workout | null&gt;</signature>
+      <path>lib/supabase/queries.ts</path>
+      <description>Fetches single workout by ID with ownership check. Returns null if not found or unauthorized.</description>
+    </interface>
+    <interface>
+      <name>Workout</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface Workout { id: string; user_id: string; workout_date: string; workout_type: string; duration_minutes: number; notes: string | null; created_at: string; updated_at: string; }</signature>
+      <path>lib/types/workout.ts</path>
+      <description>Database record type for workouts table.</description>
+    </interface>
+    <interface>
+      <name>CreateWorkoutInput</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface CreateWorkoutInput { workout_date: string; workout_type: string; duration_minutes: number; notes?: string; }</signature>
+      <path>lib/types/workout.ts</path>
+      <description>Input type for createWorkout Server Action and WorkoutForm.</description>
+    </interface>
+    <interface>
+      <name>ActionResult</name>
+      <kind>TypeScript Generic</kind>
+      <signature>type ActionResult&lt;T&gt; = { success: true; data: T } | { success: false; error: string }</signature>
+      <path>lib/types/workout.ts or lib/types/index.ts</path>
+      <description>Standard Server Action response format for consistent error handling.</description>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>Manual testing for MVP per project plan. Automated testing deferred to test epic. Manual verification should cover: (1) successful workout creation with valid data, (2) validation errors for invalid inputs (missing fields, duration &lt;= 0 or > 1440), (3) authentication enforcement (unauthenticated users redirected), (4) RLS policies prevent cross-user data access, (5) toast notifications on success/error, (6) redirect to /workouts after creation, (7) database record created with correct user_id.</standards>
+    <locations>
+      tests/e2e/workouts.spec.ts (future E2E tests)
+      app/actions/workouts.test.ts (future unit tests for Server Actions)
+      components/workouts/WorkoutForm.test.tsx (future component tests)
+    </locations>
+    <ideas>
+      <test ac="AC-1">
+        <description>Happy path: Fill valid workout form, submit, verify database record created with correct user_id, verify redirect to /workouts, verify success toast displayed</description>
+      </test>
+      <test ac="AC-1">
+        <description>Validation: Submit form with duration = 0, verify error message "Duration must be greater than 0"</description>
+      </test>
+      <test ac="AC-1">
+        <description>Validation: Submit form with duration = 1500, verify error message "Duration cannot exceed 1440 minutes (24 hours)"</description>
+      </test>
+      <test ac="AC-1">
+        <description>Validation: Submit form with missing workout_type, verify error message "Workout type is required"</description>
+      </test>
+      <test ac="AC-4">
+        <description>Client-side validation: All required fields show validation errors before form submission is allowed</description>
+      </test>
+      <test ac="AC-1">
+        <description>Authentication: Unauthenticated user navigating to /workouts/new is redirected to /login</description>
+      </test>
+      <test ac="AC-1">
+        <description>Authorization: RLS policies prevent User A from creating workout with User B's user_id (attempt should fail with database error)</description>
+      </test>
+      <test ac="AC-2">
+        <description>Navigation: After successful creation, verify user is on /workouts page (URL check)</description>
+      </test>
+      <test ac="AC-3">
+        <description>History visibility: After creation, verify new workout appears in workout history stub page (Story 2.2 will fully implement)</description>
+      </test>
+    </ideas>
+  </tests>
+</story-context>
