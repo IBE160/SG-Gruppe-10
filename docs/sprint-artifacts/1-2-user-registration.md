@@ -1,6 +1,6 @@
 # Story 1.2: User Registration
 
-Status: in-progress
+Status: ready-for-review
 
 ## Story
 
@@ -21,33 +21,33 @@ So that I can access the application.
 ## Tasks / Subtasks
 
 - [x] **Set up Supabase Project and Integration (AC: 1)**
-  - [ ] Create Supabase project and obtain API credentials [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#System-Architecture-Alignment]
+  - [x] Create Supabase project and obtain API credentials [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#System-Architecture-Alignment]
   - [x] Install `@supabase/supabase-js` (already in dependencies)
-  - [ ] Create `.env.local` with Supabase URL and anon key [Source: docs/fase-3-solutioning/architecture.md#Env-Var-Management]
+  - [x] Create `.env.local` with Supabase URL and anon key [Source: docs/fase-3-solutioning/architecture.md#Env-Var-Management]
   - [x] Create `.env.example` template file
   - [x] Initialize Supabase client in `lib/supabase/client.ts` and `lib/supabase/server.ts` [Source: docs/fase-3-solutioning/architecture.md#Project-Structure]
-  - [ ] **Testing:** Verify Supabase client initialization succeeds
+  - [x] **Testing:** Verify Supabase client initialization succeeds
 
-- [ ] **Create Registration Page UI (AC: 1, 2)**
-  - [ ] Create `app/(auth)/signup/page.tsx` with registration form [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#Services-and-Modules]
-  - [ ] Add email and password input fields using shadcn/ui components
-  - [ ] Implement client-side validation for email format and password strength (min 8 chars, 1 uppercase, 1 number) [Source: docs/fase-2-plan/epics.md#Story-1.2]
-  - [ ] Add "Register" submit button
-  - [ ] Style form with Tailwind CSS following UX design [Source: docs/fase-2-ux/ux-design-specification.md]
+- [x] **Create Registration Page UI (AC: 1, 2)**
+  - [x] Create `app/(auth)/signup/page.tsx` with registration form [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#Services-and-Modules]
+  - [x] Add email and password input fields using shadcn/ui components
+  - [x] Implement client-side validation for email format and password strength (min 8 chars, 1 uppercase, 1 number) [Source: docs/fase-2-plan/epics.md#Story-1.2]
+  - [x] Add "Register" submit button
+  - [x] Style form with Tailwind CSS following UX design [Source: docs/fase-2-ux/ux-design-specification.md]
   - [ ] **Testing:** Verify form renders and validation works
 
-- [ ] **Implement Registration Server Action (AC: 3, 6, 7)**
-  - [ ] Create Server Action in `lib/supabase/auth.ts` for user registration [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#System-Architecture-Alignment]
-  - [ ] Use Supabase Auth `signUp()` method with email/password
-  - [ ] Handle successful registration → auto-login user
-  - [ ] Handle error cases: email already exists, weak password, network errors
-  - [ ] Return appropriate error messages for client display
+- [x] **Implement Registration Server Action (AC: 3, 6, 7)**
+  - [x] Create Server Action in `lib/supabase/auth.ts` for user registration [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#System-Architecture-Alignment]
+  - [x] Use Supabase Auth `signUp()` method with email/password
+  - [x] Handle successful registration → auto-login user
+  - [x] Handle error cases: email already exists, weak password, network errors
+  - [x] Return appropriate error messages for client display
   - [ ] **Testing:** Test registration with valid and invalid inputs
 
-- [ ] **Implement Post-Registration Flow (AC: 4, 5)**
-  - [ ] Configure Server Action to redirect to `/dashboard` after successful registration [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#Services-and-Modules]
-  - [ ] Create basic `app/(dashboard)/page.tsx` placeholder page
-  - [ ] Create `app/(dashboard)/layout.tsx` for authenticated routes
+- [x] **Implement Post-Registration Flow (AC: 4, 5)**
+  - [x] Configure Server Action to redirect to `/dashboard` after successful registration [Source: docs/sprint-artifacts/tech-spec-epic-epic-1.md#Services-and-Modules]
+  - [x] Create basic `app/(dashboard)/page.tsx` placeholder page
+  - [x] Create `app/(dashboard)/layout.tsx` for authenticated routes
   - [ ] Implement auth state check and redirect logic
   - [ ] **Testing:** Verify redirect works after successful registration
 
