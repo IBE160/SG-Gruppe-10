@@ -10,9 +10,14 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.86.0",
     "next": "16.0.5",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.67.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
