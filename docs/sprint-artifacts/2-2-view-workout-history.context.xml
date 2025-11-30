@@ -1,0 +1,288 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.2</storyId>
+    <title>View Workout History</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-30</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-2-view-workout-history.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in user</asA>
+    <iWant>to be able to see a chronological list of all my past workouts</iWant>
+    <soThat>I can review my progress</soThat>
+    <tasks>
+      - Create TanStack Query Hook for Workouts (AC: 1, 3)
+      - Create WorkoutCard Component (AC: 2)
+      - Create WorkoutList Component (AC: 1, 2, 4)
+      - Update Workout History Page (AC: 1, 2, 3, 4)
+      - Add Loading Skeleton Component (AC: 3)
+      - Format Dates with date-fns (AC: 2)
+      - Test Query Invalidation from Story 2.1 (AC: 1)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    AC-1: Given a user is on the "Workout History" page, then all their past workouts are displayed in reverse chronological order.
+    AC-2: And each workout in the list shows the date, type, and duration.
+    AC-3: And the page shows a loading state while fetching data.
+    AC-4: And an empty state is displayed if the user has no workouts yet.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>APIs and Interfaces</section>
+        <snippet>Query Functions: getWorkouts(userId) returns array ordered by workout_date DESC. useWorkouts hook with queryKey ['workouts', userId], staleTime 30000ms. Returns loading, error, success states.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Workflows and Sequencing</section>
+        <snippet>View Workout History Flow: Navigate to /workouts → useWorkouts hook fetches → Loading state → WorkoutList renders in reverse chronological → Click card navigates to /workouts/[id]</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Data Models and Contracts</section>
+        <snippet>Workout interface: id (UUID), user_id, workout_date (ISO 8601), workout_type (string), duration_minutes (number), notes (string|null), created_at, updated_at. Already in lib/types/workout.ts</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>API Pattern/Data Fetching</section>
+        <snippet>TanStack Query for client-side data fetching with caching. Custom hooks pattern for queries. staleTime configuration per query. QueryClientProvider wraps app for context.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Structure</section>
+        <snippet>Hooks in hooks/ directory. Client components use "use client" directive. Server components default. Components in components/ with domain folders (workouts/).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown - Story 2.2</title>
+        <section>Epic 2: Core Workout Management</section>
+        <snippet>Story 2.2 displays chronological workout list. Shows date, type, duration per workout. Prerequisites: Story 1.3 (Login). Requires frontend list component and API endpoint (getWorkouts already exists from Story 2.1).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/2-1-create-workout.md</path>
+        <title>Story 2.1: Create Workout</title>
+        <section>Dev Agent Record - Completion Notes</section>
+        <snippet>getWorkouts query function implemented in lib/supabase/queries.ts. Returns workouts ordered by workout_date DESC. RLS policies enforce user isolation. revalidatePath('/workouts') called after createWorkout for cache invalidation.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>lib/supabase/queries.ts</path>
+        <kind>query-function</kind>
+        <symbol>getWorkouts</symbol>
+        <lines>4-18</lines>
+        <reason>Returns all workouts for user ordered by workout_date DESC. Core data fetching function for this story. Already implemented in Story 2.1.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/types/workout.ts</path>
+        <kind>types</kind>
+        <symbol>Workout</symbol>
+        <lines>1-9</lines>
+        <reason>TypeScript interface for workout data structure. Defines all fields: id, user_id, workout_date, workout_type, duration_minutes, notes, created_at, updated_at.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/client.ts</path>
+        <kind>service</kind>
+        <symbol>createClient</symbol>
+        <lines>1-8</lines>
+        <reason>Client-side Supabase client factory for TanStack Query hooks. Uses browser-specific client from @supabase/ssr. Required for useWorkouts hook to access auth and database.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/workouts/page.tsx</path>
+        <kind>page</kind>
+        <symbol>WorkoutsPage</symbol>
+        <lines>4-22</lines>
+        <reason>Current stub page showing "Workout created successfully" message. Needs to be updated to use useWorkouts hook and display WorkoutList component. Auth check already present.</reason>
+      </artifact>
+      <artifact>
+        <path>components/workouts/WorkoutForm.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutForm</symbol>
+        <lines>1-160</lines>
+        <reason>Example of client component with "use client" directive, using react-hook-form, date-fns formatting, shadcn/ui components. Pattern reference for WorkoutCard/WorkoutList implementation.</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/button.tsx</path>
+        <kind>component</kind>
+        <symbol>Button</symbol>
+        <lines>all</lines>
+        <reason>shadcn/ui Button component for "Log Workout" link and card interactions.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/layout.tsx</path>
+        <kind>layout</kind>
+        <symbol>DashboardLayout</symbol>
+        <lines>all</lines>
+        <reason>Dashboard route group layout. Needs QueryClientProvider to be added here or in parent layout for TanStack Query context.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/page.tsx</path>
+        <kind>page</kind>
+        <symbol>DashboardPage</symbol>
+        <lines>15-30</lines>
+        <reason>Shows navigation pattern with Link components and Button styling. Reference for linking to workout history.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package>@tanstack/react-query</package>
+        <version>^5.90.11</version>
+        <reason>Client-side data fetching and caching - ALREADY INSTALLED. Core dependency for useWorkouts hook. Provides QueryClient, useQuery, QueryClientProvider.</reason>
+      </node>
+      <node>
+        <package>date-fns</package>
+        <version>^4.1.0</version>
+        <reason>Date formatting for workout display - ALREADY INSTALLED. Use format() function for readable dates like "Nov 30, 2025".</reason>
+      </node>
+      <node>
+        <package>@supabase/supabase-js</package>
+        <version>^2.86.0</version>
+        <reason>Database client for queries - ALREADY INSTALLED. Used by getWorkouts function.</reason>
+      </node>
+      <node>
+        <package>react</package>
+        <version>^19.2.0</version>
+        <reason>React framework - ALREADY INSTALLED. Required for hooks and components.</reason>
+      </node>
+      <node>
+        <package>next</package>
+        <version>^16.0.5</version>
+        <reason>Next.js framework - ALREADY INSTALLED. App Router, Server Components, Client Components.</reason>
+      </node>
+      <shadcn>
+        <component>Card</component>
+        <status>NEEDS INSTALLATION</status>
+        <reason>Display individual workouts in WorkoutCard component. Provides Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter.</reason>
+        <install>npx shadcn@latest add card</install>
+      </shadcn>
+      <shadcn>
+        <component>Skeleton</component>
+        <status>NEEDS INSTALLATION</status>
+        <reason>Loading state placeholder while fetching workout data. Shows 6 skeleton cards during data load.</reason>
+        <install>npx shadcn@latest add skeleton</install>
+      </shadcn>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Use TanStack Query for all client-side data fetching (first usage in project - set up QueryClientProvider)
+    - Create custom hook useWorkouts with queryKey ['workouts', userId] and staleTime 30000ms
+    - All workout pages must be in app/(dashboard)/ route group for authentication protection
+    - Display workouts in reverse chronological order (newest first) per tech spec
+    - Use getWorkouts(userId) query function from lib/supabase/queries.ts (already implemented)
+    - Format dates with date-fns using format() function for user-friendly display
+    - Client components must have "use client" directive at top (required for hooks)
+    - Server components do NOT have directive (default in App Router)
+    - Use shadcn/ui Card component for workout display (install via CLI if not exists)
+    - Use shadcn/ui Skeleton component for loading state (install via CLI if not exists)
+    - Handle three states: loading (skeletons), empty (message), and data (WorkoutList)
+    - Empty state message: "No workouts yet. Click 'Log Workout' to get started."
+    - Responsive grid layout: 1 column mobile, 2 columns tablet, 3+ columns desktop
+    - Each WorkoutCard should be clickable and navigate to /workouts/[id] (prep for Story 2.3)
+    - Maintain existing "Log Workout" button/link for easy access to creation flow
+    - Follow TypeScript strict mode: explicit types, no any types
+    - Use existing Workout interface from lib/types/workout.ts
+    - Verify cache invalidation: After creating workout (Story 2.1), new workout should appear immediately
+    - Duration display: Show minutes, or convert to "X hours Y minutes" if duration >= 60
+    - Date formatting examples: "Nov 30, 2025" or "30 Nov 2025" or relative "Today"/"Yesterday"
+    - Error handling: Display error message if query fails, with retry option
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>useWorkouts</name>
+      <kind>React Hook</kind>
+      <signature>export function useWorkouts(): UseQueryResult&lt;Workout[], Error&gt;</signature>
+      <path>hooks/useWorkouts.ts</path>
+      <description>TanStack Query hook for fetching all workouts for current user. Returns { data, isLoading, isError, error, refetch }. Automatically handles auth via client-side Supabase client.</description>
+    </interface>
+    <interface>
+      <name>getWorkouts</name>
+      <kind>Query Function</kind>
+      <signature>export async function getWorkouts(userId: string): Promise&lt;Workout[]&gt;</signature>
+      <path>lib/supabase/queries.ts</path>
+      <description>Fetches all workouts for user ordered by workout_date DESC. Already implemented in Story 2.1. Returns empty array if no workouts.</description>
+    </interface>
+    <interface>
+      <name>WorkoutCard</name>
+      <kind>React Component</kind>
+      <signature>export function WorkoutCard({ workout }: { workout: Workout })</signature>
+      <path>components/workouts/WorkoutCard.tsx</path>
+      <description>Displays single workout in card format. Shows formatted date, type, duration. Clickable - navigates to /workouts/[workout.id] on click. Uses shadcn/ui Card component.</description>
+    </interface>
+    <interface>
+      <name>WorkoutList</name>
+      <kind>React Component</kind>
+      <signature>export function WorkoutList({ workouts }: { workouts: Workout[] })</signature>
+      <path>components/workouts/WorkoutList.tsx</path>
+      <description>Renders grid of WorkoutCard components. Handles empty state when workouts array is empty. Responsive grid layout (1/2/3 columns).</description>
+    </interface>
+    <interface>
+      <name>Workout</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface Workout { id: string; user_id: string; workout_date: string; workout_type: string; duration_minutes: number; notes: string | null; created_at: string; updated_at: string; }</signature>
+      <path>lib/types/workout.ts</path>
+      <description>Database record type for workouts table. Already defined in Story 2.1.</description>
+    </interface>
+    <interface>
+      <name>QueryClientProvider</name>
+      <kind>React Context Provider</kind>
+      <signature>&lt;QueryClientProvider client={queryClient}&gt;{children}&lt;/QueryClientProvider&gt;</signature>
+      <path>app/layout.tsx or components/provider.tsx</path>
+      <description>TanStack Query context provider. Must wrap app or dashboard section to enable useQuery hooks. Configure with defaultOptions: { queries: { staleTime: 30000, refetchOnWindowFocus: false } }</description>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>Manual testing for MVP per project plan. Automated testing deferred to test epic. Manual verification should cover: (1) loading state displays during data fetch, (2) workouts appear in reverse chronological order, (3) each card shows date/type/duration correctly, (4) empty state shows when no workouts, (5) clicking card navigates to detail page (404 until Story 2.3), (6) creating workout shows in history immediately (cache invalidation), (7) responsive layout works on mobile/tablet/desktop, (8) error state displays if query fails, (9) date formatting is readable and correct.</standards>
+    <locations>
+      tests/e2e/workouts.spec.ts (future E2E tests)
+      hooks/useWorkouts.test.ts (future unit tests for hook)
+      components/workouts/WorkoutCard.test.tsx (future component tests)
+      components/workouts/WorkoutList.test.tsx (future component tests)
+    </locations>
+    <ideas>
+      <test ac="AC-1">
+        <description>Navigate to /workouts, verify workouts displayed in reverse chronological order (newest at top). Check: workout from today appears before workout from yesterday.</description>
+      </test>
+      <test ac="AC-2">
+        <description>Verify each WorkoutCard displays: (1) formatted date (e.g., "Nov 30, 2025"), (2) workout type text, (3) duration in minutes or hours format.</description>
+      </test>
+      <test ac="AC-3">
+        <description>Throttle network to 3G in DevTools, navigate to /workouts, verify skeleton loading state appears for ~1-2 seconds before data loads.</description>
+      </test>
+      <test ac="AC-4">
+        <description>Test with new user account that has zero workouts. Verify empty state message displays: "No workouts yet. Click 'Log Workout' to get started."</description>
+      </test>
+      <test ac="AC-1">
+        <description>Create new workout via "Log Workout" → fill form → save. Verify: (1) redirected to /workouts, (2) new workout appears at top of list immediately (no page refresh needed).</description>
+      </test>
+      <test ac="AC-2">
+        <description>Test duration formatting: Create workout with 45 minutes → verify displays "45 minutes". Create workout with 90 minutes → verify displays "1 hour 30 minutes" or "90 minutes".</description>
+      </test>
+      <test ac="AC-2">
+        <description>Test date formatting: Create workout today → verify displays "Today" or "Nov 30, 2025". Create workout yesterday → verify proper format.</description>
+      </test>
+      <test ac="AC-1, AC-2">
+        <description>Click on a workout card → verify navigation to /workouts/[id] (will be 404 until Story 2.3 implemented, but URL should be correct).</description>
+      </test>
+      <test ac="AC-3">
+        <description>Simulate query error (disconnect network) → verify error message displays with option to retry.</description>
+      </test>
+      <test ac="Responsive">
+        <description>Test layout on different screen sizes: Mobile (1 column), Tablet (2 columns), Desktop (3 columns). Verify cards resize properly.</description>
+      </test>
+    </ideas>
+  </tests>
+</story-context>
