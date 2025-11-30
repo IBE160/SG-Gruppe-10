@@ -21,7 +21,7 @@ export async function signUp(prevState: any, formData: FormData) {
   // Validate inputs
   const validation = signUpSchema.safeParse({ email, password });
   if (!validation.success) {
-    return { error: validation.error.errors[0].message };
+    return { error: validation.error.issues[0].message };
   }
 
   // Create Supabase client
