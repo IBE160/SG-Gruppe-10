@@ -43,8 +43,8 @@ development_status:
   1-4-user-logout: done
   epic-1-retrospective: optional
 
-  epic-2: backlog
-  2-1-create-workout: backlog
+  epic-2: contexted
+  2-1-create-workout: review
   2-2-view-workout-history: backlog
   2-3-view-workout-details: backlog
   2-4-update-workout: backlog
