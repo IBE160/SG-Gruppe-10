@@ -1,6 +1,6 @@
 # Story 2.2: View Workout History
 
-Status: drafted
+Status: ready-for-dev
 
 ## Story
 
@@ -273,3 +273,5 @@ Claude 3.7 Sonnet (GitHub Copilot CLI)
 ## Change Log
 
 - **2025-11-30:** Initial draft generated for Story 2.2: View Workout History
+- **2025-11-30:** Story context XML created with comprehensive technical guidance
+- **2025-11-30:** Story marked ready-for-dev - approved for implementation
