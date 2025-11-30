@@ -1,0 +1,49 @@
+"use server";
+
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import { z } from "zod";
+
+// Validation schema
+const signUpSchema = z.object({
+  email: z.string().email("Invalid email format"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+});
+
+export async function signUp(formData: FormData) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  // Validate inputs
+  const validation = signUpSchema.safeParse({ email, password });
+  if (!validation.success) {
+    return { error: validation.error.errors[0].message };
+  }
+
+  // Create Supabase client
+  const supabase = await createClient();
+
+  // Sign up user
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/callback`,
+    },
+  });
+
+  if (error) {
+    // Handle specific error cases
+    if (error.message.includes("already registered")) {
+      return { error: "Email already in use" };
+    }
+    return { error: error.message };
+  }
+
+  // User created and auto-logged in
+  redirect("/dashboard");
+}
