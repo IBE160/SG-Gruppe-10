@@ -1,10 +1,7 @@
-"use server";
-
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
-// Validation schema
 const signUpSchema = z.object({
   email: z.string().email("Invalid email format"),
   password: z
@@ -14,15 +11,19 @@ const signUpSchema = z.object({
     .regex(/[0-9]/, "Password must contain at least one number"),
 });
 
-export async function signUp(prevState: any, formData: FormData) {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+export async function POST(request: Request) {
+  const body = await request.json();
 
   // Validate inputs
-  const validation = signUpSchema.safeParse({ email, password });
+  const validation = signUpSchema.safeParse(body);
   if (!validation.success) {
-    return { error: validation.error.errors[0].message };
+    return NextResponse.json(
+      { error: validation.error.errors[0].message },
+      { status: 400 }
+    );
   }
+
+  const { email, password } = validation.data;
 
   // Create Supabase client
   const supabase = await createClient();
@@ -34,19 +35,22 @@ export async function signUp(prevState: any, formData: FormData) {
   });
 
   if (error) {
-    // Handle specific error cases
     if (error.message.includes("already registered")) {
-      return { error: "Email already in use" };
+      return NextResponse.json(
+        { error: "Email already in use" },
+        { status: 400 }
+      );
     }
-    return { error: error.message };
+    return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
   // Check if user was created and session exists
   if (!data.user || !data.session) {
-    return { error: "Failed to create user account" };
+    return NextResponse.json(
+      { error: "Failed to create user account" },
+      { status: 500 }
+    );
   }
 
-  // Session is now set in cookies via the server client
-  // Redirect server-side to ensure cookies are sent
-  redirect("/dashboard");
+  return NextResponse.json({ success: true });
 }

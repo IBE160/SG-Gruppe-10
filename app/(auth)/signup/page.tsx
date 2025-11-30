@@ -1,33 +1,51 @@
 "use client";
 
-import { signUp } from "@/lib/supabase/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
-import { useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
-
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full">
-      {pending ? "Creating account..." : "Register"}
-    </Button>
-  );
-}
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
-  const [state, formAction] = useActionState(signUp, null);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  useEffect(() => {
-    if (state?.error) {
-      toast.error("Registration failed", {
-        description: state.error,
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error("Registration failed", {
+          description: data.error,
+        });
+        return;
+      }
+
+      toast.success("Account created successfully!");
+      router.push("/dashboard");
+      router.refresh();
+    } catch (error) {
+      toast.error("Registration failed", {
+        description: "An unexpected error occurred",
+      });
+    } finally {
+      setIsLoading(false);
     }
-  }, [state]);
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -37,7 +55,7 @@ export default function SignupPage() {
           <p className="text-gray-500">Enter your details to get started</p>
         </div>
         
-        <form action={formAction} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -46,6 +64,7 @@ export default function SignupPage() {
               type="email"
               placeholder="you@example.com"
               required
+              disabled={isLoading}
             />
           </div>
           
@@ -57,13 +76,16 @@ export default function SignupPage() {
               type="password"
               placeholder="••••••••"
               required
+              disabled={isLoading}
             />
             <p className="text-xs text-gray-500">
               Minimum 8 characters, 1 uppercase letter, 1 number
             </p>
           </div>
 
-          <SubmitButton />
+          <Button type="submit" disabled={isLoading} className="w-full">
+            {isLoading ? "Creating account..." : "Register"}
+          </Button>
         </form>
         
         <p className="text-center text-sm text-gray-500">
