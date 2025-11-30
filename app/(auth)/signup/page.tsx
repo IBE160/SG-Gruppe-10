@@ -4,7 +4,8 @@ import { signUp } from "@/lib/supabase/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -18,7 +19,7 @@ function SubmitButton() {
 }
 
 export default function SignupPage() {
-  const [state, formAction] = useFormState(signUp, null);
+  const [state, formAction] = useActionState(signUp, null);
 
   useEffect(() => {
     if (state?.error) {
