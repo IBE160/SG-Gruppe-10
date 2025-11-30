@@ -45,8 +45,8 @@ development_status:
 
   epic-2: contexted
   2-1-create-workout: done
-  2-2-view-workout-history: ready-for-dev
-  2-3-view-workout-details: backlog
+  2-2-view-workout-history: done
+  2-3-view-workout-details: done
   2-4-update-workout: backlog
   2-5-delete-workout: backlog
   epic-2-retrospective: optional
