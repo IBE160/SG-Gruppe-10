@@ -258,7 +258,7 @@ export function useWorkouts() {
 
 ### Context Reference
 
-<!-- Path(s) to story context XML will be added here by context workflow -->
+- `docs/sprint-artifacts/2-2-view-workout-history.context.xml` - Technical context for implementation (generated 2025-11-30)
 
 ### Agent Model Used
 
