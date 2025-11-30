@@ -14,7 +14,7 @@ const signUpSchema = z.object({
     .regex(/[0-9]/, "Password must contain at least one number"),
 });
 
-export async function signUp(formData: FormData) {
+export async function signUp(prevState: any, formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
