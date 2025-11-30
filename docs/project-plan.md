@@ -64,12 +64,13 @@
         - [x] File: docs/sprint-artifacts/1-1-first-story-title.md
       - [x] /run-agent-task sm *validate-create-story {prompt / user-input-file}
         - [x] File: docs/sprint-artifacts/validation-report-2025-11-29.md
-      - [ ] /run-agent-task sm *create-story-context {prompt / user-input-file}
-        - [ ] File: sprint-artifacts/{{story_key}}.context.xml
-      - [ ] /run-agent-task sm *validate-story-context {prompt / user-input-file}
-      - [ ] /run-agent-task sm *story-ready-for-dev {prompt / user-input-file}
+      - [x] /run-agent-task sm *create-story-context {prompt / user-input-file}
+        - [x] File: docs/sprint-artifacts/1-1-project-setup.context.xml
+      - [x] /run-agent-task sm *validate-story-context {prompt / user-input-file}
+        - [x] File: docs/sprint-artifacts/validation-report-story-context-2025-11-30.md
+      - [x] /run-agent-task sm *story-ready-for-dev {prompt / user-input-file}
       while code-review != approved:
-        - [ ] /run-agent-task dev *develop-story {prompt / user-input-file}
+        - [x] /run-agent-task dev *develop-story {prompt / user-input-file}
         - [ ] /run-agent-task dev *code-review {prompt / user-input-file}
       - [ ] /run-agent-task dev *story-done {prompt / user-input-file}
       - [ ] /run-agent-task sm *test-review {prompt / user-input-file}
