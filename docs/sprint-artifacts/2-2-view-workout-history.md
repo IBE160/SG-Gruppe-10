@@ -1,6 +1,6 @@
 # Story 2.2: View Workout History
 
-Status: review
+Status: done
 
 ## Story
 
