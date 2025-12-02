@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { createWorkout } from "@/app/actions/workouts";
-import type { CreateWorkoutInput } from "@/lib/types/workout";
+import { createWorkout, updateWorkout } from "@/app/actions/workouts";
+import type { CreateWorkoutInput, Workout } from "@/lib/types/workout";
 
 const workoutFormSchema = z.object({
   workout_date: z.string().min(1, "Workout date is required"),
@@ -37,10 +37,20 @@ const workoutFormSchema = z.object({
 type WorkoutFormValues = z.infer<typeof workoutFormSchema>;
 
 interface WorkoutFormProps {
+  mode?: "create" | "edit";
+  workout?: Workout;
   defaultValues?: Partial<WorkoutFormValues>;
+  onSuccess?: () => void;
+  onCancel?: () => void;
 }
 
-export function WorkoutForm({ defaultValues }: WorkoutFormProps) {
+export function WorkoutForm({ 
+  mode = "create", 
+  workout,
+  defaultValues,
+  onSuccess,
+  onCancel 
+}: WorkoutFormProps) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [todayDate] = useState(() => format(new Date(), "yyyy-MM-dd"));
@@ -58,21 +68,45 @@ export function WorkoutForm({ defaultValues }: WorkoutFormProps) {
   async function onSubmit(values: WorkoutFormValues) {
     setIsSubmitting(true);
     try {
-      const input: CreateWorkoutInput = {
-        workout_date: values.workout_date,
-        workout_type: values.workout_type,
-        duration_minutes: values.duration_minutes,
-        notes: values.notes || undefined,
-      };
+      if (mode === "edit" && workout) {
+        // Update existing workout
+        const result = await updateWorkout({
+          id: workout.id,
+          workout_date: values.workout_date,
+          workout_type: values.workout_type,
+          duration_minutes: values.duration_minutes,
+          notes: values.notes || undefined,
+        });
 
-      const result = await createWorkout(input);
-
-      if (result.success) {
-        toast.success("Workout created successfully!");
-        router.push("/workouts");
-        router.refresh();
+        if (result.success) {
+          toast.success("Workout updated successfully!");
+          if (onSuccess) {
+            onSuccess();
+          } else {
+            router.push(`/workouts/${workout.id}`);
+            router.refresh();
+          }
+        } else {
+          toast.error(result.error);
+        }
       } else {
-        toast.error(result.error);
+        // Create new workout
+        const input: CreateWorkoutInput = {
+          workout_date: values.workout_date,
+          workout_type: values.workout_type,
+          duration_minutes: values.duration_minutes,
+          notes: values.notes || undefined,
+        };
+
+        const result = await createWorkout(input);
+
+        if (result.success) {
+          toast.success("Workout created successfully!");
+          router.push("/workouts");
+          router.refresh();
+        } else {
+          toast.error(result.error);
+        }
       }
     } catch (error) {
       toast.error("An unexpected error occurred");
@@ -150,9 +184,25 @@ export function WorkoutForm({ defaultValues }: WorkoutFormProps) {
           )}
         />
 
-        <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting ? "Saving..." : "Save Workout"}
-        </Button>
+        <div className="flex gap-2">
+          <Button type="submit" disabled={isSubmitting} className="flex-1">
+            {isSubmitting 
+              ? "Saving..." 
+              : mode === "edit" 
+              ? "Update Workout" 
+              : "Save Workout"}
+          </Button>
+          {mode === "edit" && onCancel && (
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={onCancel}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </Button>
+          )}
+        </div>
       </form>
     </Form>
   );

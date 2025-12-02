@@ -1,6 +1,6 @@
 # Story 2.4: Update Workout
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -322,7 +322,51 @@ export interface UpdateWorkoutInput {
 
 ### Agent Model Used
 
-<!-- To be filled by dev agent during implementation -->
+GitHub Copilot CLI - Implementation on 2025-12-02
+
+### Completion Notes List
+
+**Implementation Date:** December 2, 2025, 23:19 CET
+
+**Files Created:**
+1. `hooks/useWorkout.ts` - TanStack Query hook for fetching single workout
+2. `components/workouts/WorkoutDetailClient.tsx` - Client component managing view/edit mode state
+
+**Files Modified:**
+1. `app/actions/workouts.ts` - Added updateWorkout Server Action
+2. `components/workouts/WorkoutForm.tsx` - Extended to support edit mode with mode prop
+3. `components/workouts/WorkoutDetail.tsx` - Added Edit button and onEdit callback
+4. `app/(dashboard)/workouts/[id]/page.tsx` - Uses WorkoutDetailClient wrapper
+
+**Key Implementation Details:**
+- Update Server Action with Zod validation for partial updates
+- Auth check and RLS enforcement (user can only update own workouts)
+- Cache invalidation for both detail page and list page
+- WorkoutForm supports both create and edit modes via mode prop
+- Pre-fills form with existing workout data using defaultValues
+- Edit mode toggle managed by WorkoutDetailClient component
+- Cancel button returns to view mode without saving
+- Success callback returns to view mode after update
+
+**Testing Results:**
+- ✅ Edit button appears on workout detail page
+- ✅ Form pre-fills with existing data when Edit clicked
+- ✅ Updates save to database successfully
+- ✅ Returns to view mode after successful update
+- ✅ Updated data displays correctly
+- ✅ Cache invalidation works (list also shows updates)
+- ✅ Cancel button works (returns without saving)
+- ✅ Form validation working (empty fields blocked)
+- ✅ Toast notifications display correctly
+- ✅ All 6 acceptance criteria verified
+
+**All acceptance criteria met:**
+- AC-1: Edit button presents form ✅
+- AC-2: Form pre-filled with existing data ✅
+- AC-3: Changes saved to database ✅
+- AC-4: Returns to detail view showing updated data ✅
+- AC-5: Form validation ensures valid fields ✅
+- AC-6: Error messages displayed on failure ✅
 
 ### Debug Log References
 
@@ -334,7 +378,20 @@ export interface UpdateWorkoutInput {
 
 ### File List
 
-<!-- To be filled by dev agent during implementation -->
+**Created:**
+- `hooks/useWorkout.ts` (25 lines)
+- `components/workouts/WorkoutDetailClient.tsx` (38 lines)
+
+**Modified:**
+- `app/actions/workouts.ts` (+79 lines) - Added updateWorkout Server Action
+- `components/workouts/WorkoutForm.tsx` (+56 lines, modified submission logic)
+- `components/workouts/WorkoutDetail.tsx` (+9 lines) - Added Edit button
+- `app/(dashboard)/workouts/[id]/page.tsx` (4 lines changed) - Uses WorkoutDetailClient
+
+**Referenced (no changes):**
+- `lib/supabase/queries.ts` - Used getWorkoutById
+- `lib/types/workout.ts` - Used UpdateWorkoutInput and Workout types
+- `lib/supabase/server.ts` - Server-side Supabase client
 
 ## Change Log
 
