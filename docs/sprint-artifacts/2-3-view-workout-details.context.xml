@@ -1,0 +1,230 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.3</storyId>
+    <title>View Workout Details</title>
+    <status>ready-for-dev</status>
+    <generatedAt>2025-12-02</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-3-view-workout-details.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in user</asA>
+    <iWant>to be able to click on a workout in my history to see all its details</iWant>
+    <soThat>I can remember what I did</soThat>
+    <tasks>
+      - Create Dynamic Route for Workout Detail Page (AC: 1, 5)
+      - Implement Data Fetching for Single Workout (AC: 1, 6)
+      - Create Workout Detail Display Component (AC: 2, 3)
+      - Add Navigation Elements (AC: 4)
+      - Implement Error Handling (AC: 5, 6)
+      - Fix Existing WorkoutCard Navigation (AC: 1)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">
+      Given a user is on the "Workout History" page, when they click on a workout, then they are taken to a page showing all the details of that workout.
+    </criterion>
+    <criterion id="AC-2">
+      And the workout details page displays the date, type, duration, and notes fields.
+    </criterion>
+    <criterion id="AC-3">
+      And the workout date is formatted in a user-friendly way (e.g., "November 30, 2025").
+    </criterion>
+    <criterion id="AC-4">
+      And a "Back to History" link/button is provided to return to the workout list.
+    </criterion>
+    <criterion id="AC-5">
+      And if the workout ID is invalid or doesn't exist, a 404 error page is displayed.
+    </criterion>
+    <criterion id="AC-6">
+      And users can only view their own workouts (enforced by RLS).
+    </criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/fase-2-plan/PRD.md</path>
+        <title>FitTrack Product Requirements Document</title>
+        <section>FR-002: View Workouts</section>
+        <snippet>Users need to view workout details as part of CRUD operations. Simple detail view showing date, type, duration, and notes for MVP scope.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Dynamic Routes and App Router</section>
+        <snippet>Next.js App Router with dynamic routes using [id] pattern. Server Components handle auth check, then render client components for interactivity.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>APIs and Interfaces - getWorkoutById</section>
+        <snippet>Query function getWorkoutById(id, userId) returns single workout or null. RLS policies enforce user can only access own workouts.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Data Models</section>
+        <snippet>Workout interface: id, user_id, workout_date, workout_type, duration_minutes, notes, created_at, updated_at. RLS policies prevent unauthorized access.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/2-3-view-workout-details.md</path>
+        <title>Story 2.3: View Workout Details</title>
+        <section>Architectural Considerations</section>
+        <snippet>Server Component pattern: auth check + initial fetch, then pass to client component. Use getWorkoutById for fetching, notFound() for 404 handling.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>lib/supabase/queries.ts</path>
+        <kind>query-function</kind>
+        <symbol>getWorkoutById</symbol>
+        <lines>21-43</lines>
+        <reason>Already implemented query function to fetch single workout by ID and user ID. Returns workout or null if not found. Use for server-side data fetching.</reason>
+      </artifact>
+      <artifact>
+        <path>components/workouts/WorkoutCard.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutCard</symbol>
+        <lines>1-55</lines>
+        <reason>Already implements navigation to detail page (line 31: router.push). Also contains formatDuration function (lines 12-25) to reuse for detail display.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/types/workout.ts</path>
+        <kind>type-definition</kind>
+        <symbol>Workout</symbol>
+        <lines>1-10</lines>
+        <reason>TypeScript interface for workout data structure. All fields needed for detail display.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/server.ts</path>
+        <kind>server-utility</kind>
+        <symbol>createClient</symbol>
+        <lines>all</lines>
+        <reason>Server-side Supabase client for authentication check and data fetching in Server Component.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/workouts/page.tsx</path>
+        <kind>page</kind>
+        <symbol>WorkoutsPage</symbol>
+        <lines>all</lines>
+        <reason>Reference for Server Component + auth pattern. Shows how to structure dashboard routes.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package name="@supabase/supabase-js" version="^2.86.0">Database client for fetching workout data and auth</package>
+        <package name="date-fns" version="^4.1.0">Date formatting for user-friendly date display</package>
+        <package name="next" version="^16.0.5">App Router, dynamic routes, Server Components, redirect, notFound</package>
+        <package name="react" version="^19.2.0">React framework</package>
+      </node>
+      <shadcn>
+        <component name="card">For consistent workout detail display</component>
+        <component name="button">For "Back to History" navigation</component>
+      </shadcn>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Use Next.js dynamic route pattern: app/(dashboard)/workouts/[id]/page.tsx</constraint>
+    <constraint>Server Component for initial page load - handles auth and data fetching</constraint>
+    <constraint>Use existing getWorkoutById(id, userId) from lib/supabase/queries.ts</constraint>
+    <constraint>Authentication: Check user session before rendering, redirect to login if not authenticated</constraint>
+    <constraint>Authorization: RLS policies enforce user can only view own workouts</constraint>
+    <constraint>Error handling: Use Next.js notFound() for invalid/missing workout IDs</constraint>
+    <constraint>Date formatting: Use date-fns format(new Date(date), 'MMM d, yyyy')</constraint>
+    <constraint>Duration formatting: Reuse formatDuration function from WorkoutCard.tsx</constraint>
+    <constraint>Notes display: Handle empty/null notes gracefully (show placeholder or hide section)</constraint>
+    <constraint>Navigation: "Back to History" button links to /workouts</constraint>
+    <constraint>Styling: Use shadcn/ui Card component for consistent layout</constraint>
+    <constraint>Mobile-responsive: All UI components must work on screens ≥320px width</constraint>
+    <constraint>TypeScript strict mode: Use Workout type for all workout data</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>getWorkoutById</name>
+      <kind>Query Function</kind>
+      <signature>async function getWorkoutById(id: string, userId: string): Promise&lt;Workout | null&gt;</signature>
+      <path>lib/supabase/queries.ts</path>
+      <notes>Already implemented - fetches single workout by ID for specific user. Returns null if not found or unauthorized.</notes>
+    </interface>
+    <interface>
+      <name>WorkoutDetailPage</name>
+      <kind>Server Component</kind>
+      <signature>async function WorkoutDetailPage({ params }: { params: { id: string } })</signature>
+      <path>app/(dashboard)/workouts/[id]/page.tsx (NEW FILE)</path>
+      <notes>
+        - Extract workout ID from params.id
+        - Check authentication with createClient().auth.getUser()
+        - Fetch workout with getWorkoutById(params.id, user.id)
+        - Call notFound() if workout is null
+        - Render WorkoutDetail component with workout data
+      </notes>
+    </interface>
+    <interface>
+      <name>WorkoutDetail</name>
+      <kind>Presentational Component</kind>
+      <signature>function WorkoutDetail({ workout }: { workout: Workout })</signature>
+      <path>components/workouts/WorkoutDetail.tsx (NEW FILE)</path>
+      <notes>
+        - Display workout.workout_type as heading
+        - Format workout.workout_date with date-fns
+        - Format workout.duration_minutes with formatDuration helper
+        - Display workout.notes (handle null/empty)
+        - Include "Back to History" button linking to /workouts
+        - Use shadcn/ui Card for layout
+      </notes>
+    </interface>
+    <interface>
+      <name>formatDuration</name>
+      <kind>Utility Function</kind>
+      <signature>function formatDuration(minutes: number): string</signature>
+      <path>components/workouts/WorkoutCard.tsx</path>
+      <notes>Already implemented - formats minutes into "X min" or "X hr Y min". Consider extracting to lib/utils.ts for reuse.</notes>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Epic 2 Tech Spec defines layered testing: Jest for unit tests, React Testing Library for component tests, Playwright for E2E. Manual testing for MVP. Target 80% code coverage for business logic.
+    </standards>
+    <locations>
+      - app/(dashboard)/workouts/[id]/page.test.tsx (integration test)
+      - components/workouts/WorkoutDetail.test.tsx (component test)
+      - tests/e2e/workouts-detail.spec.ts (E2E test)
+    </locations>
+    <ideas>
+      <idea ac="AC-1">
+        E2E: Navigate to workout history, click on a workout card, verify URL changes to /workouts/[id], verify detail page renders
+      </idea>
+      <idea ac="AC-2">
+        Component: Test WorkoutDetail renders all fields (date, type, duration, notes), verify each field displays correct data
+      </idea>
+      <idea ac="AC-3">
+        Unit: Test date formatting with various dates, verify format is "MMM d, yyyy" (e.g., "Nov 30, 2025")
+      </idea>
+      <idea ac="AC-4">
+        E2E: On detail page, click "Back to History" button, verify navigation to /workouts, verify workout list displays
+      </idea>
+      <idea ac="AC-5">
+        Integration: Request detail page with invalid workout ID (non-existent UUID), verify 404 page displays
+        E2E: Navigate to /workouts/invalid-id, verify 404 error page
+      </idea>
+      <idea ac="AC-6">
+        Integration: Test with different user IDs, verify RLS prevents viewing other user's workouts (returns null from getWorkoutById)
+        E2E: Attempt to access another user's workout URL, verify 404 (not found due to RLS)
+      </idea>
+      <idea ac="Edge Cases">
+        Test: Workout with empty notes field - verify UI handles gracefully (shows placeholder or hides section)
+        Test: Workout with very long notes - verify text wraps properly and doesn't break layout
+        Test: Very long workout type name - verify doesn't overflow container
+        Test: Mobile viewport - verify responsive layout, all elements visible and usable
+        Test: Browser back button from detail page - verify returns to workout list
+      </idea>
+    </ideas>
+  </tests>
+</story-context>

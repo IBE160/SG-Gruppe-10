@@ -1,0 +1,253 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.4</storyId>
+    <title>Update Workout</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-02</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-4-update-workout.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>logged-in user</asA>
+    <iWant>to be able to edit the details of a past workout</iWant>
+    <soThat>I can correct any mistakes</soThat>
+    <tasks>
+      - Create Workout Detail Page with Edit Mode (AC: 1, 2)
+      - Implement Update Workout Server Action (AC: 3, 5, 6)
+      - Update WorkoutForm to Support Edit Mode (AC: 2, 5)
+      - Handle Edit Flow and Navigation (AC: 4)
+      - Update TanStack Query Cache Management (AC: 4)
+      - Add Edit Authorization Check (AC: 3)
+      - Update Workout Detail View UI (AC: 1)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">
+      Given a user is viewing the details of a workout, when they click the "Edit" button, then they are presented with a form to edit the workout's details.
+    </criterion>
+    <criterion id="AC-2">
+      And the form is pre-filled with the existing workout data (date, type, duration, notes).
+    </criterion>
+    <criterion id="AC-3">
+      And when they save the changes, the workout is updated in the database.
+    </criterion>
+    <criterion id="AC-4">
+      And they are returned to the workout details view showing the updated data.
+    </criterion>
+    <criterion id="AC-5">
+      And form validation ensures all required fields are valid before submission.
+    </criterion>
+    <criterion id="AC-6">
+      And an error message is displayed if the update fails.
+    </criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/fase-2-plan/PRD.md</path>
+        <title>FitTrack Product Requirements Document</title>
+        <section>FR-002: CRUD Operations</section>
+        <snippet>Create, view, update, and delete workouts (with date, type, duration, and notes). Users need the ability to correct mistakes in logged workouts.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>API Pattern/Data Fetching</section>
+        <snippet>Next.js Server Actions for mutations with TanStack Query for client-side data management. Dynamic routes use App Router pattern with Server Components for auth.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>APIs and Interfaces</section>
+        <snippet>Update Server Action pattern: updateWorkout(input: UpdateWorkoutInput) returns ActionResult. Validates ownership via RLS, supports partial updates, invalidates cache with revalidatePath.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Workflows and Sequencing - Update Workout Flow</section>
+        <snippet>From detail page, user clicks Edit → WorkoutForm renders pre-filled → User modifies fields → Submit → Server validates → Update database → Redirect to detail view → Show toast → Invalidate cache.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/2-4-update-workout.md</path>
+        <title>Story 2.4: Update Workout</title>
+        <section>Dev Notes - Learnings from Previous Story</section>
+        <snippet>Reuse existing WorkoutForm.tsx by adding defaultValues prop for edit mode. Pattern: Server-side auth check, Server Actions for mutations, TanStack Query cache invalidation with revalidatePath().</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>app/actions/workouts.ts</path>
+        <kind>server-action</kind>
+        <symbol>createWorkout</symbol>
+        <lines>18-65</lines>
+        <reason>Reference implementation for workout Server Action pattern - auth, validation, database insert, cache invalidation. Update action should follow same structure.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/queries.ts</path>
+        <kind>query-function</kind>
+        <symbol>getWorkoutById</symbol>
+        <lines>21-43</lines>
+        <reason>Existing function to fetch single workout by ID and user ID. Needed for pre-filling edit form and verifying ownership.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/queries.ts</path>
+        <kind>query-function</kind>
+        <symbol>getWorkouts</symbol>
+        <lines>4-19</lines>
+        <reason>Workout list query pattern. Cache invalidation after update must refresh this query.</reason>
+      </artifact>
+      <artifact>
+        <path>components/workouts/WorkoutForm.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutForm</symbol>
+        <lines>39-159</lines>
+        <reason>Existing form component with validation. Must be extended to support edit mode with defaultValues prop and updateWorkout action.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/types/workout.ts</path>
+        <kind>type-definition</kind>
+        <symbol>UpdateWorkoutInput</symbol>
+        <lines>19-21</lines>
+        <reason>TypeScript interface for update operation - id required, all other fields optional for partial updates.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/types/workout.ts</path>
+        <kind>type-definition</kind>
+        <symbol>ActionResult</symbol>
+        <lines>27-29</lines>
+        <reason>Standard Server Action return type for success/error responses.</reason>
+      </artifact>
+      <artifact>
+        <path>hooks/useWorkouts.ts</path>
+        <kind>hook</kind>
+        <symbol>useWorkouts</symbol>
+        <lines>all</lines>
+        <reason>TanStack Query hook for fetching workout list. Pattern to follow for useWorkout(id) hook for single workout fetching.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package name="@supabase/supabase-js" version="^2.86.0">Database client for auth and CRUD operations</package>
+        <package name="@tanstack/react-query" version="^5.90.11">Client-side data fetching, caching, and cache invalidation</package>
+        <package name="date-fns" version="^4.1.0">Date formatting for workout detail display</package>
+        <package name="react-hook-form" version="^7.x">Form state management and validation</package>
+        <package name="zod" version="^3.x">Schema validation for update input</package>
+        <package name="sonner" version="latest">Toast notifications for success/error feedback</package>
+        <package name="next" version="^16.0.5">Server Actions, dynamic routes, revalidatePath</package>
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Use Next.js Server Actions for updateWorkout mutation following existing createWorkout pattern</constraint>
+    <constraint>Implement Row Level Security (RLS) enforcement - users can only update their own workouts</constraint>
+    <constraint>Dynamic route at app/(dashboard)/workouts/[id]/page.tsx for workout detail page</constraint>
+    <constraint>Server Component for auth check, Client Component for data fetching and edit mode toggle</constraint>
+    <constraint>Reuse existing WorkoutForm component - extend with defaultValues prop for edit mode</constraint>
+    <constraint>Use TanStack Query for single workout fetch with useWorkout(id) hook</constraint>
+    <constraint>Cache invalidation: revalidatePath('/workouts') and revalidatePath('/workouts/[id]') after update</constraint>
+    <constraint>Form validation: Zod schema matching createWorkout but allow partial updates</constraint>
+    <constraint>Error handling: Display user-friendly error messages via toast notifications</constraint>
+    <constraint>Navigation: Redirect to workout detail view mode after successful update</constraint>
+    <constraint>TypeScript strict mode: Use UpdateWorkoutInput and ActionResult types</constraint>
+    <constraint>Date handling: Store UTC in database, format with date-fns for display</constraint>
+    <constraint>Mobile-responsive: All UI components must work on screens ≥320px width</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>updateWorkout</name>
+      <kind>Server Action</kind>
+      <signature>async function updateWorkout(input: UpdateWorkoutInput): Promise&lt;ActionResult&lt;Workout&gt;&gt;</signature>
+      <path>app/actions/workouts.ts</path>
+      <notes>
+        - Input: { id: string, workout_date?: string, workout_type?: string, duration_minutes?: number, notes?: string }
+        - Validate input with Zod schema (partial update allowed)
+        - Get authenticated user via createClient().auth.getUser()
+        - Verify user owns workout (RLS will enforce, but explicit check recommended)
+        - Update workout in database, set updated_at to current timestamp
+        - Return ActionResult: { success: true, data: Workout } or { success: false, error: string }
+        - Call revalidatePath('/workouts') and revalidatePath(`/workouts/${id}`) for cache invalidation
+      </notes>
+    </interface>
+    <interface>
+      <name>getWorkoutById</name>
+      <kind>Query Function</kind>
+      <signature>async function getWorkoutById(id: string, userId: string): Promise&lt;Workout | null&gt;</signature>
+      <path>lib/supabase/queries.ts</path>
+      <notes>Already implemented - use for fetching workout data to pre-fill edit form</notes>
+    </interface>
+    <interface>
+      <name>useWorkout</name>
+      <kind>TanStack Query Hook</kind>
+      <signature>function useWorkout(id: string): UseQueryResult&lt;Workout&gt;</signature>
+      <path>hooks/useWorkout.ts (NEW FILE)</path>
+      <notes>
+        - queryKey: ['workout', id]
+        - queryFn: calls getWorkoutById(id, userId) where userId from auth session
+        - staleTime: 30000 (30 seconds)
+        - Pattern: Follow existing useWorkouts hook implementation
+      </notes>
+    </interface>
+    <interface>
+      <name>WorkoutForm</name>
+      <kind>React Component</kind>
+      <signature>function WorkoutForm({ defaultValues, mode }: WorkoutFormProps)</signature>
+      <path>components/workouts/WorkoutForm.tsx</path>
+      <notes>
+        - Extend existing component to accept defaultValues prop for edit mode
+        - Add mode prop: 'create' | 'edit' to determine which Server Action to call
+        - Pre-fill form fields when defaultValues provided
+        - Call updateWorkout when mode='edit', createWorkout when mode='create'
+        - Keep existing validation and error handling patterns
+      </notes>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Epic 2 Tech Spec defines layered testing: Jest for unit tests (Server Actions, query functions, validation), React Testing Library for component integration tests, Playwright for E2E workflows. Target 80% code coverage for business logic. All tests co-located with code (.test.ts/.test.tsx) except E2E in tests/e2e directory.
+    </standards>
+    <locations>
+      - app/actions/workouts.test.ts
+      - lib/supabase/queries.test.ts
+      - components/workouts/WorkoutForm.test.tsx
+      - hooks/useWorkout.test.ts
+      - tests/e2e/workouts-update.spec.ts
+    </locations>
+    <ideas>
+      <idea ac="AC-1">
+        E2E: Navigate to workout detail page, verify Edit button exists, click Edit button, verify form appears with pre-filled data
+      </idea>
+      <idea ac="AC-2">
+        Unit: Test WorkoutForm renders with defaultValues, verify form fields contain correct initial values
+      </idea>
+      <idea ac="AC-3">
+        Unit: Test updateWorkout Server Action validates ownership, updates database, handles Zod validation errors
+        Integration: Test updateWorkout with real Supabase test database, verify RLS prevents unauthorized updates
+      </idea>
+      <idea ac="AC-4">
+        E2E: Submit edit form, verify redirect to workout detail page, verify updated data displayed, verify toast notification
+      </idea>
+      <idea ac="AC-5">
+        Unit: Test Zod schema validation with invalid inputs (negative duration, empty required fields), verify error messages
+        Integration: Test form submission with invalid data, verify server-side validation catches errors
+      </idea>
+      <idea ac="AC-6">
+        Unit: Test updateWorkout returns error when database update fails
+        E2E: Simulate network error during update, verify error message displayed, user stays on edit form
+      </idea>
+      <idea ac="Edge Cases">
+        Test: User attempts to edit another user's workout (should fail with 403)
+        Test: Workout ID doesn't exist (should fail with 404)
+        Test: Partial update (only change one field, others remain unchanged)
+        Test: Cancel button returns to view mode without saving changes
+        Test: Cache invalidation ensures workout list also reflects updated data
+      </idea>
+    </ideas>
+  </tests>
+</story-context>
