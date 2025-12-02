@@ -1,0 +1,34 @@
+import { redirect, notFound } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { getWorkoutById } from "@/lib/supabase/queries";
+import { WorkoutDetail } from "@/components/workouts/WorkoutDetail";
+
+export default async function WorkoutDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  // Await params in Next.js 15+
+  const { id } = await params;
+
+  // Check authentication
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    redirect("/login");
+  }
+
+  // Fetch workout data
+  const workout = await getWorkoutById(id, user.id);
+
+  // Handle not found
+  if (!workout) {
+    notFound();
+  }
+
+  return <WorkoutDetail workout={workout} />;
+}
