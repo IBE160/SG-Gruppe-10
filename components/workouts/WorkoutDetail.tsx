@@ -9,6 +9,7 @@ import type { Workout } from "@/lib/types/workout";
 interface WorkoutDetailProps {
   workout: Workout;
   onEdit?: () => void;
+  onDelete?: () => void;
 }
 
 function formatDuration(minutes: number): string {
@@ -26,7 +27,7 @@ function formatDuration(minutes: number): string {
   return `${hours} hr ${remainingMinutes} min`;
 }
 
-export function WorkoutDetail({ workout, onEdit }: WorkoutDetailProps) {
+export function WorkoutDetail({ workout, onEdit, onDelete }: WorkoutDetailProps) {
   const formattedDate = format(new Date(workout.workout_date), "MMMM d, yyyy");
 
   return (
@@ -41,11 +42,18 @@ export function WorkoutDetail({ workout, onEdit }: WorkoutDetailProps) {
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl">{workout.workout_type}</CardTitle>
-            {onEdit && (
-              <Button onClick={onEdit} variant="outline" size="sm">
-                Edit
-              </Button>
-            )}
+            <div className="flex gap-2">
+              {onEdit && (
+                <Button onClick={onEdit} variant="outline" size="sm">
+                  Edit
+                </Button>
+              )}
+              {onDelete && (
+                <Button onClick={onDelete} variant="destructive" size="sm">
+                  Delete
+                </Button>
+              )}
+            </div>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">

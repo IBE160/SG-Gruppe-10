@@ -1,0 +1,275 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>2</epicId>
+    <storyId>2.5</storyId>
+    <title>Delete Workout</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-02</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/2-5-delete-workout.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a logged-in user</asA>
+    <iWant>to be able to delete a past workout</iWant>
+    <soThat>I can remove incorrect entries</soThat>
+    <tasks>
+      - Create Delete Workout Server Action (AC: 3, 5)
+      - Add Delete Button to Workout Detail Page (AC: 1)
+      - Implement Confirmation Dialog (AC: 1, 2, 6)
+      - Handle Delete Flow and Navigation (AC: 4, 5)
+      - Update TanStack Query Cache Management (AC: 4)
+      - Add Delete Authorization Check (AC: 3)
+      - Error Handling and Edge Cases (AC: 3, 5)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    AC-1: Given a user is viewing the details of a workout, when they click the "Delete" button, then they are presented with a confirmation dialog.
+    AC-2: And the confirmation dialog clearly warns that deletion is permanent and cannot be undone.
+    AC-3: And when they confirm deletion, the workout is permanently deleted from the database.
+    AC-4: And they are redirected to the workout history page.
+    AC-5: And a success message is displayed confirming the deletion.
+    AC-6: And if the user cancels the confirmation dialog, no deletion occurs and they remain on the workout detail page.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <!-- Epic 2 Technical Specification -->
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>APIs and Interfaces - Server Actions</section>
+        <snippet>Delete workout Server Action signature: `deleteWorkout(id: string): Promise&lt;ActionResult&lt;void&gt;&gt;`. Input validation required, RLS policies enforce user owns workout, cache invalidation with revalidatePath after deletion.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Workflows and Sequencing - Delete Workout Flow</section>
+        <snippet>User clicks Delete → Confirmation dialog (AlertDialog) → User confirms → Call deleteWorkout Server Action → On success: Redirect to /workouts, show toast, invalidate cache. On error: Display error, stay on page.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-2.md</path>
+        <title>Epic Technical Specification: Core Workout Management</title>
+        <section>Data Models and Contracts - RLS Policies</section>
+        <snippet>Row Level Security policy for deletion: "Users can delete own workouts" ON workouts FOR DELETE USING (auth.uid() = user_id). Database enforces users can only delete their own workouts.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>API Pattern/Data Fetching</section>
+        <snippet>Next.js Server Actions for mutations + TanStack Query for fetching. Server Actions provide type-safe, server-side operations with built-in CSRF protection and instant type safety.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>ibe160 - Epic Breakdown</title>
+        <section>Epic 2: Core Workout Management</section>
+        <snippet>Epic 2 covers FR-002 (CRUD operations for workouts) and FR-003 (workout history). Delete functionality is the final CRUD operation, allowing users to remove incorrect entries with confirmation dialog.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <!-- Existing Server Actions for workout mutations -->
+      <artifact>
+        <path>app/actions/workouts.ts</path>
+        <kind>server-actions</kind>
+        <symbol>createWorkout, updateWorkout</symbol>
+        <lines>1-144</lines>
+        <reason>Existing Server Actions for create/update workouts. Pattern to follow for deleteWorkout implementation. Uses Zod validation, Supabase auth checks, revalidatePath for cache invalidation.</reason>
+      </artifact>
+      
+      <!-- Workout Detail Client Component - needs Delete button and dialog -->
+      <artifact>
+        <path>components/workouts/WorkoutDetailClient.tsx</path>
+        <kind>client-component</kind>
+        <symbol>WorkoutDetailClient</symbol>
+        <lines>1-37</lines>
+        <reason>Client wrapper for workout detail page. Manages edit mode state. Needs to be extended with delete confirmation dialog state and handleDelete function.</reason>
+      </artifact>
+      
+      <!-- Workout Detail Display Component - needs Delete button -->
+      <artifact>
+        <path>components/workouts/WorkoutDetail.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutDetail</symbol>
+        <lines>1-79</lines>
+        <reason>Displays workout details with Edit button. Needs Delete button added next to Edit button with onDelete callback prop, styled with destructive variant.</reason>
+      </artifact>
+      
+      <!-- Supabase Server Client for authentication -->
+      <artifact>
+        <path>lib/supabase/server.ts</path>
+        <kind>service</kind>
+        <symbol>createClient</symbol>
+        <lines>N/A</lines>
+        <reason>Server-side Supabase client used in Server Actions for authentication checks. Required for deleteWorkout Server Action.</reason>
+      </artifact>
+      
+      <!-- Workout Types -->
+      <artifact>
+        <path>lib/types/workout.ts</path>
+        <kind>types</kind>
+        <symbol>Workout, ActionResult</symbol>
+        <lines>1-29</lines>
+        <reason>TypeScript types for Workout entity and ActionResult response pattern. May need DeleteWorkoutInput type added (or use inline type).</reason>
+      </artifact>
+      
+      <!-- Workout Detail Page (Dynamic Route) -->
+      <artifact>
+        <path>app/(dashboard)/workouts/[id]/page.tsx</path>
+        <kind>page</kind>
+        <symbol>WorkoutPage</symbol>
+        <lines>N/A</lines>
+        <reason>Dynamic route for workout detail. Uses WorkoutDetailClient component. No changes needed here, all logic in client component.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <npm>
+        <package name="@supabase/supabase-js" version="^2.86.0">Database client for Server Actions</package>
+        <package name="@tanstack/react-query" version="^5.90.11">Client-side data fetching and cache management</package>
+        <package name="next" version="16.0.5">Framework with Server Actions and App Router</package>
+        <package name="react" version="19.2.0">UI library</package>
+        <package name="zod" version="^4.1.13">Schema validation for Server Action inputs</package>
+        <package name="sonner" version="^2.0.7">Toast notifications for success/error feedback</package>
+        <package name="date-fns" version="^4.1.0">Date formatting utilities</package>
+        <package name="lucide-react" version="N/A">Icons including Trash icon for delete button (verify installed)</package>
+      </npm>
+      <shadcn>
+        <component name="alert-dialog">NOT INSTALLED - Required for confirmation dialog. Install with: npx shadcn-ui@latest add alert-dialog</component>
+        <component name="button">Installed - Used for Delete button with destructive variant</component>
+        <component name="card">Installed - Used in WorkoutDetail component</component>
+      </shadcn>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Delete Server Action MUST validate user authentication via supabase.auth.getUser()
+    - RLS policies in database enforce users can only delete their own workouts (auth.uid() = user_id)
+    - Input validation required: workout ID must be valid UUID format
+    - Confirmation dialog MUST warn "This action cannot be undone. This will permanently delete your workout."
+    - After successful deletion, MUST call revalidatePath('/workouts') to invalidate TanStack Query cache
+    - Redirect to /workouts using router.push() after successful deletion
+    - Display toast notifications: "Workout deleted successfully" on success, error message on failure
+    - Disable delete button during deletion operation to prevent double-deletion
+    - Follow existing Server Action pattern from createWorkout/updateWorkout (Zod validation, error handling)
+    - Use shadcn/ui AlertDialog component for confirmation dialog (install if not present)
+    - Style delete button with destructive variant (red) to indicate danger
+    - Handle edge cases: workout already deleted, network errors, unauthorized access
+    - Server Action should return ActionResult&lt;void&gt; type consistent with existing patterns
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>deleteWorkout</name>
+      <kind>Server Action</kind>
+      <signature>
+export async function deleteWorkout(input: { id: string }): Promise&lt;ActionResult&lt;void&gt;&gt; {
+  // Validate input with Zod
+  // Get authenticated user via supabase.auth.getUser()
+  // Delete workout from database (RLS enforces ownership)
+  // Invalidate cache with revalidatePath('/workouts')
+  // Return { success: true, data: undefined } or { success: false, error: string }
+}
+      </signature>
+      <path>app/actions/workouts.ts</path>
+    </interface>
+    
+    <interface>
+      <name>WorkoutDetailClient</name>
+      <kind>React Client Component</kind>
+      <signature>
+// Add state for delete dialog and deletion loading
+const [showDeleteDialog, setShowDeleteDialog] = useState(false)
+const [isDeleting, setIsDeleting] = useState(false)
+
+// Add handleDelete function
+const handleDelete = async () => {
+  setIsDeleting(true)
+  const result = await deleteWorkout({ id: workout.id })
+  if (result.success) {
+    toast.success('Workout deleted successfully')
+    router.push('/workouts')
+  } else {
+    toast.error(result.error || 'Failed to delete workout')
+    setIsDeleting(false)
+    setShowDeleteDialog(false)
+  }
+}
+      </signature>
+      <path>components/workouts/WorkoutDetailClient.tsx</path>
+    </interface>
+    
+    <interface>
+      <name>WorkoutDetail</name>
+      <kind>React Component</kind>
+      <signature>
+// Add onDelete callback prop alongside onEdit
+interface WorkoutDetailProps {
+  workout: Workout;
+  onEdit?: () => void;
+  onDelete?: () => void; // NEW
+}
+
+// Add Delete button next to Edit button with destructive styling
+&lt;Button onClick={onDelete} variant="destructive" size="sm"&gt;Delete&lt;/Button&gt;
+      </signature>
+      <path>components/workouts/WorkoutDetail.tsx</path>
+    </interface>
+    
+    <interface>
+      <name>AlertDialog</name>
+      <kind>shadcn/ui Component</kind>
+      <signature>
+&lt;AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}&gt;
+  &lt;AlertDialogContent&gt;
+    &lt;AlertDialogHeader&gt;
+      &lt;AlertDialogTitle&gt;Are you sure?&lt;/AlertDialogTitle&gt;
+      &lt;AlertDialogDescription&gt;
+        This action cannot be undone. This will permanently delete your workout.
+      &lt;/AlertDialogDescription&gt;
+    &lt;/AlertDialogHeader&gt;
+    &lt;AlertDialogFooter&gt;
+      &lt;AlertDialogCancel&gt;Cancel&lt;/AlertDialogCancel&gt;
+      &lt;AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-destructive"&gt;
+        {isDeleting ? 'Deleting...' : 'Delete'}
+      &lt;/AlertDialogAction&gt;
+    &lt;/AlertDialogFooter&gt;
+  &lt;/AlertDialogContent&gt;
+&lt;/AlertDialog&gt;
+      </signature>
+      <path>components/ui/alert-dialog.tsx (install first)</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Manual testing is the primary approach for this MVP project. Unit tests and E2E tests are deferred to a dedicated testing epic. Manual testing should verify all acceptance criteria are met. Focus on:
+      - Server Action validation and error handling
+      - Confirmation dialog display and interaction
+      - Delete button functionality and styling
+      - Navigation after deletion
+      - Toast notifications
+      - RLS policy enforcement (test with multiple users)
+      - Edge cases: network errors, already-deleted workouts, unauthorized access
+    </standards>
+    
+    <locations>
+      - No test files exist yet (deferred to testing epic)
+      - When implemented: __tests__/actions/workouts.test.ts for Server Action unit tests
+      - When implemented: __tests__/components/WorkoutDetailClient.test.tsx for component tests
+      - When implemented: e2e/workouts/delete-workout.spec.ts for E2E tests
+    </locations>
+    
+    <ideas>
+      AC-1: Verify delete button appears on workout detail page and opens confirmation dialog when clicked
+      AC-2: Verify confirmation dialog displays warning message: "This action cannot be undone..."
+      AC-3: Verify workout is deleted from database when confirmed (check Supabase directly)
+      AC-4: Verify navigation to /workouts page after successful deletion
+      AC-5: Verify success toast displays: "Workout deleted successfully"
+      AC-6: Verify cancel button closes dialog without deletion
+      Error Case: Verify error toast displays when deletion fails (simulate by invalid ID)
+      Authorization: Verify user cannot delete another user's workout (test with 2 accounts)
+      Edge Case: Verify button disabled during deletion to prevent double-deletion
+      Edge Case: Verify error handling for already-deleted workout (404 case)
+    </ideas>
+  </tests>
+</story-context>

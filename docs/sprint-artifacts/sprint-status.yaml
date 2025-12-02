@@ -48,7 +48,7 @@ development_status:
   2-2-view-workout-history: done
   2-3-view-workout-details: done
   2-4-update-workout: done
-  2-5-delete-workout: backlog
+  2-5-delete-workout: done
   epic-2-retrospective: optional
 
   epic-3: backlog

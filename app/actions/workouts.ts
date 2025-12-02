@@ -27,6 +27,10 @@ const updateWorkoutSchema = z.object({
   notes: z.string().optional(),
 });
 
+const deleteWorkoutSchema = z.object({
+  id: z.string().uuid("Invalid workout ID"),
+});
+
 export async function createWorkout(
   input: CreateWorkoutInput
 ): Promise<ActionResult<Workout>> {
@@ -134,6 +138,49 @@ export async function updateWorkout(
     revalidatePath(`/workouts/${validatedInput.id}`);
 
     return { success: true, data };
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return { success: false, error: error.issues[0].message };
+    }
+    console.error("Unexpected error:", error);
+    return { success: false, error: "An unexpected error occurred" };
+  }
+}
+
+export async function deleteWorkout(
+  input: { id: string }
+): Promise<ActionResult<void>> {
+  try {
+    // Validate input
+    const validatedInput = deleteWorkoutSchema.parse(input);
+
+    // Get authenticated user
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return { success: false, error: "Unauthorized" };
+    }
+
+    // Delete workout (RLS ensures user owns it)
+    const { error } = await supabase
+      .from("workouts")
+      .delete()
+      .eq("id", validatedInput.id)
+      .eq("user_id", user.id);
+
+    if (error) {
+      console.error("Database error:", error);
+      return { success: false, error: "Failed to delete workout" };
+    }
+
+    // Revalidate the workouts page
+    revalidatePath("/workouts");
+
+    return { success: true, data: undefined };
   } catch (error) {
     if (error instanceof z.ZodError) {
       return { success: false, error: error.issues[0].message };
