@@ -1,9 +1,13 @@
-import { WorkoutForm } from "@/components/workouts/WorkoutForm";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { AppHeader } from "@/components/common/AppHeader";
+import { ProfileClient } from "@/components/profile/ProfileClient";
 
-export default async function NewWorkoutPage() {
+export const metadata = {
+  title: "Profile - FitTrack",
+};
+
+export default async function ProfilePage() {
   const supabase = await createClient();
   const {
     data: { user },
@@ -15,11 +19,8 @@ export default async function NewWorkoutPage() {
 
   return (
     <>
-      <AppHeader title="Log Workout" showBackButton={true} />
-      <div className="mx-auto max-w-2xl p-8">
-        <h1 className="mb-6 text-3xl font-bold">Log Workout</h1>
-        <WorkoutForm />
-      </div>
+      <AppHeader title="Profile" />
+      <ProfileClient user={user} />
     </>
   );
 }

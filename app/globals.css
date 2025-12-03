@@ -6,7 +6,7 @@
   --foreground: #111813;
   --card: #ffffff;
   --card-foreground: #111813;
-  --primary: #2C5F2D;
+  --primary: #22c55e;
   --primary-foreground: #ffffff;
   --secondary: #f1f5f9;
   --secondary-foreground: #0f172a;
@@ -18,8 +18,14 @@
   --destructive-foreground: #ffffff;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #2C5F2D;
+  --ring: #22c55e;
   --radius: 0.75rem;
+  --primary-green: #22c55e;
+  --inactive-gray: #9ca3af;
+  --graphite-50: #f9fafb;
+  --graphite-100: #f3f4f6;
+  --graphite-700: #374151;
+  --graphite-900: #111827;
 }
 
 @theme inline {
@@ -41,6 +47,12 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --font-sans: var(--font-lexend);
+  --color-primary-green: var(--primary-green);
+  --color-inactive-gray: var(--inactive-gray);
+  --color-graphite-50: var(--graphite-50);
+  --color-graphite-100: var(--graphite-100);
+  --color-graphite-700: var(--graphite-700);
+  --color-graphite-900: var(--graphite-900);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,7 +62,7 @@
     --foreground: #e2e8f0;
     --card: #1C2D22;
     --card-foreground: #e2e8f0;
-    --primary: #2C5F2D;
+    --primary: #22c55e;
     --primary-foreground: #ffffff;
     --secondary: #334155;
     --secondary-foreground: #f1f5f9;
@@ -62,7 +74,7 @@
     --destructive-foreground: #ffffff;
     --border: #334155;
     --input: #334155;
-    --ring: #2C5F2D;
+    --ring: #22c55e;
   }
 }
 
