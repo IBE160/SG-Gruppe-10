@@ -124,11 +124,15 @@ export function WorkoutForm({
           name="workout_date"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Workout Date</FormLabel>
+              <FormLabel className="text-white">Workout Date</FormLabel>
               <FormControl>
-                <Input type="date" {...field} />
+                <Input 
+                  type="date" 
+                  {...field} 
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-white/90" />
             </FormItem>
           )}
         />
@@ -138,11 +142,15 @@ export function WorkoutForm({
           name="workout_type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Workout Type</FormLabel>
+              <FormLabel className="text-white">Workout Type</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Running, Cycling, Gym" {...field} />
+                <Input 
+                  placeholder="e.g., Running, Cycling, Gym" 
+                  {...field} 
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-white/90" />
             </FormItem>
           )}
         />
@@ -152,16 +160,17 @@ export function WorkoutForm({
           name="duration_minutes"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Duration (minutes)</FormLabel>
+              <FormLabel className="text-white">Duration (minutes)</FormLabel>
               <FormControl>
                 <Input
                   type="number"
                   placeholder="60"
                   {...field}
                   onChange={(e) => field.onChange(Number(e.target.value))}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60"
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-white/90" />
             </FormItem>
           )}
         />
@@ -171,21 +180,25 @@ export function WorkoutForm({
           name="notes"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Notes (optional)</FormLabel>
+              <FormLabel className="text-white">Notes (optional)</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Add any notes about your workout..."
-                  className="resize-none"
+                  className="resize-none bg-white/10 border-white/20 text-white placeholder:text-white/60"
                   {...field}
                 />
               </FormControl>
-              <FormMessage />
+              <FormMessage className="text-white/90" />
             </FormItem>
           )}
         />
 
         <div className="flex gap-2">
-          <Button type="submit" disabled={isSubmitting} className="flex-1">
+          <Button 
+            type="submit" 
+            disabled={isSubmitting} 
+            className="flex-1 bg-white text-primary-green hover:bg-white/90 h-12 font-semibold"
+          >
             {isSubmitting 
               ? "Saving..." 
               : mode === "edit" 
@@ -198,6 +211,7 @@ export function WorkoutForm({
               variant="outline" 
               onClick={onCancel}
               disabled={isSubmitting}
+              className="border-white/30 text-white hover:bg-white/10 h-12"
             >
               Cancel
             </Button>

@@ -45,20 +45,24 @@ export function WorkoutDetailClient({ workout }: WorkoutDetailClientProps) {
 
   if (isEditing) {
     return (
-      <div className="container max-w-2xl py-8">
-        <h1 className="text-2xl font-bold mb-6">Edit Workout</h1>
-        <WorkoutForm
-          mode="edit"
-          workout={workout}
-          defaultValues={{
-            workout_date: format(new Date(workout.workout_date), "yyyy-MM-dd"),
-            workout_type: workout.workout_type,
-            duration_minutes: workout.duration_minutes,
-            notes: workout.notes || "",
-          }}
-          onSuccess={() => setIsEditing(false)}
-          onCancel={() => setIsEditing(false)}
-        />
+      <div className="min-h-screen bg-graphite-50 pb-20">
+        <main className="max-w-4xl mx-auto px-4 py-6">
+          <div className="bg-primary-green text-white rounded-xl p-8 shadow-lg">
+            <h1 className="text-2xl font-bold mb-6">Edit Workout</h1>
+            <WorkoutForm
+              mode="edit"
+              workout={workout}
+              defaultValues={{
+                workout_date: format(new Date(workout.workout_date), "yyyy-MM-dd"),
+                workout_type: workout.workout_type,
+                duration_minutes: workout.duration_minutes,
+                notes: workout.notes || "",
+              }}
+              onSuccess={() => setIsEditing(false)}
+              onCancel={() => setIsEditing(false)}
+            />
+          </div>
+        </main>
       </div>
     );
   }
