@@ -1,0 +1,248 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>1</storyId>
+    <title>Navigation &amp; Layout Foundation</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-03</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/4-1-navigation-layout-foundation.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a FitTrack user</asA>
+    <iWant>to navigate between different sections of the app using a consistent mobile-first interface</iWant>
+    <soThat>I can easily access workouts, goals, and my profile with a modern, intuitive design</soThat>
+    <tasks>
+- Install Google Material Symbols (AC: 2)
+- Create MaterialIcon Wrapper Component (AC: 2)
+- Create BottomNav Component (AC: 1, 2, 3, 4, 7)
+- Create AppHeader Component (AC: 5)
+- Update Root Layout for Authenticated Pages (AC: 1, 6)
+- Update Individual Pages with AppHeader (AC: 5)
+- Install and Configure Lexend Font (AC: 6)
+- Add Custom Colors to Tailwind Config (AC: 3)
+- Create Profile Page Placeholder (AC: 1)
+- Update Navigation Active State Logic (AC: 7)
+- Manual Testing &amp; Verification (AC: All)
+- Update Sprint Status (AC: All)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+AC-1: Given I am logged into FitTrack, when I view any page in the app, then I see a fixed bottom navigation bar with 4 tabs: "Home", "Workouts", "Goals", "Profile".
+AC-2: And each tab displays an icon (Material Symbol) and label text.
+AC-3: And the active tab is highlighted in primary green color (#22c55e).
+AC-4: And inactive tabs are displayed in muted gray.
+AC-5: And I see a sticky header at the top with back button (when applicable), page title, and optional action button.
+AC-6: And the layout is mobile-first with centered content on desktop (max-width 640px).
+AC-7: And clicking navigation tabs changes route and updates active state.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Overview</section>
+        <snippet>Epic 4 focuses on applying the UX Design Specification's "Green &amp; Graphite" theme across all existing FitTrack pages. This epic transforms the functional MVP into a visually polished, mobile-first application. All five stories are purely frontend visual enhancements—no database schema changes or backend API modifications required.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Detailed Design - Services and Modules</section>
+        <snippet>BottomNav: Fixed bottom navigation bar with 4 tabs. Location: components/common/BottomNav.tsx. AppHeader: Sticky top header with back button, title, action button. Location: components/common/AppHeader.tsx. MaterialIcon: Wrapper for Google Material Symbols icons. Location: components/ui/MaterialIcon.tsx.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Workflows and Sequencing - Story 4.1</section>
+        <snippet>1. Install Google Material Symbols package or add CDN link. 2. Create MaterialIcon wrapper component. 3. Create BottomNav component with 4 tabs. 4. Create AppHeader component with back/title/action props. 5. Update root layout to include BottomNav on all authenticated pages. 6. Update individual pages to use AppHeader.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Dependencies and Integrations</section>
+        <snippet>Google Material Symbols: Either npm package or CDN link. Recommended: npm package for offline support. CDN already added in layout. Lexend font: Via Next.js Font API (already configured). Tailwind custom colors: primary green #22c55e, graphite shades defined in globals.css.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Epic 4: UX Visual Polish - Story 4.1</section>
+        <snippet>Create BottomNav, AppHeader, and MaterialIcon wrapper components. Implement mobile-first layout pattern with max-width 640px. Use Google Material Symbols for icons. Prerequisites: Epic 3 complete. Technical Notes: Bottom nav with 4 tabs (Home, Workouts, Goals, Profile), sticky header, mobile-first responsive design.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Structure</section>
+        <snippet>Components organized in: components/ui/ (shadcn/ui), components/common/ (reusable components like Navbar), components/auth/, components/workouts/, components/goals/. App Router: app/(dashboard)/ for authenticated routes, app/(auth)/ for login/signup. Next.js 16 with TypeScript, Tailwind CSS 4.0, shadcn/ui components.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>app/layout.tsx</path>
+        <kind>layout</kind>
+        <symbol>RootLayout</symbol>
+        <lines>1-39</lines>
+        <reason>Root layout already has Lexend font configured and Material Symbols CDN link. Will need to verify font weights match Story requirements (300-700).</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/layout.tsx</path>
+        <kind>layout</kind>
+        <symbol>DashboardLayout</symbol>
+        <lines>1-14</lines>
+        <reason>Current dashboard layout uses DashboardNav component. This will be replaced/refactored with new BottomNav component for Story 4.1.</reason>
+      </artifact>
+      <artifact>
+        <path>components/layout/DashboardNav.tsx</path>
+        <kind>component</kind>
+        <symbol>DashboardNav</symbol>
+        <lines>1-45</lines>
+        <reason>Existing navigation component using lucide-react icons and top navigation pattern. Will be replaced with bottom navigation using Material Symbols. Can reference active state logic (usePathname hook).</reason>
+      </artifact>
+      <artifact>
+        <path>app/globals.css</path>
+        <kind>stylesheet</kind>
+        <symbol>CSS Variables</symbol>
+        <lines>1-78</lines>
+        <reason>Already defines Green &amp; Graphite theme colors. Primary color is #2C5F2D (darker green). Story requires #22c55e (lighter green). Material Symbols CSS class already defined at line 75-77.</reason>
+      </artifact>
+      <artifact>
+        <path>components/layout/page-header.tsx</path>
+        <kind>component</kind>
+        <symbol>PageHeader</symbol>
+        <lines>unknown</lines>
+        <reason>Existing page header component. Check if can be refactored or if AppHeader should replace it.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/page.tsx</path>
+        <kind>page</kind>
+        <symbol>HomePage</symbol>
+        <lines>unknown</lines>
+        <reason>Home dashboard page that will need AppHeader with title "Dashboard".</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/workouts/page.tsx</path>
+        <kind>page</kind>
+        <symbol>WorkoutsPage</symbol>
+        <lines>unknown</lines>
+        <reason>Workouts list page that will need AppHeader with title "Workouts".</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/goals/page.tsx</path>
+        <kind>page</kind>
+        <symbol>GoalsPage</symbol>
+        <lines>unknown</lines>
+        <reason>Goals page that will need AppHeader with title "Goals" and action button "Add Goal".</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/button.tsx</path>
+        <kind>component</kind>
+        <symbol>Button</symbol>
+        <lines>unknown</lines>
+        <reason>shadcn/ui Button component used throughout app. Can be used in BottomNav and AppHeader.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package name="next" version="16.0.5" usage="Framework, Font API, App Router, Link component, usePathname hook, useRouter hook"/>
+        <package name="react" version="19.2.0" usage="Component library, useState, useEffect hooks"/>
+        <package name="tailwindcss" version="^4" usage="Styling, responsive utilities, custom color theme"/>
+        <package name="lucide-react" version="^0.555.0" usage="Currently used for icons, will be replaced by Material Symbols for new components"/>
+        <package name="@supabase/supabase-js" version="^2.86.0" usage="Authentication (read-only for protected routes)"/>
+        <package name="next-themes" version="^0.4.6" usage="Dark mode support (if needed)"/>
+        <package name="class-variance-authority" version="^0.7.1" usage="Component variant styling"/>
+        <package name="clsx" version="^2.1.1" usage="Conditional className composition"/>
+        <package name="tailwind-merge" version="^3.4.0" usage="Merge Tailwind classes safely"/>
+      </node>
+      <recommendations>
+        <item>Consider adding material-symbols package via "pnpm add material-symbols" for offline support and bundle optimization (vs CDN which is already added)</item>
+        <item>Verify Lexend font weights in app/layout.tsx match Story requirements: 300, 400, 500, 600, 700 (currently only 400-700)</item>
+      </recommendations>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>All existing functionality from Epics 1-3 must remain intact - no breaking changes to workouts, goals, or authentication features</constraint>
+    <constraint>Mobile-first design with max-width 640px centered on desktop - use Tailwind utility classes: max-w-[640px] mx-auto</constraint>
+    <constraint>Use Next.js Link component for navigation (not anchor tags) to enable client-side routing</constraint>
+    <constraint>Use usePathname() hook from next/navigation to detect current route for active tab state</constraint>
+    <constraint>Bottom navigation must have fixed positioning (fixed bottom-0 left-0 right-0) with appropriate z-index</constraint>
+    <constraint>Content area must have padding-bottom to prevent overlap with fixed bottom navigation</constraint>
+    <constraint>AppHeader must use sticky positioning (sticky top-0) for consistent behavior</constraint>
+    <constraint>All components must be TypeScript with proper prop interfaces exported</constraint>
+    <constraint>Follow PascalCase naming convention for component files (BottomNav.tsx, AppHeader.tsx, MaterialIcon.tsx)</constraint>
+    <constraint>Create new components in: components/common/ for BottomNav and AppHeader, components/ui/ for MaterialIcon</constraint>
+    <constraint>Material Symbols icons specified: home (Home), fitness_center (Workouts), flag (Goals), person (Profile), arrow_back (Back button)</constraint>
+    <constraint>Primary green color must be #22c55e (not the darker #2C5F2D currently in globals.css) - update CSS variable or add new color</constraint>
+    <constraint>Inactive tab color: muted gray #9ca3af</constraint>
+    <constraint>Profile page must be created at app/(dashboard)/profile/page.tsx as placeholder (display user email, logout button)</constraint>
+    <constraint>No Server Actions or database changes required - purely frontend component work</constraint>
+    <constraint>Maintain existing DashboardNav behavior during transition or clean migration path</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>BottomNavProps</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface BottomNavProps { activeTab: 'home' | 'workouts' | 'goals' | 'profile'; }</signature>
+      <path>components/common/BottomNav.tsx</path>
+    </interface>
+    <interface>
+      <name>AppHeaderProps</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface AppHeaderProps { title: string; showBackButton?: boolean; actionButton?: { icon: string; onClick: () =&gt; void; label: string }; }</signature>
+      <path>components/common/AppHeader.tsx</path>
+    </interface>
+    <interface>
+      <name>MaterialIconProps</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface MaterialIconProps { icon: string; className?: string; filled?: boolean; }</signature>
+      <path>components/ui/MaterialIcon.tsx</path>
+    </interface>
+    <interface>
+      <name>Link Component</name>
+      <kind>Next.js Component</kind>
+      <signature>import Link from 'next/link'; &lt;Link href="/path"&gt;...&lt;/Link&gt;</signature>
+      <path>next/link</path>
+    </interface>
+    <interface>
+      <name>usePathname Hook</name>
+      <kind>Next.js Hook</kind>
+      <signature>import { usePathname } from 'next/navigation'; const pathname = usePathname();</signature>
+      <path>next/navigation</path>
+    </interface>
+    <interface>
+      <name>useRouter Hook</name>
+      <kind>Next.js Hook</kind>
+      <signature>import { useRouter } from 'next/navigation'; const router = useRouter(); router.back();</signature>
+      <path>next/navigation</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+Manual testing approach following established patterns from Epics 1-3. No automated tests required for Story 4.1 (deferred to Test Epic per Tech Spec). Testing focuses on: visual verification, navigation flow, responsive design across device sizes, accessibility (keyboard navigation, screen reader labels), and cross-browser compatibility.
+    </standards>
+    <locations>
+No automated test files for Story 4.1. Manual testing checklist documented in story Dev Notes section. Future automated tests (when Test Epic is implemented) would go in: tests/e2e/ for navigation flow, tests/unit/ for component unit tests.
+    </locations>
+    <ideas>
+      <test ac="AC-1">Verify fixed bottom navigation appears on all authenticated pages (Home, Workouts, Goals, Profile) with correct 4-tab structure</test>
+      <test ac="AC-2">Verify each tab displays correct Material Symbol icon (home, fitness_center, flag, person) and label text</test>
+      <test ac="AC-3">Verify active tab is highlighted in primary green #22c55e when on corresponding page</test>
+      <test ac="AC-4">Verify inactive tabs display in muted gray #9ca3af</test>
+      <test ac="AC-5">Verify AppHeader displays on each page with correct title, back button visibility, and optional action button</test>
+      <test ac="AC-6">Verify layout is mobile-first: test at 320px, 375px, 768px widths; verify max-width 640px and centered on desktop (1024px+)</test>
+      <test ac="AC-7">Verify clicking each navigation tab changes route and updates active state correctly using usePathname()</test>
+      <test ac="All">Test back button navigation on detail pages (workout details) using router.back()</test>
+      <test ac="All">Test action button on Goals page (Add Goal) triggers correct handler</test>
+      <test ac="All">Verify no overlap between header, content, and bottom nav (check padding-bottom on content area)</test>
+      <test ac="All">Verify Lexend font loads correctly across all pages with weights 300-700</test>
+      <test ac="All">Verify Material Symbols icons load from CDN (or npm package if chosen) without errors</test>
+      <test ac="All">Test on real mobile devices: iOS Safari, Android Chrome</test>
+      <test ac="All">Accessibility: keyboard navigation (Tab key), ARIA labels on icons, screen reader announces tab names</test>
+      <test ac="All">Lighthouse score: Performance ≥ 90, Accessibility ≥ 95</test>
+    </ideas>
+  </tests>
+</story-context>
