@@ -51,7 +51,7 @@ development_status:
   2-5-delete-workout: done
   epic-2-retrospective: done
 
-  epic-3: backlog
-  3-1-create-goal: backlog
+  epic-3: ready-for-stories
+  3-1-create-goal: done
   3-2-view-goals: backlog
   epic-3-retrospective: optional

@@ -26,6 +26,9 @@ export default async function DashboardPage() {
           <Link href="/workouts">
             <Button variant="outline">View History</Button>
           </Link>
+          <Link href="/goals">
+            <Button variant="outline">View Goals</Button>
+          </Link>
         </div>
       </div>
     </div>

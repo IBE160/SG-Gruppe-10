@@ -1,0 +1,186 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>3</epicId>
+    <storyId>1</storyId>
+    <title>Create Goal</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-03T16:09:43.809Z</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/3-1-create-goal.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a logged-in user</asA>
+    <iWant>to be able to create a new personal goal with a title and a target</iWant>
+    <soThat>I can track my progress towards it</soThat>
+    <tasks>
+      - [x] Create Goals Database Schema (AC: 3) - COMPLETED 2025-12-03
+      - [x] Create TypeScript Types for Goals (AC: 3) - COMPLETED 2025-12-03
+      - [ ] Create Goals Page Route (AC: 1)
+      - [ ] Create Goal Server Actions (AC: 3, 5)
+      - [ ] Create TanStack Query Hook for Goals (AC: 4)
+      - [ ] Create Goal Form Component (AC: 2, 6)
+      - [ ] Create Goals List Component (AC: 4)
+      - [ ] Create Goals Client Wrapper (AC: 1, 4)
+      - [ ] Add Navigation to Goals Page (AC: 1)
+      - [ ] Error Handling and Edge Cases (AC: 5, 6)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    AC-1: Given a user is on the "Goals" page, when they click "Create Goal" button, then they are presented with a goal creation form.
+    AC-2: And the form contains fields for goal title (required) and target (required).
+    AC-3: And when they fill in valid goal details and submit, a new goal is created and associated with their account.
+    AC-4: And the new goal appears in their list of goals on the same page.
+    AC-5: And a success message is displayed confirming the creation.
+    AC-6: And validation errors are displayed for missing or invalid fields.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/fase-2-plan/PRD.md</path>
+        <title>FitTrack Product Requirements Document</title>
+        <section>FR-004: Personal Goal Setting</section>
+        <snippet>FR-004: Create and view personal goals (with a title and a target, e.g., "run 10k" or "work out 3 times a week"). MVP scope: Simple goal creation with title and target fields.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic 3: Personal Goal Setting</title>
+        <section>Story 3.1: Create Goal</section>
+        <snippet>As a logged-in user, I want to be able to create a new personal goal with a title and a target, so that I can track my progress towards it. Prerequisites: Story 1.3 (User Login).</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Database Schema, Server Actions Pattern, Component Structure</section>
+        <snippet>Unified Next.js with Server Actions for backend logic, Supabase PostgreSQL with RLS policies, TanStack Query for client-side data fetching, shadcn/ui components with Tailwind CSS.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/epic-3-migration-deployed-2025-12-03.md</path>
+        <title>Epic 3 Migration Deployment Record</title>
+        <section>Cloud Database Status</section>
+        <snippet>Goals table successfully deployed to cloud (ubcakdyirdaevwnaeozx). Includes: 6 columns (id, user_id, title, target, created_at, updated_at), 2 indexes, 4 RLS policies active, ready for Epic 3 development.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>lib/types/goal.ts</path>
+        <kind>type-definition</kind>
+        <symbol>Goal, CreateGoalInput, ActionResult</symbol>
+        <lines>1-24</lines>
+        <reason>TypeScript types for Goal entity - already created and ready to use. Defines Goal interface, CreateGoalInput for form data, and ActionResult for Server Action responses.</reason>
+      </artifact>
+      <artifact>
+        <path>app/actions/workouts.ts</path>
+        <kind>server-action</kind>
+        <symbol>createWorkout, updateWorkout, deleteWorkout</symbol>
+        <lines>1-192</lines>
+        <reason>Reference pattern for creating Server Actions. Shows auth check, Zod validation, database operations, error handling, and cache revalidation. Story 3.1 should follow identical pattern for goals.</reason>
+      </artifact>
+      <artifact>
+        <path>hooks/useWorkouts.ts</path>
+        <kind>hook</kind>
+        <symbol>useWorkouts</symbol>
+        <lines>1-39</lines>
+        <reason>Reference pattern for TanStack Query hooks. Shows authentication check, Supabase query, ordering, and error handling. Create similar useGoals hook following this pattern.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/server.ts</path>
+        <kind>service</kind>
+        <symbol>createClient</symbol>
+        <lines>1-28</lines>
+        <reason>Server-side Supabase client used in Server Actions for authentication and database operations. Required for goal creation.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package>@supabase/supabase-js</package>
+        <version>^2.86.0</version>
+        <usage>Database client for goal CRUD operations</usage>
+      </node>
+      <node>
+        <package>@tanstack/react-query</package>
+        <version>^5.90.11</version>
+        <usage>Client-side data fetching and caching for goals list</usage>
+      </node>
+      <node>
+        <package>next</package>
+        <version>^16.0.5</version>
+        <usage>Framework (Server Actions, routing, revalidatePath)</usage>
+      </node>
+      <node>
+        <package>zod</package>
+        <version>latest</version>
+        <usage>Schema validation for goal input in Server Actions</usage>
+      </node>
+      <node>
+        <package>lucide-react</package>
+        <version>latest</version>
+        <usage>Target icon for navigation link to Goals page</usage>
+      </node>
+      <node>
+        <package>sonner</package>
+        <version>latest</version>
+        <usage>Toast notifications for success/error feedback</usage>
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint type="security">All goal operations must verify user authentication via supabase.auth.getUser() in Server Actions. RLS policies in database enforce user can only access their own goals.</constraint>
+    <constraint type="architecture">Follow exact same patterns as Epic 2 Workouts: Server Actions for mutations, TanStack Query hooks for fetching, client/server component split.</constraint>
+    <constraint type="validation">Validate goal input on both client (form validation) and server (Zod schema in Server Action). Title and target are required fields.</constraint>
+    <constraint type="naming">Use kebab-case for files (goal-form.tsx), PascalCase for components (GoalForm), snake_case for database columns (user_id, created_at).</constraint>
+    <constraint type="structure">Pages in app/(dashboard)/, components in components/goals/, Server Actions in app/actions/goals.ts, hooks in hooks/useGoals.ts.</constraint>
+    <constraint type="caching">Use revalidatePath('/goals') after goal creation to invalidate Next.js cache and refresh the goals list.</constraint>
+    <constraint type="ui">Use shadcn/ui components (Button, Input, Card) with Tailwind CSS. Follow existing design patterns from Epic 2 components.</constraint>
+    <constraint type="error-handling">Display clear error messages via toast notifications (Sonner). Handle loading states with disabled buttons and spinners during submission.</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>createGoal</name>
+      <kind>server-action</kind>
+      <signature>async function createGoal(input: CreateGoalInput): Promise&lt;ActionResult&lt;Goal&gt;&gt;</signature>
+      <path>app/actions/goals.ts</path>
+      <description>Server Action to create a new goal. Validates input with Zod, checks authentication, inserts into goals table, revalidates /goals path.</description>
+    </interface>
+    <interface>
+      <name>useGoals</name>
+      <kind>hook</kind>
+      <signature>function useGoals(): UseQueryResult&lt;Goal[]&gt;</signature>
+      <path>hooks/useGoals.ts</path>
+      <description>TanStack Query hook to fetch user's goals from Supabase. Returns goals array ordered by created_at DESC, with loading and error states.</description>
+    </interface>
+    <interface>
+      <name>goals table</name>
+      <kind>database-table</kind>
+      <signature>CREATE TABLE goals (id UUID PRIMARY KEY, user_id UUID NOT NULL REFERENCES auth.users(id), title TEXT NOT NULL, target TEXT NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW(), updated_at TIMESTAMPTZ DEFAULT NOW())</signature>
+      <path>supabase/migrations/20251203_create_goals_table.sql</path>
+      <description>PostgreSQL table for storing user goals. RLS enabled with policies: SELECT, INSERT, UPDATE, DELETE restricted to auth.uid() = user_id.</description>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Manual testing per project plan. Verify all 6 acceptance criteria. Test form validation, authentication checks, error handling, and database operations. Follow Definition of Done checklist in docs/sprint-artifacts/definition-of-done.md.
+    </standards>
+    <locations>
+      Manual testing workflow: Login → Navigate to /goals → Create goal → Verify display → Test edge cases. Future automated tests will use Jest (unit/integration) and Playwright (E2E) following patterns in tests/ directory.
+    </locations>
+    <ideas>
+      <test id="AC-1">Verify "Create Goal" button appears on Goals page and shows form when clicked</test>
+      <test id="AC-2">Verify form has title and target input fields, both marked as required</test>
+      <test id="AC-3">Submit valid goal data and verify new goal is created in database with correct user_id</test>
+      <test id="AC-4">After creating goal, verify it appears in the goals list immediately without page refresh</test>
+      <test id="AC-5">Verify success toast notification appears with message "Goal created successfully"</test>
+      <test id="AC-6">Submit empty form and verify validation error messages appear for required fields</test>
+      <test id="edge-case-1">Test with very long title (200+ chars) to verify validation limits</test>
+      <test id="edge-case-2">Test concurrent goal creation to verify no race conditions</test>
+      <test id="edge-case-3">Test goal creation with network error to verify error handling and user feedback</test>
+      <test id="security-1">Verify unauthenticated user is redirected to login page when accessing /goals</test>
+      <test id="security-2">Verify RLS policies prevent viewing other users' goals</test>
+    </ideas>
+  </tests>
+</story-context>
