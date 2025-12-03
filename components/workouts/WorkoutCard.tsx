@@ -2,7 +2,7 @@
 
 import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { WorkoutIcon } from '@/components/dashboard/WorkoutIcon'
 import type { Workout } from '@/lib/types/workout'
 
 interface WorkoutCardProps {
@@ -34,21 +34,32 @@ export function WorkoutCard({ workout }: WorkoutCardProps) {
   const formattedDate = format(new Date(workout.workout_date), 'MMM d, yyyy')
   
   return (
-    <Card 
-      className="cursor-pointer transition-shadow hover:shadow-lg"
+    <article 
+      className="bg-primary-green text-white rounded-xl p-6 shadow-md cursor-pointer hover:shadow-lg transition-shadow"
       onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleClick()
+        }
+      }}
+      aria-label={`${workout.workout_type} workout on ${formattedDate}`}
     >
-      <CardHeader>
-        <CardTitle className="text-lg">{workout.workout_type}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-1 text-sm text-gray-600">
-          <p>{formattedDate}</p>
-          <p className="font-medium text-gray-900">
+      <div className="flex items-start gap-4">
+        <WorkoutIcon workoutType={workout.workout_type} size="lg" variant="default" />
+        <div className="flex-1 min-w-0">
+          <h3 className="text-xl font-semibold mb-1">{workout.workout_type}</h3>
+          <p className="text-sm opacity-90 mb-2">{formattedDate}</p>
+          <p className="text-base font-medium">
             {formatDuration(workout.duration_minutes)}
           </p>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+      {workout.notes && (
+        <p className="text-sm mt-4 opacity-80 line-clamp-2">{workout.notes}</p>
+      )}
+    </article>
   )
 }
