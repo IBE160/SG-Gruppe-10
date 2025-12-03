@@ -24,6 +24,11 @@
   --inactive-gray: #9ca3af;
   --graphite-50: #f9fafb;
   --graphite-100: #f3f4f6;
+  --graphite-200: #e5e7eb;
+  --graphite-300: #d1d5db;
+  --graphite-400: #9ca3af;
+  --graphite-500: #6b7280;
+  --graphite-600: #4b5563;
   --graphite-700: #374151;
   --graphite-900: #111827;
 }
@@ -51,6 +56,11 @@
   --color-inactive-gray: var(--inactive-gray);
   --color-graphite-50: var(--graphite-50);
   --color-graphite-100: var(--graphite-100);
+  --color-graphite-200: var(--graphite-200);
+  --color-graphite-300: var(--graphite-300);
+  --color-graphite-400: var(--graphite-400);
+  --color-graphite-500: var(--graphite-500);
+  --color-graphite-600: var(--graphite-600);
   --color-graphite-700: var(--graphite-700);
   --color-graphite-900: var(--graphite-900);
 }

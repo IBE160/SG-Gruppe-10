@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { GoalsClient } from "@/components/goals/GoalsClient";
+import { BottomNav } from "@/components/common/BottomNav";
 
 export const metadata = {
   title: "Goals - FitTrack",
@@ -17,8 +18,9 @@ export default async function GoalsPage() {
   }
 
   return (
-    <div className="p-8">
+    <>
       <GoalsClient />
-    </div>
+      <BottomNav activeTab="goals" />
+    </>
   );
 }
