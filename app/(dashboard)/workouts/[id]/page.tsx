@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getWorkoutById } from "@/lib/supabase/queries";
 import { WorkoutDetailClient } from "@/components/workouts/WorkoutDetailClient";
 import { AppHeader } from "@/components/common/AppHeader";
+import { BottomNav } from "@/components/common/BottomNav";
 
 export default async function WorkoutDetailPage({
   params,
@@ -35,6 +36,7 @@ export default async function WorkoutDetailPage({
     <>
       <AppHeader title="Workout Details" showBackButton={true} />
       <WorkoutDetailClient workout={workout} />
+      <BottomNav activeTab="workouts" />
     </>
   );
 }

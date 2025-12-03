@@ -1,0 +1,321 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>3</storyId>
+    <title>Authentication Pages Visual Polish</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-03</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/4-3-authentication-pages-visual-polish.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a new or returning user</asA>
+    <iWant>to see polished login and signup pages with modern design</iWant>
+    <soThat>my first impression of FitTrack is professional and trustworthy</soThat>
+    <tasks>
+      - Create IconInput Component (AC: 2, 4)
+      - Update Login Page Design (AC: 1, 2, 3, 4, 5)
+      - Update Signup Page Design (AC: 1, 2, 3, 4, 5)
+      - Create Logo/Brand Component (AC: 1, 4)
+      - Apply Lexend Font to Auth Pages (AC: 4)
+      - Color Theme Application (AC: 4)
+      - Page Layout and Centering (AC: 5)
+      - Error Handling and Feedback (AC: All)
+      - Loading States (AC: 3)
+      - Accessibility Improvements (AC: All)
+      - Password Field Enhancements (AC: 2)
+      - Mobile Responsiveness Testing (AC: 5)
+      - Desktop/Tablet Testing (AC: 5)
+      - Manual Testing &amp; Verification (AC: All)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    AC-1: Given I visit the login or signup page, when the page loads, then I see the FitTrack logo in a green circular badge.
+    
+    AC-2: And I see input fields with left-aligned icons (email icon for email field, lock icon for password field).
+    
+    AC-3: And I see a large primary green button for sign in/sign up actions.
+    
+    AC-4: And the page uses Lexend font and Green &amp; Graphite colors consistently.
+    
+    AC-5: And the design is centered, mobile-responsive, and matches the login-screen-dashboard.html mockup.
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Epic 4 - UX Visual Polish</section>
+        <snippet>Story 4.3: Apply polished authentication design with FitTrack logo in green circular badge, input fields with left-aligned icons (email, password), large primary green button, Lexend font, Green &amp; Graphite colors, centered and mobile-responsive design.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic 4 Technical Specification</title>
+        <section>Story 4.3: Authentication Pages Visual Polish</section>
+        <snippet>Create IconInput component wrapping shadcn/ui Input with MaterialIcon. Use Material Symbols for icons (mail, lock). Apply primary green (#22c55e) and graphite palette. Mobile-first design with max-width constraints. No backend API or database changes required.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>Architecture Document</title>
+        <section>Styling Architecture</section>
+        <snippet>Tailwind CSS + shadcn/ui for styling. MaterialIcon wrapper component. Lexend font via Next.js Font optimization. Color theme: primary green (#22c55e), graphite grays. Mobile-first responsive design approach.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/4-1-navigation-layout-foundation.md</path>
+        <title>Story 4.1: Navigation Layout Foundation</title>
+        <section>Dev Agent Record</section>
+        <snippet>MaterialIcon wrapper component created at components/ui/MaterialIcon.tsx. Lexend font loaded and optimized (weight 300). Color theme variables defined in app/globals.css including primary-green, graphite shades.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/4-2-dashboard-visual-polish.md</path>
+        <title>Story 4.2: Dashboard Visual Polish</title>
+        <section>Dev Notes - Learnings</section>
+        <snippet>MaterialIcon wrapper component works reliably - use for all icons. Color theme variables working correctly (primary-green, graphite shades). Lexend font loaded globally. Server Components pattern for data fetching. Mobile-first responsive design approach successful.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <file>
+        <path>components/ui/MaterialIcon.tsx</path>
+        <kind>component</kind>
+        <symbol>MaterialIcon</symbol>
+        <lines>1-21</lines>
+        <reason>Reusable icon wrapper for Material Symbols. Use for mail, lock, visibility, visibility_off, fitness_center icons in auth pages.</reason>
+      </file>
+      <file>
+        <path>components/ui/input.tsx</path>
+        <kind>component</kind>
+        <symbol>Input</symbol>
+        <lines>1-23</lines>
+        <reason>shadcn/ui Input component to be wrapped by IconInput. Already styled with Tailwind classes, focus rings, and disabled states.</reason>
+      </file>
+      <file>
+        <path>components/ui/button.tsx</path>
+        <kind>component</kind>
+        <symbol>Button</symbol>
+        <lines>full-file</lines>
+        <reason>shadcn/ui Button component for submit buttons. Already supports loading states and disabled states. Will be styled with primary green classes.</reason>
+      </file>
+      <file>
+        <path>app/(auth)/login/page.tsx</path>
+        <kind>page</kind>
+        <symbol>LoginPage</symbol>
+        <lines>1-97</lines>
+        <reason>Current login page with basic form layout. Auth logic works correctly - preserve authentication flow, only replace visual design.</reason>
+      </file>
+      <file>
+        <path>app/(auth)/signup/page.tsx</path>
+        <kind>page</kind>
+        <symbol>SignupPage</symbol>
+        <lines>1-100</lines>
+        <reason>Current signup page with basic form layout. Auth logic works correctly - preserve authentication flow, only replace visual design.</reason>
+      </file>
+      <file>
+        <path>app/globals.css</path>
+        <kind>styles</kind>
+        <symbol>root-css-variables</symbol>
+        <lines>1-50</lines>
+        <reason>Global CSS with color theme definitions. Primary green (#22c55e), graphite shades (50, 100, 700, 900) already defined. Lexend font variable configured.</reason>
+      </file>
+    </code>
+    <dependencies>
+      <node>
+        <package>next</package>
+        <version>16.0.5</version>
+        <reason>App Router, Font optimization for Lexend</reason>
+      </node>
+      <node>
+        <package>react</package>
+        <version>19.2.0</version>
+        <reason>Component library, useState for form state and password toggle</reason>
+      </node>
+      <node>
+        <package>@supabase/supabase-js</package>
+        <version>^2.86.0</version>
+        <reason>Authentication API - auth logic unchanged, only visual updates</reason>
+      </node>
+      <node>
+        <package>tailwindcss</package>
+        <version>^4</version>
+        <reason>Styling framework with custom color variables</reason>
+      </node>
+      <node>
+        <package>class-variance-authority</package>
+        <version>^0.7.1</version>
+        <reason>shadcn/ui component styling</reason>
+      </node>
+      <node>
+        <package>clsx</package>
+        <version>^2.1.1</version>
+        <reason>Conditional className utility</reason>
+      </node>
+      <node>
+        <package>tailwind-merge</package>
+        <version>^3.4.0</version>
+        <reason>Merge Tailwind classes in cn() utility</reason>
+      </node>
+      <node>
+        <package>sonner</package>
+        <version>^2.0.7</version>
+        <reason>Toast notifications for auth errors</reason>
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - Preserve existing authentication logic completely - only visual changes allowed
+    - Use MaterialIcon component for all icons (mail, lock, visibility, visibility_off, fitness_center)
+    - Wrap shadcn/ui Input component in IconInput - do not modify base Input component
+    - Apply existing color theme variables: primary-green (#22c55e), graphite-50, graphite-100, graphite-700, graphite-900
+    - Use Lexend font family (already loaded globally) with weights 300-700
+    - Follow mobile-first responsive design approach proven in Story 4.2
+    - Maintain existing form submission, error handling, and redirect behavior
+    - Use Client Components for auth pages (required for form state management)
+    - Ensure all inputs have proper labels (visible or sr-only for accessibility)
+    - Minimum touch target size: 44x44px for buttons and interactive elements
+    - Color contrast must meet WCAG AA standards (4.5:1 for text, verify with tools)
+    - TypeScript strict mode - all components must be properly typed
+    - Follow PascalCase naming convention for components
+    - ESLint warnings in auth files should be resolved during this story
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>IconInput Component Props</name>
+      <kind>TypeScript Interface</kind>
+      <signature>
+interface IconInputProps {
+  icon: string;
+  type: string;
+  placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; void;
+  error?: string;
+  name: string;
+  required?: boolean;
+  showPasswordToggle?: boolean;
+}
+      </signature>
+      <path>components/auth/IconInput.tsx</path>
+    </interface>
+    <interface>
+      <name>MaterialIcon Component</name>
+      <kind>React Component</kind>
+      <signature>
+MaterialIcon({ icon, className, filled }: { icon: string; className?: string; filled?: boolean })
+      </signature>
+      <path>components/ui/MaterialIcon.tsx</path>
+    </interface>
+    <interface>
+      <name>Auth API Endpoints (Unchanged)</name>
+      <kind>REST API</kind>
+      <signature>
+POST /api/auth/login
+  Body: { email: string; password: string }
+  Response: { success: boolean; error?: string }
+
+POST /api/auth/signup
+  Body: { email: string; password: string }
+  Response: { success: boolean; error?: string }
+      </signature>
+      <path>app/api/auth/</path>
+    </interface>
+    <interface>
+      <name>Supabase Auth (Unchanged)</name>
+      <kind>External API</kind>
+      <signature>
+supabase.auth.signInWithPassword({ email, password })
+supabase.auth.signUp({ email, password })
+      </signature>
+      <path>lib/supabase/</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+Manual testing is the primary focus for this visual polish story. Unit tests for IconInput component should verify icon rendering, focus state changes, error state display, and password visibility toggle functionality. Integration tests should ensure form submission continues to work correctly with the new visual design. E2E tests will be added in the Test Epic to validate complete authentication flows with the polished UI.
+    </standards>
+    <locations>
+- Component tests would be in: __tests__/components/auth/IconInput.test.tsx (deferred to Test Epic)
+- Integration tests would be in: __tests__/integration/auth/ (deferred to Test Epic)
+- E2E tests would be in: e2e/auth/ (deferred to Test Epic)
+    </locations>
+    <ideas>
+      <test id="AC-1">
+        <description>Logo Display Verification</description>
+        <steps>
+1. Visit /login page
+2. Verify green circular badge (80px) with white fitness_center icon displays
+3. Verify "FitTrack" heading in Lexend Bold, text-3xl, graphite-900
+4. Verify tagline "Track Your Fitness Journey" in text-sm, graphite-600
+5. Repeat for /signup page
+        </steps>
+      </test>
+      <test id="AC-2">
+        <description>Icon Input Fields Verification</description>
+        <steps>
+1. Verify email input has mail icon on left (graphite-400 default)
+2. Verify password input has lock icon on left
+3. Focus email input - verify icon changes to primary-green
+4. Focus password input - verify icon changes to primary-green
+5. Verify input text doesn't overlap with left icon (pl-10 spacing)
+6. Click password visibility toggle - verify password becomes visible/hidden
+        </steps>
+      </test>
+      <test id="AC-3">
+        <description>Submit Button Styling</description>
+        <steps>
+1. Verify button is full width (w-full) and large height (h-12)
+2. Verify button has primary green background (#22c55e) and white text
+3. Click submit - verify button shows loading state (disabled, "Signing In..." text)
+4. Verify button has rounded corners (rounded-lg)
+        </steps>
+      </test>
+      <test id="AC-4">
+        <description>Font and Color Theme Consistency</description>
+        <steps>
+1. Verify Lexend font applied to all text elements
+2. Verify primary green (#22c55e) used for badge, focus states, button
+3. Verify graphite shades used for text and borders
+4. Use browser dev tools to verify color contrast ratios meet WCAG AA
+5. Verify font weights: 700 (headings), 400 (body), 500 (buttons)
+        </steps>
+      </test>
+      <test id="AC-5">
+        <description>Responsive Design and Centering</description>
+        <steps>
+1. Mobile (320px, 375px) - verify form card adapts, no horizontal overflow
+2. Tablet (768px) - verify form stays centered at max-width
+3. Desktop (1024px, 1920px) - verify form doesn't stretch, stays centered
+4. Verify form card has white bg, rounded-xl, shadow-xl
+5. Verify page background is graphite-50
+6. Verify vertical and horizontal centering (flex items-center justify-center)
+        </steps>
+      </test>
+      <test id="accessibility">
+        <description>Accessibility Compliance</description>
+        <steps>
+1. Tab through form - verify logical tab order
+2. Verify focus indicators visible (ring-2 ring-primary-green)
+3. Press Enter in input - verify form submits
+4. Run Lighthouse audit - verify Accessibility ≥ 95
+5. Verify all inputs have aria-labels or visible labels
+6. Verify password toggle has aria-label
+        </steps>
+      </test>
+      <test id="functional-regression">
+        <description>Authentication Flow Regression Test</description>
+        <steps>
+1. Test actual login with valid credentials - verify authentication works
+2. Test actual signup with new email - verify registration works
+3. Test login with invalid credentials - verify error displays
+4. Test signup with existing email - verify error displays
+5. Verify redirect to dashboard after successful login/signup
+6. Verify all Supabase auth logic remains unchanged
+        </steps>
+      </test>
+    </ideas>
+  </tests>
+</story-context>

@@ -9,6 +9,9 @@ export interface WorkoutIconProps {
 
 const workoutIconMap: Record<string, string> = {
   'Cardio': 'directions_run',
+  'Running': 'directions_run',
+  'Cycling': 'directions_bike',
+  'Swimming': 'pool',
   'Strength': 'fitness_center',
   'Yoga': 'self_improvement',
   'Flexibility': 'accessibility',
@@ -26,19 +29,12 @@ export function WorkoutIcon({ workoutType, size = 'md', variant = 'default' }: W
   const iconName = workoutIconMap[workoutType] || workoutIconMap['Other']
   
   return (
-    <div
+    <MaterialIcon
+      icon={iconName}
       className={cn(
-        'flex items-center justify-center',
-        variant === 'filled' && 'rounded-full bg-primary-green p-2'
+        sizeMap[size],
+        'text-white'
       )}
-    >
-      <MaterialIcon
-        icon={iconName}
-        className={cn(
-          sizeMap[size],
-          variant === 'filled' ? 'text-white' : 'text-primary-green'
-        )}
-      />
-    </div>
+    />
   )
 }
