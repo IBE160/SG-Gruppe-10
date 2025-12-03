@@ -1,0 +1,337 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>2</storyId>
+    <title>Dashboard Visual Polish</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-03</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/4-2-dashboard-visual-polish.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>FitTrack user</asA>
+    <iWant>see an engaging dashboard with visual statistics and goal progress</iWant>
+    <soThat>I feel motivated and can quickly understand my fitness status</soThat>
+    <tasks>
+      - Create StatCard Component (AC: 1, 4)
+      - Create GoalProgressCard Component (AC: 2, 4)
+      - Create RecentActivityCard Component (AC: 3, 4)
+      - Create WorkoutIcon Component (AC: 3, 4)
+      - Fetch Dashboard Data with Server Actions (AC: 1, 2, 3)
+      - Update Dashboard Page Component (AC: 1, 2, 3, 4, 5)
+      - Add Loading States (AC: All)
+      - Empty State Handling (AC: All)
+      - Date Formatting Utilities (AC: 3)
+      - Color Theme Verification (AC: 4)
+      - Manual Testing &amp; Verification (AC: All)
+      - Update Sprint Status (AC: All)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    AC-1: Given I am logged into FitTrack, when I view the home dashboard, then I see weekly snapshot cards displaying workouts count, total time, and calories.
+    AC-2: And I see goal progress cards with progress bars showing percentage complete.
+    AC-3: And I see recent activity list with workout icons and summaries.
+    AC-4: And all components use the Green &amp; Graphite color theme (#22c55e primary green, graphite shades).
+    AC-5: And the design matches the UX mockup specifications (logging-dashboard.html).
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Overview</section>
+        <snippet>Epic 4 focuses on applying the UX Design Specification's "Green &amp; Graphite" theme across all existing FitTrack pages. This epic transforms the functional MVP (Epics 1-3) into a visually polished, mobile-first application.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Services and Modules</section>
+        <snippet>StatCard (weekly stats display), GoalProgressCard (goal progress with progress bar), RecentActivityCard (recent workout item with icon), WorkoutIcon (icon mapping for workout types). All components use MaterialIcon wrapper and shadcn/ui Progress component.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Data Models and Contracts</section>
+        <snippet>No new data models required. All existing data structures from Epics 1-3 remain unchanged: User, Workout (id, user_id, date, type, duration, notes, created_at), Goal (id, user_id, title, target, created_at).</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic Technical Specification: UX Visual Polish</title>
+        <section>Dependencies and Integrations</section>
+        <snippet>Existing dependencies: next 16.0.5, react 19.2.0, tailwindcss 4.0+, shadcn/ui, @supabase/supabase-js 2.x, date-fns 4.x, material-symbols. Progress and Skeleton components from shadcn/ui.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epics Document</title>
+        <section>Epic 4: Story 4.2</section>
+        <snippet>Dashboard Visual Polish - Display weekly snapshot cards (workouts count, total time, calories), goal progress cards with progress bars, recent activity list with workout icons. Apply Green &amp; Graphite color theme. Match UX mockup specifications.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>Project Structure</section>
+        <snippet>Next.js App Router with Server Actions for mutations and TanStack Query for data fetching. Components organized in components/ directory: ui/, common/, dashboard/, workouts/, goals/. Supabase for data persistence with server-side client in lib/supabase/.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/4-2-dashboard-visual-polish.md</path>
+        <title>Story 4.2 Definition</title>
+        <section>Dev Notes - Learnings from Previous Story</section>
+        <snippet>Story 4.1 completed successfully. MaterialIcon component created at components/ui/MaterialIcon.tsx. AppHeader and BottomNav components working. Primary green color (#22c55e) configured. Graphite color variables in globals.css. Layout uses max-width 640px with pb-20 for BottomNav spacing.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>components/ui/MaterialIcon.tsx</path>
+        <kind>component</kind>
+        <symbol>MaterialIcon</symbol>
+        <lines>1-21</lines>
+        <reason>Existing icon wrapper component from Story 4.1 - use this for all workout type icons and dashboard icons</reason>
+      </artifact>
+      <artifact>
+        <path>components/common/AppHeader.tsx</path>
+        <kind>component</kind>
+        <symbol>AppHeader</symbol>
+        <lines>1-67</lines>
+        <reason>Existing header component from Story 4.1 - already integrated in dashboard page, provides consistent header pattern</reason>
+      </artifact>
+      <artifact>
+        <path>components/common/BottomNav.tsx</path>
+        <kind>component</kind>
+        <symbol>BottomNav</symbol>
+        <lines>1-69</lines>
+        <reason>Existing bottom navigation from Story 4.1 - provides navigation context and active state detection pattern</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/page.tsx</path>
+        <kind>page</kind>
+        <symbol>DashboardPage</symbol>
+        <lines>1-41</lines>
+        <reason>Current dashboard page to be updated - already has auth check and AppHeader, needs replacement of placeholder content with new components</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/layout.tsx</path>
+        <kind>layout</kind>
+        <symbol>DashboardLayout</symbol>
+        <lines>all</lines>
+        <reason>Dashboard layout with BottomNav integration - already configured with max-width 640px and pb-20 spacing</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/queries.ts</path>
+        <kind>service</kind>
+        <symbol>getWorkouts, getWorkoutById</symbol>
+        <lines>1-43</lines>
+        <reason>Existing workout query functions - pattern to follow for new dashboard queries (getWeeklyStats, getGoalsWithProgress, getRecentWorkouts)</reason>
+      </artifact>
+      <artifact>
+        <path>lib/supabase/server.ts</path>
+        <kind>service</kind>
+        <symbol>createClient</symbol>
+        <lines>all</lines>
+        <reason>Server-side Supabase client - use this for all dashboard data fetching in Server Components</reason>
+      </artifact>
+      <artifact>
+        <path>app/globals.css</path>
+        <kind>stylesheet</kind>
+        <symbol>CSS variables</symbol>
+        <lines>1-50</lines>
+        <reason>Theme configuration with primary green (#22c55e) and graphite color variables - use these color variables in new components</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/button.tsx</path>
+        <kind>component</kind>
+        <symbol>Button</symbol>
+        <lines>all</lines>
+        <reason>shadcn/ui Button component - use for CTA buttons in empty state</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/card.tsx</path>
+        <kind>component</kind>
+        <symbol>Card</symbol>
+        <lines>all</lines>
+        <reason>shadcn/ui Card component - use as base for StatCard, GoalProgressCard, RecentActivityCard</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package name="next" version="16.0.5" />
+        <package name="react" version="19.2.0" />
+        <package name="react-dom" version="19.2.0" />
+        <package name="@supabase/supabase-js" version="^2.86.0" />
+        <package name="@supabase/ssr" version="^0.8.0" />
+        <package name="@tanstack/react-query" version="^5.90.11" />
+        <package name="date-fns" version="^4.1.0" />
+        <package name="@radix-ui/react-progress" version="^1.1.8" />
+        <package name="tailwindcss" version="^4" />
+        <package name="typescript" version="^5" />
+        <package name="clsx" version="^2.1.1" />
+        <package name="tailwind-merge" version="^3.4.0" />
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    - All new components must be created in components/dashboard/ directory
+    - Use MaterialIcon component for all icons (do not use Lucide icons)
+    - Use shadcn/ui Progress component for goal progress bars
+    - Dashboard page must remain a Server Component for data fetching
+    - Use server-side Supabase client from lib/supabase/server.ts
+    - All database queries must filter by user_id from authenticated session
+    - Date formatting must use date-fns library (format function)
+    - Color theme must use CSS variables: --primary-green (#22c55e), --graphite-* shades
+    - Layout must respect existing max-width 640px constraint from dashboard layout
+    - Content must have pb-20 to prevent overlap with BottomNav (already in layout)
+    - TypeScript interfaces must be exported for all component props
+    - Weekly stats calculation: workouts from last 7 days only
+    - Calorie estimation: Simple formula (duration * 7 cal/min average)
+    - Recent activity: Limit to 5 most recent workouts
+    - Empty state: Display motivational message with CTAs for new users
+    - Loading states: Use shadcn/ui Skeleton component (install if missing)
+    - Mobile-first responsive design required (320px minimum)
+    - No breaking changes to existing Epics 1-3 functionality
+    - Maintain TypeScript strictness and ESLint rules
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>StatCard Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface StatCardProps {
+          icon: string;
+          label: string;
+          value: string | number;
+          unit?: string;
+          variant?: 'default' | 'highlighted';
+        }
+      </signature>
+      <path>components/dashboard/StatCard.tsx</path>
+    </interface>
+    <interface>
+      <name>GoalProgressCard Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface GoalProgressCardProps {
+          goalTitle: string;
+          progressPercentage: number;
+          targetValue: string;
+          currentValue: string;
+          daysRemaining?: number;
+        }
+      </signature>
+      <path>components/dashboard/GoalProgressCard.tsx</path>
+    </interface>
+    <interface>
+      <name>RecentActivityCard Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface RecentActivityCardProps {
+          workoutType: string;
+          date: Date | string;
+          duration: number;
+          title: string;
+          onClick?: () => void;
+        }
+      </signature>
+      <path>components/dashboard/RecentActivityCard.tsx</path>
+    </interface>
+    <interface>
+      <name>WorkoutIcon Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface WorkoutIconProps {
+          workoutType: string;
+          size?: 'sm' | 'md' | 'lg';
+          variant?: 'default' | 'filled';
+        }
+      </signature>
+      <path>components/dashboard/WorkoutIcon.tsx</path>
+    </interface>
+    <interface>
+      <name>Dashboard Queries</name>
+      <kind>Server Function Interface</kind>
+      <signature>
+        async function getWeeklyStats(userId: string): Promise&lt;{ workoutCount: number; totalMinutes: number; estimatedCalories: number }&gt;
+        async function getGoalsWithProgress(userId: string): Promise&lt;Goal[]&gt;
+        async function getRecentWorkouts(userId: string, limit?: number): Promise&lt;Workout[]&gt;
+      </signature>
+      <path>lib/supabase/dashboard-queries.ts</path>
+    </interface>
+    <interface>
+      <name>Supabase Workouts Table</name>
+      <kind>Database Table</kind>
+      <signature>
+        workouts {
+          id: uuid,
+          user_id: uuid,
+          workout_date: date,
+          workout_type: text,
+          duration: integer,
+          notes: text,
+          created_at: timestamp
+        }
+      </signature>
+      <path>Supabase Database</path>
+    </interface>
+    <interface>
+      <name>Supabase Goals Table</name>
+      <kind>Database Table</kind>
+      <signature>
+        goals {
+          id: uuid,
+          user_id: uuid,
+          goal_title: text,
+          target_value: text,
+          status: text,
+          created_at: timestamp
+        }
+      </signature>
+      <path>Supabase Database</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      All new components should have unit tests using Jest and React Testing Library. Test files should be colocated with component files using .test.tsx extension. Test both rendering and edge cases (null data, invalid progress values). E2E tests deferred to separate Test Epic. Component tests should verify props affect rendering correctly and click handlers fire. Loading states should use Suspense boundaries where applicable.
+    </standards>
+    <locations>
+      components/**/*.test.tsx
+      lib/**/*.test.ts
+      app/**/*.test.tsx
+    </locations>
+    <ideas>
+      <test id="AC-1">
+        Test: StatCard renders with correct icon, label, value, and unit
+        Test: StatCard highlighted variant displays green background
+        Test: Weekly stats calculation includes only last 7 days of workouts
+        Test: Calorie estimation formula calculates correctly (duration * 7)
+      </test>
+      <test id="AC-2">
+        Test: GoalProgressCard displays progress bar with correct percentage
+        Test: Progress percentage clamped between 0-100
+        Test: Days remaining displays when provided
+        Test: Progress bar uses primary green color
+      </test>
+      <test id="AC-3">
+        Test: RecentActivityCard displays workout icon, title, date, duration
+        Test: Date formatting uses "MMM d, yyyy" format
+        Test: Workout icon maps to correct Material Symbol
+        Test: Click handler fires on card click
+        Test: Recent workouts limited to 5 items
+      </test>
+      <test id="AC-4">
+        Test: All components use primary green (#22c55e) for highlights
+        Test: All components use graphite shades for text/backgrounds
+        Test: Color contrast meets WCAG AA standards
+      </test>
+      <test id="AC-5">
+        Test: Dashboard layout matches UX mockup structure
+        Test: Empty state displays for new users with no data
+        Test: Loading skeletons display during data fetch
+        Test: Responsive design works at 320px, 768px, 1024px viewports
+      </test>
+    </ideas>
+  </tests>
+</story-context>

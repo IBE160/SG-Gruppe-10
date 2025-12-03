@@ -2,6 +2,7 @@ import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getWorkoutById } from "@/lib/supabase/queries";
 import { WorkoutDetailClient } from "@/components/workouts/WorkoutDetailClient";
+import { AppHeader } from "@/components/common/AppHeader";
 
 export default async function WorkoutDetailPage({
   params,
@@ -30,5 +31,10 @@ export default async function WorkoutDetailPage({
     notFound();
   }
 
-  return <WorkoutDetailClient workout={workout} />;
+  return (
+    <>
+      <AppHeader title="Workout Details" showBackButton={true} />
+      <WorkoutDetailClient workout={workout} />
+    </>
+  );
 }

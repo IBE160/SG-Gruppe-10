@@ -1,4 +1,4 @@
-import { DashboardNav } from "@/components/layout/DashboardNav";
+import { BottomNav } from "@/components/common/BottomNav";
 
 export default function DashboardLayout({
   children,
@@ -7,8 +7,10 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="min-h-screen bg-gray-50">
-      <DashboardNav />
-      {children}
+      <div className="max-w-[640px] mx-auto pb-20">
+        {children}
+      </div>
+      <BottomNav />
     </div>
   );
 }
