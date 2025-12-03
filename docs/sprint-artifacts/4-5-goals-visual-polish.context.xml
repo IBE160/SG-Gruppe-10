@@ -1,0 +1,335 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>5</storyId>
+    <title>Goals Visual Polish</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-03</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/4-5-goals-visual-polish.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a FitTrack user</asA>
+    <iWant>to see my goals with progress bars and achievement badges</iWant>
+    <soThat>I feel accomplished and motivated to continue working towards my fitness objectives</soThat>
+    <tasks>
+      - Refactor GoalCard Component (AC: 1, 2)
+      - Enhance GoalProgressCard Component (AC: 2)
+      - Create AchievementBadge Component (AC: 3, 4)
+      - Create FloatingActionButton (FAB) Component (AC: 5)
+      - Update Goals Page Layout (AC: 1, 2, 6)
+      - Add Achievement Section to Goals Page (AC: 3, 4, 6)
+      - Ensure Existing Functionality Preserved (AC: All)
+      - Color Theme Consistency (AC: 2, 3, 4, 6)
+      - Typography Application (AC: 1, 6)
+      - Progress Bar Implementation (AC: 2)
+      - Floating Action Button Integration (AC: 5)
+      - Loading and Empty States (AC: 1, 6)
+      - Apply Responsive Design Patterns (AC: 1, 2, 6)
+      - Manual Testing &amp; Verification (AC: All)
+      - Accessibility Improvements (AC: All)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">Given I view my goals page, when the page loads, then each goal card displays an icon, title, progress percentage, and days remaining (if applicable).</criterion>
+    <criterion id="AC-2">And progress bars visually show completion percentage (0-100%) in primary green color (#22c55e).</criterion>
+    <criterion id="AC-3">And I see achievement badges for earned milestones displayed in full color (primary green).</criterion>
+    <criterion id="AC-4">And I see locked achievement badges displayed in grayed-out state (graphite-300).</criterion>
+    <criterion id="AC-5">And I see a floating action button (FAB) in the bottom-right corner with "Add Goal" icon to create new goals.</criterion>
+    <criterion id="AC-6">And the design matches goals-achievements-dashboard.html mockup from UX specification with Green &amp; Graphite theme.</criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <artifact>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic 4: UX Visual Polish - Story 4.5</title>
+        <section>Epic 4, Story 4.5: Goals Visual Polish</section>
+        <snippet>Prerequisites: Story 4.4 complete. Goal cards display icon, title, progress percentage, days remaining. Progress bars show completion in primary green. Achievement badges for earned/locked milestones. FAB in bottom-right for adding goals. Design matches goals-achievements-dashboard.html mockup.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic 4 Technical Specification</title>
+        <section>Overview and Design Decisions</section>
+        <snippet>Epic 4 applies Green &amp; Graphite theme (#22c55e primary green, graphite shades) across all pages using shadcn/ui, Google Material Symbols, and Lexend font. Story 4.5 focuses on goals page with progress bars, achievement badges, and FAB component. Mobile-first responsive design with max-width constraint.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture</title>
+        <section>Technology Stack</section>
+        <snippet>Next.js (16, App Router), TypeScript (5), React (19), Tailwind CSS (4.0), shadcn/ui, Supabase (PostgreSQL), TanStack Query (5) for data fetching. Component structure: components/ui/ for shadcn, components/goals/ for goal features, components/common/ for reusable elements.</snippet>
+      </artifact>
+      <artifact>
+        <path>docs/fase-2-ux/goals-achivements-dashboard.html</path>
+        <title>UX Mockup: Goals and Achievements Dashboard</title>
+        <section>Visual Design Reference</section>
+        <snippet>UX mockup showing goals with progress bars, achievement badge grid, Green &amp; Graphite color scheme, and floating action button for creating new goals.</snippet>
+      </artifact>
+    </docs>
+    <code>
+      <artifact>
+        <path>components/goals/GoalCard.tsx</path>
+        <kind>component</kind>
+        <symbol>GoalCard</symbol>
+        <lines>1-24</lines>
+        <reason>Existing goal card component to be refactored with progress bars, icons, and enhanced styling per AC-1 and AC-2</reason>
+      </artifact>
+      <artifact>
+        <path>components/dashboard/GoalProgressCard.tsx</path>
+        <kind>component</kind>
+        <symbol>GoalProgressCard</symbol>
+        <lines>1-54</lines>
+        <reason>Existing component from Story 4.2 with progress bar implementation that can be enhanced or referenced for goals page per AC-2</reason>
+      </artifact>
+      <artifact>
+        <path>components/goals/GoalsClient.tsx</path>
+        <kind>component</kind>
+        <symbol>GoalsClient</symbol>
+        <lines>1-111</lines>
+        <reason>Main goals page client component to be updated with new layout, achievement section, and FAB per AC-1 through AC-6</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/goals/page.tsx</path>
+        <kind>page</kind>
+        <symbol>GoalsPage</symbol>
+        <lines>1-24</lines>
+        <reason>Goals page server component that wraps GoalsClient, verify bg-graphite-50 background and layout structure per AC-6</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/progress.tsx</path>
+        <kind>component</kind>
+        <symbol>Progress</symbol>
+        <lines>1-29</lines>
+        <reason>shadcn/ui Progress component already installed, to be styled with primary green color for goal progress bars per AC-2</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/MaterialIcon.tsx</path>
+        <kind>component</kind>
+        <symbol>MaterialIcon</symbol>
+        <lines>1-21</lines>
+        <reason>Existing Material Symbols icon wrapper to be used for goal icons, achievement icons, and FAB icon per AC-1, AC-3, AC-4, AC-5</reason>
+      </artifact>
+      <artifact>
+        <path>components/common/AppHeader.tsx</path>
+        <kind>component</kind>
+        <symbol>AppHeader</symbol>
+        <lines>N/A</lines>
+        <reason>Existing header component from Story 4.1 to be integrated with goals page per AC-6</reason>
+      </artifact>
+      <artifact>
+        <path>components/common/BottomNav.tsx</path>
+        <kind>component</kind>
+        <symbol>BottomNav</symbol>
+        <lines>N/A</lines>
+        <reason>Existing bottom navigation from Story 4.1, FAB must be positioned above it on mobile per AC-5</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/skeleton.tsx</path>
+        <kind>component</kind>
+        <symbol>Skeleton</symbol>
+        <lines>N/A</lines>
+        <reason>shadcn/ui Skeleton component for loading states of goal cards and progress bars per AC-1</reason>
+      </artifact>
+      <artifact>
+        <path>app/globals.css</path>
+        <kind>stylesheet</kind>
+        <symbol>CSS Variables</symbol>
+        <lines>1-94</lines>
+        <reason>Global CSS with primary-green (#22c55e), graphite color variables, and Material Symbols font configuration to be used throughout per AC-2, AC-3, AC-4, AC-6</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <node>
+        <package>next</package>
+        <version>^16.0.5</version>
+        <usage>App Router, routing, Server Components</usage>
+      </node>
+      <node>
+        <package>react</package>
+        <version>^19.2.0</version>
+        <usage>Component library</usage>
+      </node>
+      <node>
+        <package>tailwindcss</package>
+        <version>^4.0+</version>
+        <usage>Styling with custom green/graphite theme</usage>
+      </node>
+      <node>
+        <package>@supabase/supabase-js</package>
+        <version>^2.x</version>
+        <usage>Database queries for goals (unchanged)</usage>
+      </node>
+      <node>
+        <package>@tanstack/react-query</package>
+        <version>^5.x</version>
+        <usage>Data fetching and caching (unchanged)</usage>
+      </node>
+      <node>
+        <package>shadcn/ui</package>
+        <version>latest</version>
+        <usage>Progress, Skeleton, Button components</usage>
+      </node>
+      <node>
+        <package>material-symbols</package>
+        <version>latest</version>
+        <usage>Goal icons, achievement icons, FAB icon</usage>
+      </node>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>No database schema changes - purely visual enhancements to existing goals functionality</constraint>
+    <constraint>No backend API changes - all data fetching via existing Server Actions and TanStack Query</constraint>
+    <constraint>Preserve existing goal CRUD operations (create, view) without regressions</constraint>
+    <constraint>Mobile-first responsive design with max-width constraint (max-w-3xl or max-w-4xl centered)</constraint>
+    <constraint>FAB must be positioned above BottomNav on mobile (bottom-20 or bottom-24) to avoid overlap</constraint>
+    <constraint>Progress bar values must be clamped to 0-100 range for edge case handling</constraint>
+    <constraint>White text on primary green must meet WCAG AA contrast ratio ≥ 4.5:1 for accessibility</constraint>
+    <constraint>Achievement badges use circular design with earned (full color green) vs locked (grayed graphite) states</constraint>
+    <constraint>Use existing MaterialIcon, Progress, Skeleton, Button shadcn components - no new third-party dependencies</constraint>
+    <constraint>Loading skeletons must match goal card dimensions including progress bar placeholder</constraint>
+    <constraint>Empty state displays friendly message with CTA button and locked achievement badges only</constraint>
+    <constraint>Goal card backgrounds are white on graphite-50 page (not green - progress bars provide color accent)</constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>GoalCard Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface GoalCardProps {
+          goal: Goal;
+          progress?: number; // 0-100 percentage
+          daysRemaining?: number;
+          onClick?: () => void;
+        }
+      </signature>
+      <path>components/goals/GoalCard.tsx</path>
+    </interface>
+    <interface>
+      <name>AchievementBadge Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface AchievementBadgeProps {
+          achievement: {
+            title: string;
+            icon: string; // Material Symbol name
+            earned: boolean;
+          };
+          size?: 'small' | 'medium' | 'large';
+        }
+      </signature>
+      <path>components/goals/AchievementBadge.tsx (to be created)</path>
+    </interface>
+    <interface>
+      <name>FloatingActionButton Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>
+        interface FloatingActionButtonProps {
+          icon?: string;
+          onClick: () => void;
+          ariaLabel: string;
+          className?: string;
+        }
+      </signature>
+      <path>components/ui/FloatingActionButton.tsx (to be created)</path>
+    </interface>
+    <interface>
+      <name>Goal Data Model</name>
+      <kind>TypeScript Type</kind>
+      <signature>
+        interface Goal {
+          id: string;
+          user_id: string;
+          title: string;
+          target: string;
+          created_at: string;
+          updated_at: string;
+        }
+      </signature>
+      <path>lib/types/goal.ts</path>
+    </interface>
+    <interface>
+      <name>MaterialIcon Component</name>
+      <kind>React Component</kind>
+      <signature>
+        MaterialIcon({ icon, className, filled }: { icon: string; className?: string; filled?: boolean })
+      </signature>
+      <path>components/ui/MaterialIcon.tsx</path>
+    </interface>
+    <interface>
+      <name>shadcn/ui Progress Component</name>
+      <kind>React Component</kind>
+      <signature>
+        Progress({ value, className }: { value?: number; className?: string })
+      </signature>
+      <path>components/ui/progress.tsx</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Manual testing checklist provided in story Dev Notes covering visual design, functionality, accessibility, and responsiveness. Automated unit tests for GoalCard, AchievementBadge, and FloatingActionButton components should verify rendering, props, styling, and event handlers. Integration tests should ensure no regressions in goal CRUD operations. E2E tests with Playwright should verify complete user flows including creating goals, viewing progress, and clicking FAB. Visual regression tests should compare rendered output to UX mockup (goals-achievements-dashboard.html).
+    </standards>
+    <locations>
+      - Unit tests: Co-located with components (e.g., GoalCard.test.tsx, AchievementBadge.test.tsx)
+      - Integration tests: tests/unit/ directory or co-located
+      - E2E tests: tests/e2e/ directory (e.g., goals.spec.ts)
+      - Manual testing: Follow 100-step checklist in Dev Notes section of story file
+    </locations>
+    <ideas>
+      <test id="AC-1-visual">
+        <criterion>AC-1</criterion>
+        <description>Verify goal cards display icon, title, progress percentage, and days remaining on page load</description>
+        <approach>E2E test navigates to /goals, creates sample goal, verifies card renders with MaterialIcon, title text, progress percentage text, and optional days remaining</approach>
+      </test>
+      <test id="AC-2-progress">
+        <criterion>AC-2</criterion>
+        <description>Verify progress bars show completion percentage (0-100%) in primary green color</description>
+        <approach>Unit test GoalCard with various progress values (0, 50, 100, -10, 150), verify clamping and green background color (bg-primary-green)</approach>
+      </test>
+      <test id="AC-3-earned-badges">
+        <criterion>AC-3</criterion>
+        <description>Verify earned achievement badges display in full color (primary green)</description>
+        <approach>Unit test AchievementBadge with earned=true, verify bg-primary-green and text-white styling applied</approach>
+      </test>
+      <test id="AC-4-locked-badges">
+        <criterion>AC-4</criterion>
+        <description>Verify locked achievement badges display in grayed-out state</description>
+        <approach>Unit test AchievementBadge with earned=false, verify bg-graphite-200/300 and text-graphite-400/500 styling applied</approach>
+      </test>
+      <test id="AC-5-fab">
+        <criterion>AC-5</criterion>
+        <description>Verify FAB appears in bottom-right corner with "Add Goal" icon</description>
+        <approach>E2E test navigates to /goals, verifies FAB exists with fixed positioning, bottom-20 right-6, click handler navigates to goal creation</approach>
+      </test>
+      <test id="AC-6-design">
+        <criterion>AC-6</criterion>
+        <description>Verify design matches goals-achievements-dashboard.html mockup with Green &amp; Graphite theme</description>
+        <approach>Visual regression test captures screenshot of /goals page, compares to reference image from UX mockup using Playwright visual comparison</approach>
+      </test>
+      <test id="empty-state">
+        <criterion>AC-1, AC-6</criterion>
+        <description>Verify empty state displays when no goals exist with CTA button and locked achievements</description>
+        <approach>E2E test with no goals, verifies empty state message, CTA button, and achievement section with locked badges only</approach>
+      </test>
+      <test id="loading-state">
+        <criterion>AC-1</criterion>
+        <description>Verify loading skeleton displays while goals are fetching</description>
+        <approach>E2E test intercepts network request, delays response, verifies skeleton cards render during loading</approach>
+      </test>
+      <test id="accessibility">
+        <criterion>All ACs</criterion>
+        <description>Verify keyboard navigation, ARIA labels, screen reader support, and color contrast</description>
+        <approach>Automated accessibility audit with Lighthouse, manual keyboard navigation test (Tab through elements, Enter/Space activation), screen reader testing (optional)</approach>
+      </test>
+      <test id="responsive">
+        <criterion>AC-1, AC-2, AC-6</criterion>
+        <description>Verify responsive design on mobile (320px-640px), tablet (641px-1024px), desktop (1025px+)</description>
+        <approach>E2E test with Playwright viewport emulation at various sizes, verify layout adjustments, achievement badge grid columns, FAB positioning</approach>
+      </test>
+    </ideas>
+  </tests>
+</story-context>
