@@ -1,23 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { IconInput } from "@/components/auth/IconInput";
+import { AuthLogo } from "@/components/auth/AuthLogo";
+import { MaterialIcon } from "@/components/ui/MaterialIcon";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
-
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    setErrors({});
 
     try {
       const response = await fetch("/api/auth/signup", {
@@ -38,7 +40,7 @@ export default function SignupPage() {
       toast.success("Account created successfully!");
       router.push("/");
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error("Registration failed", {
         description: "An unexpected error occurred",
       });
@@ -48,51 +50,62 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md space-y-6 p-6">
-        <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Create an account</h1>
-          <p className="text-gray-500">Enter your details to get started</p>
-        </div>
+    <div className="flex min-h-screen items-center justify-center bg-graphite-50 px-4">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8">
+        <AuthLogo />
         
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
+          <div>
+            <label htmlFor="email" className="sr-only">Email</label>
+            <IconInput
               id="email"
               name="email"
               type="email"
+              icon="mail"
               placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email}
               required
               disabled={isLoading}
             />
           </div>
           
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
+          <div>
+            <label htmlFor="password" className="sr-only">Password</label>
+            <IconInput
               id="password"
               name="password"
               type="password"
+              icon="lock"
               placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password}
+              showPasswordToggle
               required
               disabled={isLoading}
             />
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-muted-foreground mt-1">
               Minimum 8 characters, 1 uppercase letter, 1 number
             </p>
           </div>
 
-          <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Creating account..." : "Register"}
+          <Button 
+            type="submit" 
+            disabled={isLoading} 
+            className="w-full h-12 bg-primary-green hover:bg-primary-green/90 text-white font-medium rounded-lg"
+          >
+            {isLoading && <MaterialIcon icon="progress_activity" className="animate-spin" />}
+            {isLoading ? "Creating account..." : "Sign up"}
           </Button>
         </form>
         
-        <p className="text-center text-sm text-gray-500">
+        <p className="text-center text-sm text-graphite-700 mt-6">
           Already have an account?{" "}
-          <a href="/login" className="font-medium hover:underline">
+          <Link href="/login" className="text-primary-green hover:underline font-medium">
             Sign in
-          </a>
+          </Link>
         </p>
       </div>
     </div>

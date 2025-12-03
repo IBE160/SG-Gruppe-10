@@ -1,0 +1,381 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>4</epicId>
+    <storyId>4</storyId>
+    <title>Workouts Visual Polish</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-03</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/4-4-workouts-visual-polish.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>FitTrack user</asA>
+    <iWant>to see my workouts displayed with attractive cards and visual styling</iWant>
+    <soThat>reviewing my workout history is enjoyable and easy to scan</soThat>
+    <tasks>
+      - Refactor WorkoutCard Component (AC: 1, 2, 3, 4)
+      - Update Workout History Page (AC: 4, 5)
+      - Update Workout Details Page (AC: 1, 2, 3, 4, 5)
+      - Enhance WorkoutIcon Component (AC: 2)
+      - Add Workout Type Icons to All Workout Displays (AC: 2, 4)
+      - Apply Responsive Design Patterns (AC: 3, 4, 5)
+      - Loading and Empty States (AC: 4)
+      - Ensure Existing Functionality Preserved (AC: All)
+      - Color Theme Consistency (AC: 1)
+      - Typography Application (AC: 4)
+      - Manual Testing &amp; Verification (AC: All)
+      - Accessibility Improvements (AC: All)
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="AC-1">
+      Given I view my workout history or workout details, when the page loads, then workout cards have primary green backgrounds (#22c55e) with white text.
+    </criterion>
+    <criterion id="AC-2">
+      And cards display workout icon, title, date, and summary metrics prominently.
+    </criterion>
+    <criterion id="AC-3">
+      And cards use rounded corners (rounded-xl) for modern appearance.
+    </criterion>
+    <criterion id="AC-4">
+      And the list is easy to scan with clear visual hierarchy.
+    </criterion>
+    <criterion id="AC-5">
+      And the design matches workout-history-dashboard.html mockup from UX specification.
+    </criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/fase-2-plan/PRD.md</path>
+        <title>FitTrack Product Requirements Document</title>
+        <section>FR-002: Workout Management</section>
+        <snippet>Users can create, view, update, and delete workouts with date, type, duration, and notes. View workout history in a simple, chronological list.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-2-plan/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Epic 4: UX Visual Polish, Story 4.4: Workouts Visual Polish</section>
+        <snippet>Workout cards have green backgrounds with white text. Cards display workout icon, title, date, and summary metrics. Cards use rounded corners (rounded-xl) for modern appearance. Design matches workout-history-dashboard.html mockup.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-3-solutioning/architecture.md</path>
+        <title>FitTrack Architecture Document</title>
+        <section>System Architecture</section>
+        <snippet>Next.js 16 with App Router, TypeScript, Tailwind CSS 4.0, shadcn/ui components, Supabase for auth and database, TanStack Query for data fetching, Vercel deployment. Component-based architecture with Server Actions for mutations.</snippet>
+      </doc>
+      <doc>
+        <path>docs/fase-2-ux/ux-design-specification.md</path>
+        <title>FitTrack UX Design Specification</title>
+        <section>Visual Design Principles</section>
+        <snippet>Green &amp; Graphite theme with primary green #22c55e, mobile-first responsive design, card-based interface, Lexend font family, Google Material Symbols for icons. Target platform is mobile-responsive web application with strong focus on mobile-first experience.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-4.md</path>
+        <title>Epic 4 Technical Specification</title>
+        <section>UX Visual Polish Implementation</section>
+        <snippet>Implement mobile-first bottom navigation, create reusable UI components (BottomNav, AppHeader, MaterialIcon, StatCard), apply Green &amp; Graphite color theme (#22c55e, graphite grays), enhance workout pages with visual cards and icons, use Lexend font, ensure responsive design with max-width 640px centered on desktop. No database schema changes or backend API modifications required.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/4-1-navigation-layout-foundation.md</path>
+        <title>Story 4.1: Navigation &amp; Layout Foundation</title>
+        <section>Dev Notes - Component Patterns Established</section>
+        <snippet>MaterialIcon wrapper component created and working reliably. Color theme variables configured (primary-green #22c55e, graphite shades). Lexend font loaded and optimized globally. Mobile-first responsive design approach successful. AppHeader and BottomNav components available for reuse.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/4-2-dashboard-visual-polish.md</path>
+        <title>Story 4.2: Dashboard Visual Polish</title>
+        <section>Dev Notes - Components Created</section>
+        <snippet>WorkoutIcon component created at components/dashboard/WorkoutIcon.tsx with icon mapping for workout types (Cardio→directions_run, Strength→fitness_center, Yoga→self_improvement). StatCard, GoalProgressCard, RecentActivityCard components available. Dashboard queries and empty state patterns established.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/4-3-authentication-pages-visual-polish.md</path>
+        <title>Story 4.3: Authentication Pages Visual Polish</title>
+        <section>Dev Notes - Learnings</section>
+        <snippet>MaterialIcon wrapper proven reliable. Color theme variables working correctly. Lexend font applied globally. Mobile-first responsive design successful. IconInput pattern with left-aligned icons established. Loading states with spinner animation effective. Accessibility patterns (sr-only labels, aria-describedby) working well. Continue mobile-first approach, maintain TypeScript strictness, test color contrast for WCAG AA compliance.</snippet>
+      </doc>
+    </docs>
+    
+    <code>
+      <artifact>
+        <path>components/workouts/WorkoutCard.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutCard</symbol>
+        <lines>1-54</lines>
+        <reason>Current workout card component to be refactored with primary green background, white text, rounded-xl corners, and WorkoutIcon integration.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/workouts/page.tsx</path>
+        <kind>page</kind>
+        <symbol>WorkoutsPage</symbol>
+        <lines>1-20</lines>
+        <reason>Workout history page to be updated with enhanced layout, AppHeader, BottomNav, and improved visual styling while maintaining existing data flow.</reason>
+      </artifact>
+      <artifact>
+        <path>app/(dashboard)/workouts/[id]/page.tsx</path>
+        <kind>page</kind>
+        <symbol>WorkoutDetailsPage</symbol>
+        <lines>all</lines>
+        <reason>Workout details page to be enhanced with green card styling, large workout icon, stat-card style metrics, and action buttons.</reason>
+      </artifact>
+      <artifact>
+        <path>components/dashboard/WorkoutIcon.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutIcon</symbol>
+        <lines>1-44</lines>
+        <reason>Existing WorkoutIcon component with workout type to icon mapping. To be reused/enhanced for workout cards. Already maps Cardio, Strength, Yoga, Flexibility, Sports workout types to Material Symbols.</reason>
+      </artifact>
+      <artifact>
+        <path>components/ui/MaterialIcon.tsx</path>
+        <kind>component</kind>
+        <symbol>MaterialIcon</symbol>
+        <lines>1-20</lines>
+        <reason>Wrapper component for Google Material Symbols icons. Proven reliable in Stories 4.1-4.3. Use for all workout type icons and UI elements.</reason>
+      </artifact>
+      <artifact>
+        <path>components/common/AppHeader.tsx</path>
+        <kind>component</kind>
+        <symbol>AppHeader</symbol>
+        <lines>1-66</lines>
+        <reason>Reusable header component from Story 4.1. Use for workout history and details pages with back button and optional action button.</reason>
+      </artifact>
+      <artifact>
+        <path>components/workouts/WorkoutHistoryClient.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutHistoryClient</symbol>
+        <lines>all</lines>
+        <reason>Client component for workout history list rendering. Update to use enhanced WorkoutCard component and apply new visual styling.</reason>
+      </artifact>
+      <artifact>
+        <path>components/workouts/WorkoutListSkeleton.tsx</path>
+        <kind>component</kind>
+        <symbol>WorkoutListSkeleton</symbol>
+        <lines>all</lines>
+        <reason>Loading skeleton for workout list. Update to match new green card styling dimensions.</reason>
+      </artifact>
+      <artifact>
+        <path>lib/types/workout.ts</path>
+        <kind>types</kind>
+        <symbol>Workout</symbol>
+        <lines>1-11</lines>
+        <reason>Workout data model interface. Use for type-safe component props. Fields: id, user_id, workout_date, workout_type, duration_minutes, notes, created_at, updated_at.</reason>
+      </artifact>
+      <artifact>
+        <path>app/globals.css</path>
+        <kind>styles</kind>
+        <symbol>CSS Variables</symbol>
+        <lines>1-50</lines>
+        <reason>Global CSS with Green &amp; Graphite theme variables. Primary green #22c55e, graphite shades, and Lexend font already configured. Use existing color variables: --primary-green, --graphite-50, --graphite-700, --graphite-900.</reason>
+      </artifact>
+    </code>
+    
+    <dependencies>
+      <node>
+        <package name="next" version="^16.0.5" />
+        <package name="react" version="^19.2.0" />
+        <package name="tailwindcss" version="^4.0+" />
+        <package name="@supabase/supabase-js" version="^2.x" />
+        <package name="@tanstack/react-query" version="latest" />
+        <package name="date-fns" version="^4.x" />
+        <package name="material-symbols" version="latest" />
+      </node>
+      <shadcn-ui>
+        <component name="card" />
+        <component name="button" />
+        <component name="skeleton" />
+        <component name="progress" />
+      </shadcn-ui>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>
+      <category>Visual Design</category>
+      <rule>Primary green background (#22c55e) with white text for workout cards</rule>
+    </constraint>
+    <constraint>
+      <category>Visual Design</category>
+      <rule>Rounded-xl corners for all workout cards</rule>
+    </constraint>
+    <constraint>
+      <category>Visual Design</category>
+      <rule>Shadow-md for card depth</rule>
+    </constraint>
+    <constraint>
+      <category>Visual Design</category>
+      <rule>Use Lexend font family for all text elements</rule>
+    </constraint>
+    <constraint>
+      <category>Visual Design</category>
+      <rule>Graphite-50 (#f9fafb) for page backgrounds</rule>
+    </constraint>
+    <constraint>
+      <category>Layout</category>
+      <rule>Mobile-first responsive design with max-width 640px centered on desktop</rule>
+    </constraint>
+    <constraint>
+      <category>Layout</category>
+      <rule>Card-based list with gap-4 spacing</rule>
+    </constraint>
+    <constraint>
+      <category>Layout</category>
+      <rule>Use AppHeader component from Story 4.1 for page headers</rule>
+    </constraint>
+    <constraint>
+      <category>Layout</category>
+      <rule>Use BottomNav component with "workouts" active tab</rule>
+    </constraint>
+    <constraint>
+      <category>Icons</category>
+      <rule>Use WorkoutIcon component with MaterialIcon wrapper for workout type icons</rule>
+    </constraint>
+    <constraint>
+      <category>Icons</category>
+      <rule>Icon mapping: Running→directions_run, Cycling→directions_bike, Swimming→pool, Strength→fitness_center, Yoga→self_improvement, Default→fitness_center</rule>
+    </constraint>
+    <constraint>
+      <category>Typography</category>
+      <rule>Workout title: font-semibold or font-bold, text-lg or text-xl</rule>
+    </constraint>
+    <constraint>
+      <category>Typography</category>
+      <rule>Date/time: font-normal, text-sm, opacity-90 or text-graphite-100</rule>
+    </constraint>
+    <constraint>
+      <category>Typography</category>
+      <rule>Duration/metrics: font-medium, text-base</rule>
+    </constraint>
+    <constraint>
+      <category>Data Flow</category>
+      <rule>NO database schema changes - maintain existing Workout data model</rule>
+    </constraint>
+    <constraint>
+      <category>Data Flow</category>
+      <rule>NO backend API changes - keep existing Server Actions and TanStack Query patterns</rule>
+    </constraint>
+    <constraint>
+      <category>Data Flow</category>
+      <rule>Preserve all existing workout CRUD functionality (create, read, update, delete)</rule>
+    </constraint>
+    <constraint>
+      <category>Testing</category>
+      <rule>Verify all existing functionality still works after visual changes</rule>
+    </constraint>
+    <constraint>
+      <category>Testing</category>
+      <rule>Test color contrast for WCAG AA compliance (white on #22c55e must be ≥4.5:1)</rule>
+    </constraint>
+    <constraint>
+      <category>Accessibility</category>
+      <rule>Minimum touch target size: 44x44px for interactive elements</rule>
+    </constraint>
+    <constraint>
+      <category>Accessibility</category>
+      <rule>Visible focus indicators (ring-2 ring-white or ring-graphite-900)</rule>
+    </constraint>
+    <constraint>
+      <category>Accessibility</category>
+      <rule>Semantic HTML with appropriate ARIA labels where needed</rule>
+    </constraint>
+    <constraint>
+      <category>Performance</category>
+      <rule>Target Lighthouse Performance ≥90, Accessibility ≥95</rule>
+    </constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>WorkoutCard Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>interface WorkoutCardProps { workout: Workout; onClick?: () =&gt; void; }</signature>
+      <path>components/workouts/WorkoutCard.tsx</path>
+    </interface>
+    <interface>
+      <name>WorkoutIcon Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>interface WorkoutIconProps { workoutType: string; size?: 'sm' | 'md' | 'lg'; variant?: 'default' | 'filled'; }</signature>
+      <path>components/dashboard/WorkoutIcon.tsx</path>
+    </interface>
+    <interface>
+      <name>AppHeader Component Props</name>
+      <kind>React Component Interface</kind>
+      <signature>interface AppHeaderProps { title: string; showBackButton?: boolean; actionButton?: { icon: string; onClick: () =&gt; void; label: string }; }</signature>
+      <path>components/common/AppHeader.tsx</path>
+    </interface>
+    <interface>
+      <name>Workout Data Model</name>
+      <kind>TypeScript Interface</kind>
+      <signature>interface Workout { id: string; user_id: string; workout_date: string; workout_type: string; duration_minutes: number; notes: string | null; created_at: string; updated_at: string; }</signature>
+      <path>lib/types/workout.ts</path>
+    </interface>
+    <interface>
+      <name>Supabase Workout Query</name>
+      <kind>Database Query Pattern</kind>
+      <signature>supabase.from('workouts').select('*').eq('user_id', userId).order('workout_date', { ascending: false })</signature>
+      <path>Existing Server Actions and TanStack Query patterns</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Use Jest and React Testing Library for component unit tests. Test component rendering, prop handling, and user interactions. For visual components, verify CSS classes are applied correctly (bg-primary-green, text-white, rounded-xl). Test accessibility attributes (aria-labels, focus indicators). Integration tests should verify workout data flows correctly through components. E2E tests with Playwright for complete user workflows (view history, click card, navigate to details).
+    </standards>
+    
+    <locations>
+      __tests__/components/workouts/
+      __tests__/pages/workouts/
+      e2e/workouts/
+    </locations>
+    
+    <ideas>
+      <test id="UT-1" criterion="AC-1">
+        Unit test WorkoutCard: Verify bg-primary-green and text-white classes are applied when component renders
+      </test>
+      <test id="UT-2" criterion="AC-2">
+        Unit test WorkoutCard: Verify workout icon, title, date, and duration are all rendered with correct data
+      </test>
+      <test id="UT-3" criterion="AC-3">
+        Unit test WorkoutCard: Verify rounded-xl class is applied to card container
+      </test>
+      <test id="UT-4" criterion="AC-2">
+        Unit test WorkoutIcon: Verify correct icon mapping for different workout types (Running→directions_run, Strength→fitness_center, etc.)
+      </test>
+      <test id="IT-1" criterion="AC-4">
+        Integration test WorkoutHistory: Verify workout list renders multiple cards with proper spacing (gap-4) and visual hierarchy
+      </test>
+      <test id="IT-2" criterion="AC-4">
+        Integration test WorkoutHistory: Verify empty state displays when no workouts exist with friendly message and CTA button
+      </test>
+      <test id="IT-3" criterion="AC-4">
+        Integration test WorkoutHistory: Verify loading skeleton displays during data fetch and matches card dimensions
+      </test>
+      <test id="E2E-1" criterion="AC-All">
+        E2E test: Create workout → Verify appears in history list with green card styling → Click card → Verify navigates to details page with enhanced layout
+      </test>
+      <test id="E2E-2" criterion="AC-All">
+        E2E test: Edit workout from details page → Verify changes save → Verify updated card displays correctly in history list
+      </test>
+      <test id="E2E-3" criterion="AC-All">
+        E2E test: Delete workout from details page → Verify removes from history list → Verify empty state if last workout
+      </test>
+      <test id="A11Y-1" criterion="AC-All">
+        Accessibility test: Verify keyboard navigation works (Tab through cards, Enter to open details)
+      </test>
+      <test id="A11Y-2" criterion="AC-All">
+        Accessibility test: Run Lighthouse audit → Verify Accessibility score ≥95
+      </test>
+      <test id="A11Y-3" criterion="AC-1">
+        Accessibility test: Verify color contrast ratio for white text on primary green #22c55e meets WCAG AA (≥4.5:1)
+      </test>
+      <test id="RESP-1" criterion="AC-3,AC-4">
+        Responsive test: Verify cards display correctly on mobile (320px, 375px, 414px), tablet (768px, 1024px), and desktop (1280px, 1920px)
+      </test>
+      <test id="PERF-1" criterion="AC-All">
+        Performance test: Run Lighthouse audit → Verify Performance score ≥90
+      </test>
+    </ideas>
+  </tests>
+</story-context>
