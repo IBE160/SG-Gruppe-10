@@ -56,25 +56,58 @@
     - [x] File: docs/sprint-artifacts/sprint-status.yaml
   - foreach epic in sprint planning:
     - [x] /run-agent-task sm create-epic-tech-context {prompt / user-input-file}
-      - [x] File: docs/sprint-artifacts/tech-spec-epic-epic-1.md
+      - [x] Epic 1: docs/sprint-artifacts/tech-spec-epic-1.md
+      - [x] Epic 2: docs/sprint-artifacts/tech-spec-epic-2.md
+      - [x] Epic 4: docs/sprint-artifacts/tech-spec-epic-4.md
     - [x] /run-agent-task sm validate-epic-tech-context {prompt / user-input-file}
       - [x] File: docs/sprint-artifacts/validation-report-2025-11-29.md
     - foreach story in epic:
       - [x] /run-agent-task sm *create-story {prompt / user-input-file}
-        - [x] File: docs/sprint-artifacts/1-1-first-story-title.md
+        - [x] Story 1.2: docs/sprint-artifacts/1-2-user-registration.md
+        - [x] Story 1.3: docs/sprint-artifacts/1-3-user-login.md
+        - [x] Story 1.4: docs/sprint-artifacts/1-4-user-logout.md
+        - [x] Story 2.1: docs/sprint-artifacts/2-1-create-workout.md
+        - [x] Story 2.2: docs/sprint-artifacts/2-2-view-workout-history.md
+        - [x] Story 2.3: docs/sprint-artifacts/2-3-view-workout-details.md
+        - [x] Story 2.4: docs/sprint-artifacts/2-4-update-workout.md
+        - [x] Story 2.5: docs/sprint-artifacts/2-5-delete-workout.md
+        - [x] Story 3.1: docs/sprint-artifacts/3-1-create-goal.md
+        - [x] Story 3.2: docs/sprint-artifacts/3-2-view-goals.md
+        - [x] Story 4.1: docs/sprint-artifacts/4-1-navigation-layout-foundation.md
+        - [x] Story 4.2: docs/sprint-artifacts/4-2-dashboard-visual-polish.md
+        - [x] Story 4.3: docs/sprint-artifacts/4-3-authentication-pages-visual-polish.md
+        - [x] Story 4.4: docs/sprint-artifacts/4-4-workouts-visual-polish.md
+        - [x] Story 4.5: docs/sprint-artifacts/4-5-goals-visual-polish.md
       - [x] /run-agent-task sm *validate-create-story {prompt / user-input-file}
         - [x] File: docs/sprint-artifacts/validation-report-2025-11-29.md
       - [x] /run-agent-task sm *create-story-context {prompt / user-input-file}
-        - [x] File: docs/sprint-artifacts/1-1-project-setup.context.xml
+        - [x] Story 1.2: docs/sprint-artifacts/1-2-user-registration.context.xml
+        - [x] Story 1.3: docs/sprint-artifacts/1-3-user-login.context.xml
+        - [x] Story 2.1: docs/sprint-artifacts/2-1-create-workout.context.xml
+        - [x] Story 2.2: docs/sprint-artifacts/2-2-view-workout-history.context.xml
+        - [x] Story 2.3: docs/sprint-artifacts/2-3-view-workout-details.context.xml
+        - [x] Story 2.4: docs/sprint-artifacts/2-4-update-workout.context.xml
+        - [x] Story 2.5: docs/sprint-artifacts/2-5-delete-workout.context.xml
+        - [x] Story 3.1: docs/sprint-artifacts/3-1-create-goal.context.xml
+        - [x] Story 4.1: docs/sprint-artifacts/4-1-navigation-layout-foundation.context.xml
+        - [x] Story 4.2: docs/sprint-artifacts/4-2-dashboard-visual-polish.context.xml
+        - [x] Story 4.3: docs/sprint-artifacts/4-3-authentication-pages-visual-polish.context.xml
+        - [x] Story 4.4: docs/sprint-artifacts/4-4-workouts-visual-polish.context.xml
+        - [x] Story 4.5: docs/sprint-artifacts/4-5-goals-visual-polish.context.xml
       - [x] /run-agent-task sm *validate-story-context {prompt / user-input-file}
         - [x] File: docs/sprint-artifacts/validation-report-story-context-2025-11-30.md
       - [x] /run-agent-task sm *story-ready-for-dev {prompt / user-input-file}
       while code-review != approved:
         - [x] /run-agent-task dev *develop-story {prompt / user-input-file}
         - [x] /run-agent-task dev *code-review {prompt / user-input-file}
+          - [x] Story 1.2: docs/sprint-artifacts/code-review-1-2-2025-11-30.md
       - [x] /run-agent-task dev *story-done {prompt / user-input-file}
-      - [ ] /run-agent-task sm *test-review {prompt / user-input-file}
-    - [ ] /run-agent-task sm *epic-retrospective {prompt / user-input-file}
+      - [x] /run-agent-task sm *test-review {prompt / user-input-file}
+    - [x] /run-agent-task sm *epic-retrospective {prompt / user-input-file}
+      - [x] Epic 1: docs/sprint-artifacts/epic-1-retro-2025-12-02.md
+      - [x] Epic 2: docs/sprint-artifacts/epic-2-retro-2025-12-02.md
+      - [x] Epic 3: docs/sprint-artifacts/epic-3-retro-2025-12-03.md
+      - [x] Epic 4: docs/sprint-artifacts/epic-4-retro-2025-12-03.md
 
 
 
