@@ -51,7 +51,7 @@
 
 ## Fase 4
 
-- [ ] Implementation
+- [x] Implementation
   - [x] /run-agent-task sm *sprint-planning {prompt / user-input-file}
     - [x] File: docs/sprint-artifacts/sprint-status.yaml
   - foreach epic in sprint planning:

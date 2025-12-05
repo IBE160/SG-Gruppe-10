@@ -1,0 +1,107 @@
+[
+  {
+    "request": {
+      "session.id": "b9738db1-511d-44a0-9385-e83cd8fd3961",
+      "installation.id": "d5750831-9c41-4d45-9d6b-6bd897ab01fa",
+      "interactive": true,
+      "user.email": "kristofferhop@gmail.com",
+      "event.name": "gemini_cli.api_request",
+      "event.timestamp": "2025-11-30T10:48:42.174Z",
+      "model": "gemini-3-pro-preview",
+      "prompt_id": "b9738db1-511d-44a0-9385-e83cd8fd3961########0",
+      "request_text": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "This is the Gemini CLI. We are setting up the context for our chat.\nToday's date is søndag 30. november 2025 (formatted according to the user's locale).\nMy operating system is: win32\nThe project's temporary directory is: C:\\Users\\hopkri\\.gemini\\tmp\\5804a7e10684ef1c2d018cf1eaa849d283f776524dec56a1e854b54ea5385955\nI'm currently working in the directory: C:\\himolde\\25H\\IBE160\\SG-Gruppe-10\nHere is the folder structure of the current working directories:\n\nShowing up to 200 items (files + folders). Folders or files indicated with ... contain more items not shown, were ignored, or the display limit (200 items) was reached.\n\nC:\\himolde\\25H\\IBE160\\SG-Gruppe-10\\\n├───.gitignore\n├───proposal.md\n├───README.md\n├───.bmad\\\n│   ├───_cfg\\\n│   │   ├───agent-manifest.csv\n│   │   ├───files-manifest.csv\n│   │   ├───manifest.yaml\n│   │   ├───task-manifest.csv\n│   │   ├───tool-manifest.csv\n│   │   ├───workflow-manifest.csv\n│   │   ├───agents\\\n│   │   │   ├───bmm-analyst.customize.yaml\n│   │   │   ├───bmm-architect.customize.yaml\n│   │   │   ├───bmm-dev.customize.yaml\n│   │   │   ├───bmm-pm.customize.yaml\n│   │   │   ├───bmm-sm.customize.yaml\n│   │   │   ├───bmm-tea.customize.yaml\n│   │   │   ├───bmm-tech-writer.customize.yaml\n│   │   │   ├───bmm-ux-designer.customize.yaml\n│   │   │   ├───cis-brainstorming-coach.customize.yaml\n│   │   │   ├───cis-creative-problem-solver.customize.yaml\n│   │   │   ├───cis-design-thinking-coach.customize.yaml\n│   │   │   ├───cis-innovation-strategist.customize.yaml\n│   │   │   ├───cis-presentation-master.customize.yaml\n│   │   │   ├───cis-storyteller.customize.yaml\n│   │   │   └───core-bmad-master.customize.yaml\n│   │   └───ides\\\n│   │       └───claude-code.yaml\n│   ├───bmm\\\n│   │   ├───config.yaml\n│   │   ├───README.md\n│   │   ├───agents\\\n│   │   │   ├───analyst.md\n│   │   │   ├───architect.md\n│   │   │   ├───dev.md\n│   │   │   ├───pm.md\n│   │   │   ├───sm.md\n│   │   │   ├───tea.md\n│   │   │   ├───tech-writer.md\n│   │   │   └───ux-designer.md\n│   │   ├───docs\\\n│   │   │   ├───agents-guide.md\n│   │   │   ├───brownfield-guide.md\n│   │   │   ├───enterprise-agentic-development.md\n│   │   │   ├───faq.md\n│   │   │   ├───glossary.md\n│   │   │   ├───party-mode.md\n│   │   │   ├───quick-spec-flow.md\n│   │   │   ├───quick-start.md\n│   │   │   ├───README.md\n│   │   │   ├───scale-adaptive-system.md\n│   │   │   ├───test-architecture.md\n│   │   │   ├───workflow-architecture-reference.md\n│   │   │   ├───workflow-document-project-reference.md\n│   │   │   ├───workflows-analysis.md\n│   │   │   ├───workflows-implementation.md\n│   │   │   ├───workflows-planning.md\n│   │   │   ├───workflows-solutioning.md\n│   │   │   └───images\\\n│   │   ├───teams\\\n│   │   │   ├───default-party.csv\n│   │   │   └───team-fullstack.yaml\n│   │   ├───testarch\\\n│   │   │   ├───tea-index.csv\n│   │   │   └───knowledge\\\n│   │   └───workflows\\\n│   │       ├───1-analysis\\\n│   │       ├───2-plan-workflows\\\n│   │       ├───3-solutioning\\\n│   │       ├───4-implementation\\\n│   │       ├───diagrams\\\n│   │       ├───document-project\\\n│   │       ├───techdoc\\\n│   │       ├───testarch\\\n│   │       └───workflow-status\\\n│   ├───cis\\\n│   │   ├───config.yaml\n│   │   ├───README.md\n│   │   ├───agents\\\n│   │   │   ├───brainstorming-coach.md\n│   │   │   ├───creative-problem-solver.md\n│   │   │   ├───design-thinking-coach.md\n│   │   │   ├───innovation-strategist.md\n│   │   │   ├───presentation-master.md\n│   │   │   ├───README.md\n│   │   │   └───storyteller.md\n│   │   ├───teams\\\n│   │   │   └───creative-squad.yaml\n│   │   │   └───...\n│   │   └───workflows\\\n│   ├───core\\\n│   │   ├───config.yaml\n│   │   ├───agents\\\n│   │   ├───resources\\\n│   │   ├───tasks\\\n│   │   ├───tools\\\n│   │   └───workflows\\\n│   └───docs\\\n│       ├───claude-code-instructions.md\n│       └───gemini-instructions.md\n├───.gemini\\\n│   ├───settings.json\n│   └───commands\\\n│       ├───bmad-agent-bmm-analyst.toml\n│       ├───bmad-agent-bmm-architect.toml\n│       ├───bmad-agent-bmm-dev.toml\n│       ├───bmad-agent-bmm-pm.toml\n│       ├───bmad-agent-bmm-sm.toml\n│       ├───bmad-agent-bmm-tea.toml\n│       ├───bmad-agent-bmm-tech-writer.toml\n│       ├───bmad-agent-bmm-ux-designer.toml\n│       ├───bmad-agent-cis-brainstorming-coach.toml\n│       ├───bmad-agent-cis-creative-problem-solver.toml\n│       ├───bmad-agent-cis-design-thinking-coach.toml\n│       ├───bmad-agent-cis-innovation-strategist.toml\n│       ├───bmad-agent-cis-README.toml\n│       ├───bmad-agent-cis-storyteller.toml\n│       ├───bmad-agent-core-bmad-master.toml\n│       ├───bmad-task-bmm-daily-standup.toml\n│       ├───bmad-task-core-adv-elicit.toml\n│       ├───bmad-task-core-index-docs.toml\n│       ├───bmad-task-core-validate-workflow.toml\n│       ├───bmad-task-core-workflow.toml\n│       └───run-agent-task.toml\n├───.git\\...\n├───.logging\\\n│   ├───.gitignore\n│   ├───api-viewer.html\n│   ├───api-viewer.html.bak\n│   ├───process-api-requests.py\n│   ├───README.md\n│   ├───requirements.txt\n│   ├───server.py\n│   ├───server.py.backup\n│   ├───telemetry.md\n│   ├───truncate.py\n│   ├───watcher.py\n│   └───requests\\\n│       ├───2025-11-01_10-03-18-6a75773e-f864-4405-a662-7de636f6638f.json\n│       ├───2025-11-01_10-44-15-0d73af44-8d8c-4d82-a591-99f93774afdf.json\n│       ├───2025-11-01_10-44-15-cdefc3b8-a2bd-4985-8402-1d5b26450948.json\n│       ├───2025-11-01_10-44-15-f47c6c22-1cc8-43a2-a9fb-d8f02906d903.json\n│       ├───2025-11-01_10-44-16-09a7e974-462e-461f-ad65-8e559da6ba58.json\n│       ├───2025-11-01_10-44-16-10a7f6e6-1620-4ba7-a6bc-7d400d742723.json\n│       ├───2025-11-01_10-44-16-c01cdad7-b840-4665-ab6e-9e5773e131b3.json\n│       ├───2025-11-01_10-44-17-28022870-02ec-4092-b9d5-dec50af4a47d.json\n│       ├───2025-11-01_10-44-17-a9c7f999-0fb9-409c-8c3e-d2b5d3302117.json\n│       ├───2025-11-01_10-44-17-c8eec597-81f0-4767-a823-ff2662194fd1.json\n│       ├───2025-11-01_10-44-18-e9fd1ce0-8d4e-43b4-abad-532648aceee2.json\n│       ├───2025-11-06_19-56-01-ecff0d74-dee7-4f1e-81c5-6a340939e057.json\n│       ├───2025-11-06_19-58-20-6963e690-01b2-4f04-ba95-e4ded9b6849b.json\n│       ├───2025-11-09_20-57-48-2df883b7-6fc9-49fb-a4bf-58fae55a95a4.json\n│       ├───2025-11-09_21-46-52-292015c8-5a7b-4baf-8491-46ac5e7b9c39.json\n│       ├───2025-11-12_20-31-19-ad7601c4-6dfd-4c48-acf5-bf8c38623f49.json\n│       ├───2025-11-12_20-45-50-7a54eb9c-ca69-4abc-ade1-814b0f9ff6e0.json\n│       ├───2025-11-12_21-17-10-62367a2c-649c-46b4-ba5f-03a644e4e850.json\n│       ├───2025-11-12_22-20-37-a649df23-4611-485f-901b-98b1f5beb43a.json\n│       ├───2025-11-26_19-41-20-cdc23915-3611-4b0d-a19f-e26ff3dd9def.json\n│       ├───2025-11-26_21-23-08-f494b38a-83e6-460b-98ff-1750c9bcf906.json\n│       └───2025-11-26_21-55-27-db2aecd8-010c-408e-b310-94787c916c1d.json\n├───.vscode\\\n│   ├───launch.json\n│   ├───settings.json\n│   └───tasks.json\n└───docs\\\n    ├───bmm-workflow-status.yaml\n    ├───product-brief.md\n    ├───project-plan.md\n    ├───fase-1-analysis\\\n    │   ├───brainstorming-2025-10-31-user-stories.md\n    │   ├───brainstorming-2025-11-02-chaos-engineering.md\n    │   ├───brainstorming-2025-11-02-scenarios.md\n    │   ├───brainstorming-summary.md\n    │   └───research-technical-2025-11-01-ai-library.md\n    ├───fase-2-plan\\\n    │   ├───epics.md\n    │   ├───PRD-validation-report-2025-11-12.md\n    │   └───PRD.md\n    ├───fase-2-ux\\\n    │   ├───goals-achivements-dashboard.html\n    │   ├───logging-dashboard.html\n    │   ├───login-screen-dashboard.html\n    │   ├───ux-color-themes.html\n    │   ├───ux-design-directions.html\n    │   ├───ux-design-spec-validation-report-2025-11-16.md\n    │   ├───ux-design-specification.md\n    │   └───workout-history-dashboard.html\n    ├───fase-3-solutioning\\\n    │   ├───architecture-validation-report-2025-11-26.md\n    │   ├───architecture.md\n    │   └───implementation-readiness-report-2025-11-29.md\n    ├───images\\\n    │   └───bmad-workflow.svg\n    ├───sprint-artifacts\\\n    │   ├───1-1-first-story-title.md\n    │   ├───sprint-status.yaml\n    │   ├───tech-spec-epic-epic-1.md\n    │   └───validation-report-2025-11-29.md\n    └───stories\\\n        └───.gitkeep\n\nReminder: Do not return an empty response when a tool call is required.\n\nMy setup is complete. I will provide my first command in the next turn."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "You must fully embody this agent's persona and follow all activation instructions exactly as specified. NEVER break character until given an exit command.\r\n\r\n<agent-activation CRITICAL=\"TRUE\">\r\n1. LOAD the FULL agent file from @.bmad/bmm/agents/sm.md\r\n2. READ its entire contents - this contains the complete agent persona, menu, and instructions\r\n3. Execute ALL activation steps exactly as written in the agent file\r\n4. Follow the agent's persona and menu system precisely\r\n5. Stay in character throughout the session\r\n</agent-activation>\r\n"
+            }
+          ]
+        }
+      ]
+    },
+    "response": {
+      "session.id": "b9738db1-511d-44a0-9385-e83cd8fd3961",
+      "installation.id": "d5750831-9c41-4d45-9d6b-6bd897ab01fa",
+      "interactive": true,
+      "user.email": "kristofferhop@gmail.com",
+      "event.name": "gemini_cli.api_response",
+      "event.timestamp": "2025-11-30T10:48:42.130Z",
+      "model": "gemini-2.5-flash-lite",
+      "duration_ms": 20903,
+      "input_token_count": 24535,
+      "output_token_count": 100,
+      "cached_content_token_count": 0,
+      "thoughts_token_count": 418,
+      "tool_token_count": 0,
+      "total_token_count": 25053,
+      "prompt_id": "b9738db1-511d-44a0-9385-e83cd8fd3961########0",
+      "auth_type": "oauth-personal",
+      "status_code": 200,
+      "response_text": {
+        "candidates": [
+          {
+            "content": {
+              "role": "model",
+              "parts": [
+                {
+                  "text": "{\n  \"reasoning\": \"The user is asking me to load and execute instructions from a specific agent file (`sm.md`) located within the provided directory structure. This involves reading the file's content, interpreting its activation steps, and adopting a persona. This is a complex, multi-step task requiring the interpretation of external instructions and state management, fitting the 'pro' model criteria for High Operational Complexity and Strategic Planning.\",\n  \"model_choice\": \"pro\"\n}"
+                }
+              ]
+            },
+            "finishReason": "STOP",
+            "avgLogprobs": -0.6167435836791992
+          }
+        ],
+        "usageMetadata": {
+          "promptTokenCount": 24535,
+          "candidatesTokenCount": 100,
+          "totalTokenCount": 25053,
+          "trafficType": "ON_DEMAND",
+          "promptTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 24535
+            }
+          ],
+          "candidatesTokensDetails": [
+            {
+              "modality": "TEXT",
+              "tokenCount": 100
+            }
+          ],
+          "thoughtsTokenCount": 418
+        },
+        "modelVersion": "gemini-2.5-flash-lite"
+      },
+      "http.status_code": 200
+    },
+    "error": {
+      "session.id": "b9738db1-511d-44a0-9385-e83cd8fd3961",
+      "installation.id": "d5750831-9c41-4d45-9d6b-6bd897ab01fa",
+      "interactive": true,
+      "user.email": "kristofferhop@gmail.com",
+      "event.name": "gemini_cli.api_error",
+      "event.timestamp": "2025-11-30T10:48:42.801Z",
+      "error.message": "[{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You have exhausted your capacity on this model. Your quota will reset after 7h6m8s.\",\n    \"errors\": [\n      {\n        \"message\": \"You have exhausted your capacity on this model. Your quota will reset after 7h6m8s.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"QUOTA_EXHAUSTED\",\n        \"domain\": \"cloudcode-pa.googleapis.com\",\n        \"metadata\": {\n          \"uiMessage\": \"true\",\n          \"model\": \"gemini-3-pro-preview\",\n          \"quotaResetDelay\": \"7h6m8.910506469s\",\n          \"quotaResetTimeStamp\": \"2025-11-30T17:54:52Z\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"25568.910506469s\"\n      }\n    ]\n  }\n}\n]",
+      "model_name": "gemini-3-pro-preview",
+      "duration": 627,
+      "model": "gemini-3-pro-preview",
+      "error": "[{\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You have exhausted your capacity on this model. Your quota will reset after 7h6m8s.\",\n    \"errors\": [\n      {\n        \"message\": \"You have exhausted your capacity on this model. Your quota will reset after 7h6m8s.\",\n        \"domain\": \"global\",\n        \"reason\": \"rateLimitExceeded\"\n      }\n    ],\n    \"status\": \"RESOURCE_EXHAUSTED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"QUOTA_EXHAUSTED\",\n        \"domain\": \"cloudcode-pa.googleapis.com\",\n        \"metadata\": {\n          \"uiMessage\": \"true\",\n          \"model\": \"gemini-3-pro-preview\",\n          \"quotaResetDelay\": \"7h6m8.910506469s\",\n          \"quotaResetTimeStamp\": \"2025-11-30T17:54:52Z\"\n        }\n      },\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.RetryInfo\",\n        \"retryDelay\": \"25568.910506469s\"\n      }\n    ]\n  }\n}\n]",
+      "status_code": 429,
+      "duration_ms": 627,
+      "prompt_id": "b9738db1-511d-44a0-9385-e83cd8fd3961########0",
+      "auth_type": "oauth-personal",
+      "error.type": "Error",
+      "http.status_code": 429
+    }
+  }
+]
